@@ -1,0 +1,397 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+    <div class="container py-10">
+        <!-- BOUTONS (alignés à droite) -->
+        <div class="d-flex justify-content-end gap-4 mb-10 flex-wrap">
+            <span class="btn btn-flex btn-light-warning" data-bs-toggle="modal" data-bs-target="#modalClient">
+                <i class="bi bi-person-fill fs-2x me-2"></i> Client
+            </span>
+            <span href="#" class="btn btn-flex btn-light-danger" data-bs-toggle="modal" data-bs-target="#modalArticle">
+                <i class="bi bi-box-seam fs-2x me-2"></i> Article
+            </span>
+            <a href="#" class="btn btn-flex btn-light-success">
+                <i class="bi bi-graph-up-arrow fs-2x me-2"></i> Dashboard
+            </a>
+            <a href="#" class="btn btn-flex btn-light-primary" data-bs-toggle="modal" data-bs-target="#importModal">
+                <i class="bi bi-file-earmark-spreadsheet-fill fs-2x me-2"></i> Import Excel
+            </a>
+        </div>
+
+        <!-- BARRE DE RECHERCHE -->
+        <div class="mb-5">
+            <!--<div class="input-group">
+                <input type="text" id="searchInput" class="form-control form-control-solid" placeholder="Rechercher code...">
+                <button id="searchBtn" class="btn btn-light-primary"><i class="bi bi-search"></i></button>
+            </div>-->
+        </div>
+
+        <!-- RÉSULTATS -->
+        <div class="card p-10" id="resultsContainer" style="display: block;">
+            <!-- EN-TÊTE -->
+            <!--<div class="d-flex flex-wrap justify-content-between align-items-center mb-10">
+                <div>
+                    <h4 class="mb-0 text-dark fw-bold">Code journal : <span class="text-primary">254584</span></h4>
+                    <div class="text-muted">
+                        Nom : <strong>Ali</strong> |
+                        Date : <span class="badge badge-light-info fs-7 px-3 py-2">25/02/2025</span> |
+                        Montant : <span class="badge badge-light-success fs-7 px-3 py-2">2 525 000</span>
+                    </div>
+                </div>
+                <a href="#" class="btn btn-warning fw-bold">
+                    <i class="bi bi-file-earmark-pdf-fill me-2"></i>PDF
+                </a>
+            </div>-->
+
+            <!-- TABLEAU SCROLLABLE -->
+            <div class="table-responsive" style="max-height:500px; overflow-y:auto;">
+                <table id="kt_datatable_results" class="table table-row-dashed table-row-gray-300 gy-4">
+                    <thead>
+                    <tr class="fw-bold fs-6 text-gray-800">
+                        <th>Code<br><input id="filter_code" type="text" class="form-control form-control-sm" placeholder="Code"></th>
+                        <th>Nom<br><input id="filter_nom" type="text" class="form-control form-control-sm" placeholder="Nom"></th>
+                        <th>Date<br><input id="filter_date" type="text" class="form-control form-control-sm" placeholder="jj/mm/aaaa"></th>
+                        <th>Type</th>
+                        <th>Effectif</th>
+                        <th>Prix</th>
+                        <th>Montant</th>
+                        <th>Flux</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+
+        </div>
+
+
+
+
+    </div>
+
+    <!-- MODAL D’IMPORT -->
+    <div class="modal fade" id="importModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-top">
+            <div class="modal-content p-5">
+                <div class="modal-header">
+                    <h5 class="modal-title">Importer un fichier Excel</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="importExcelForm" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <input type="file" name="excel_file" class="form-control" accept=".xls,.xlsx" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-upload"></i> Importer
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL : Ajout Client -->
+    <div class="modal fade" id="modalClient" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-top">
+            <div class="modal-content p-5">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ajouter un client</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <form id="clientForm">
+                    <div class="modal-body">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <label class="form-label">Nom</label>
+                                <input type="text" name="nom" class="form-control form-control-solid" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Prénom</label>
+                                <input type="text" name="prenom" class="form-control form-control-solid" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Code (unique)</label>
+                                <input type="text" name="code" class="form-control form-control-solid" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Téléphone</label>
+                                <input type="text" name="telephone" class="form-control form-control-solid">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Prix</label>
+                                <input type="number" step="0.01" name="prix" class="form-control form-control-solid" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Catégorie</label>
+                                <select name="categorieId" class="form-select form-select-solid" required>
+                                    <option value="">— Sélectionner —</option>
+                                    {% for c in categories %}
+                                        <option value="{{ c.id }}">{{ c.label }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button id="btnSaveClient" type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-circle me-2"></i> Enregistrer
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL : Ajout Article -->
+    <div class="modal fade" id="modalArticle" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-top">
+            <div class="modal-content p-5">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ajouter un article</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <form id="articleForm">
+                    <div class="modal-body">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <label class="form-label">Code (unique)</label>
+                                <input type="text" name="code" class="form-control form-control-solid" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">TVA (%)</label>
+                                <input type="number" step="0.01" name="tva" class="form-control form-control-solid" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Prix unitaire</label>
+                                <input type="number" step="0.01" name="prixUnitaire" class="form-control form-control-solid" required>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Catégorie</label>
+                                <select name="categorieId" class="form-select form-select-solid" required>
+                                    <option value="">— Sélectionner —</option>
+                                    {% for ca in categoriesArticle %}
+                                        <option value="{{ ca.id }}">{{ ca.label }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button id="btnSaveArticle" type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-circle me-2"></i> Enregistrer
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            const $table = $('#kt_datatable_results');
+            //const $tbody = $table.find('tbody');
+            // Affichage du loader
+            //$tbody.html(`
+            //    <tr>
+            //        <td colspan="9" class="text-center py-10">
+            //            <div class="spinner-border text-primary" role="status">
+            //                <span class="visually-hidden">Chargement...</span>
+            //            </div>
+            //        </td>
+            //    </tr>
+            //`);
+
+            // Chargement des données AJAX
+            //$.ajax({
+            //    url: '/app/v1/manager/demandes',
+            //    method: 'GET',
+            //    success: function (data) {
+            //        let rows = '';
+            //        data.forEach(function (item) {
+            //            rows += `
+            //        <tr>
+            //            <td>${item.code}</td>
+            //            <td>${item.nom}</td>
+            //            <td><span class="badge badge-light-info">${item.date}</span></td>
+            //            <td>${item.type}</td>
+            //            <td>${item.effectif}</td>
+            //            <td>${item.prix}</td>
+            //            <td>
+            //                <span class="badge ${item.montant >= 0 ? 'badge-light-success' : 'badge-light-danger'}">
+            //                    ${item.montant}
+            //                </span>
+            //            </td>
+            //            <td><span class="badge badge-light-primary">${item.flux}</span></td>
+            //            <td>
+            //                <button class="btn btn-icon btn-sm btn-light-danger delete-btn" data-id="${item.id}">
+            //                    <i class="bi bi-trash"></i>
+            //                </button>
+            //            </td>
+            //        </tr>
+            //    `;
+            //        });
+//
+            //        $tbody.html(rows);
+//
+            //        // Initialiser DataTable avec options françaises
+            //        const table = $table.DataTable({
+            //            destroy: true,
+            //            responsive: true,
+            //            pageLength: 5,
+            //            lengthMenu: [5, 10, 25, 50, 100],
+            //            ordering: false,
+            //            language: {
+            //                url: "//cdn.datatables.net/plug-ins/1.10.25/i18n/French.json"
+            //            }
+            //        });
+//
+            //        // Filtres personnalisés
+            //        $('.filter-input').on('keyup change', function () {
+            //            let i = $(this).data('column'); // Index de colonne
+            //            table.column(i).search(this.value).draw();
+            //        });
+            //    },
+            //    error: function () {
+            //        $tbody.html(`
+            //    <tr><td colspan="9" class="text-center text-danger">Erreur lors du chargement des données</td></tr>
+            //`);
+            //    }
+            //});
+
+
+            // SERVER SIDE -----------------------
+            const table = $table.DataTable({
+                processing: true,
+                serverSide: true,
+                searching: false,         // we’ll use our own inputs
+                ordering: false,          // optional; enable if you add sort handling server-side
+                pageLength: 5,
+                lengthMenu: [5, 10, 25, 50, 100],
+                ajax: {
+                    url: '/app/v1/manager/demandes/datatable',
+                    type: 'GET',
+                    data: function (d) {
+                        d.code = $('#filter_code').val() || '';
+                        d.nom  = $('#filter_nom').val()  || '';
+                        d.date = $('#filter_date').val() || ''; // if empty, backend uses today by default
+                    }
+                },
+                columns: [
+                    { data: 'code' },
+                    { data: 'nom' },
+                    { data: 'date', render: (v)=> `<span class="badge badge-light-info">${v}</span>` },
+                    { data: 'type' },
+                    { data: 'effectif' },
+                    { data: 'prix' },
+                    { data: 'montant', render: (v)=> `<span class="badge ${v>=0?'badge-light-success':'badge-light-danger'}">${v}</span>` },
+                    { data: 'flux', render: (v)=> `<span class="badge badge-light-primary">${v ?? ''}</span>` },
+                    { data: 'id', orderable:false, render: (id)=> `
+          <button class="btn btn-icon btn-sm btn-light-danger delete-btn" data-id="${id}">
+            <i class="bi bi-trash"></i>
+          </button>`
+                    }
+                ],
+                language: {
+                    // host this file locally to avoid CORS
+                    //url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/French.json'
+                    url: '/custom/datatables/i18n/French.json'
+                }
+            });
+
+            // reload on filter change
+            $('#filter_code, #filter_nom, #filter_date').on('keyup change', () => table.ajax.reload());
+
+
+        });
+
+
+        $(document).on('submit', '#importExcelForm', function (e) {
+            e.preventDefault();
+
+            let formData = new FormData(this);
+
+            $.ajax({
+                url: '/app/v1/manager/import',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function () {
+                    toastr.info('Importation en cours...');
+                },
+                success: function (response) {
+                    toastr.success('Importation réussie !');
+                    $('#importModal').modal('hide');
+                    location.reload(); // ou recharger la liste dynamiquement
+                },
+                error: function () {
+                    toastr.error('Échec de l’importation');
+                }
+            });
+        });
+
+        $(document).on('submit', '#clientForm', function (e) {
+            e.preventDefault();
+            const $btn = $('#btnSaveClient').prop('disabled', true);
+            toastr.info('Création en cours...');
+            $.ajax({
+                url: '/app/v1/clients',
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function (res) {
+                    //KTApp.showToast({ message: 'Client créé avec succès', type: 'success', icon: 'check-circle' });
+                    toastr.success('Client créé avec succès !');
+                    $('#modalClient').modal('hide');
+                    $('#clientForm')[0].reset();
+                    // Option: recharger une liste, ou insérer une ligne dans un tableau si tu en as un
+                },
+                error: function (xhr) {
+                    const msg = (xhr.responseJSON && xhr.responseJSON.message) ? xhr.responseJSON.message : 'Erreur lors de la création';
+                    //KTApp.showToast({ message: msg, type: 'error', icon: 'exclamation-triangle' });
+                    toastr.error('Erreur lors de la création !');
+                },
+                complete: function () { $btn.prop('disabled', false); }
+            });
+        });
+
+        $(document).on('submit', '#articleForm', function (e) {
+            e.preventDefault();
+            const $btn = $('#btnSaveArticle').prop('disabled', true);
+            toastr.info('Création en cours...');
+            $.ajax({
+                url: '/app/v1/articles',
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function (res) {
+                    toastr.success('Article créé avec succès !');
+                    $('#modalArticle').modal('hide');
+                    $('#articleForm')[0].reset();
+                    // TODO: rafraîchir un DataTable si nécessaire
+                },
+                error: function (xhr) {
+                    const msg = xhr.responseJSON?.message || 'Erreur lors de la création';
+                    toastr.error('Erreur lors de la création !');
+                },
+                complete: function () { $btn.prop('disabled', false); }
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,12 @@
+/* custom.css */
+#kt_datatable_results_length,
+#kt_datatable_results_info {
+    display: block;
+    width: 100%;
+}
+
+#kt_datatable_results_info {
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+    color: #6c757d;
+}

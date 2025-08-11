@@ -1,0 +1,132 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+    <div class="container py-10">
+        <!-- BOUTONS -->
+        <div class="row g-5 text-center mb-10">
+            <div class="col-md-2">
+                <button data-bs-toggle="modal" data-bs-target="#montantModal" class="btn btn-flex btn-light-info w-100">
+                    <i class="bi bi-box-arrow-in-right fs-2"></i><br>Ouverture
+                </button>
+            </div>
+            <div class="col-md-2">
+                <a href="{{ path('journal') }}" class="btn btn-flex btn-light-warning w-100">
+                    <i class="bi bi-journal-text fs-2"></i><br>Journal
+                </a>
+            </div>
+            <div class="col-md-2">
+                <a href="{{ path('mouvement') }}" class="btn btn-flex btn-light-danger w-100">
+                    <i class="bi bi-arrow-left-right fs-2"></i><br>Mouvement
+                </a>
+            </div>
+            <div class="col-md-2">
+                <a href="{{ path('client') }}" class="btn btn-flex btn-light-success w-100">
+                    <i class="bi bi-person-lines-fill fs-2"></i><br>Client
+                </a>
+            </div>
+            <div class="col-md-2">
+                <a href="{{ path('article') }}" class="btn btn-flex btn-light w-100">
+                    <i class="bi bi-box-seam fs-2"></i><br>Article
+                </a>
+            </div>
+            <div class="col-md-2">
+                <a href="{{ path('dash') }}" class="btn btn-flex btn-light-primary w-100">
+                    <i class="bi bi-graph-up fs-2"></i><br>Dashboard
+                </a>
+            </div>
+        </div>
+
+        <!-- BARRE DE RECHERCHE -->
+        <div class="mb-5">
+            <div class="input-group">
+                <input type="text" id="searchInput" class="form-control form-control-solid" placeholder="Rechercher code...">
+                <button id="searchBtn" class="btn btn-light-primary"><i class="bi bi-search"></i></button>
+            </div>
+        </div>
+
+        <!-- RÉSULTATS -->
+        <div class="card p-10" id="resultsContainer" style="display: block;">
+            <!-- EN-TÊTE -->
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-10">
+                <div>
+                    <h4 class="mb-0 text-dark fw-bold">Code journal : <span class="text-primary">254584</span></h4>
+                    <div class="text-muted">
+                        Nom : <strong>Ali</strong> |
+                        Date : <span class="badge badge-light-info fs-7 px-3 py-2">25/02/2025</span> |
+                        Montant : <span class="badge badge-light-success fs-7 px-3 py-2">2 525 000</span>
+                    </div>
+                </div>
+                <a href="#" class="btn btn-warning fw-bold">
+                    <i class="bi bi-file-earmark-pdf-fill me-2"></i>PDF
+                </a>
+            </div>
+
+            <!-- TABLEAU SCROLLABLE -->
+            <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                <table id="kt_datatable_results" class="table table-row-dashed table-row-gray-300 gy-4">
+                    <thead>
+                    <tr class="fw-bold fs-6 text-gray-800">
+                        <th>Code<br><input type="text" class="form-control form-control-sm filter-input" placeholder="Code"></th>
+                        <th>Nom<br><input type="text" class="form-control form-control-sm filter-input" placeholder="Nom"></th>
+                        <th>Date</th>
+                        <th>Type<br><input type="text" class="form-control form-control-sm filter-input" placeholder="Type"></th>
+                        <th>Effectif</th>
+                        <th>Montant</th>
+                        <th>Flux</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in 0..20 %}
+                        <tr>
+                            <td>{{ 230 + (i % 2) }}</td>
+                            <td>Nom {{ i }}</td>
+                            <td><span class="badge badge-light-info">25/02/2025</span></td>
+                            <td>{{ i % 2 == 0 ? 'Ovin' : 'Bovin' }}</td>
+                            <td>{{ 20 + (i % 3) }}</td>
+                            <td>
+                            <span class="badge {{ i % 2 == 0 ? 'badge-light-danger' : 'badge-light-success' }}">
+                                {{ i % 2 == 0 ? '-15' : '20' }}
+                            </span>
+                            </td>
+                            <td><span class="badge badge-light-primary">Encaissement</span></td>
+                            <td>
+                                <button class="btn btn-icon btn-sm btn-light-danger delete-btn" title="Supprimer">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+    <!-- MODAL OUVERTURE -->
+    <div class="modal fade" id="montantModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-top">
+            <div class="modal-content p-5">
+                <div class="modal-header">
+                    <h5 class="modal-title">Saisir le Montant</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control form-control-solid mb-3" placeholder="Montant">
+                    <button class="btn btn-primary w-100"><i class="bi bi-check-circle"></i> Valider</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/js/index.js"></script>
+{% endblock %}
