@@ -40,6 +40,7 @@ final class ManagerController extends AbstractController
             return new JsonResponse(['error' => 'No file uploaded'], 400);
         }
 
+
         $spreadsheet = IOFactory::load($file->getPathname());
         $sheet = $spreadsheet->getActiveSheet();
         $rows = $sheet->toArray();
@@ -72,7 +73,7 @@ final class ManagerController extends AbstractController
                 /**
                  * @var Article $article
                  */
-                $article = $em->getRepository(Article::class)->findOneBy(['code' => $type]);
+                $article = $em->getRepository(Article::class)->findOneBy(['name' => $type]);
                 if (!$article) {
                     continue; // ignorer la ligne si aucun article trouvé
                 }

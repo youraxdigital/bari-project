@@ -18,6 +18,9 @@ class Article
     #[ORM\Column(length: 255, unique: true)]
     private ?string $code = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
+
     #[ORM\Column]
     private ?float $tva = null;
 
@@ -50,6 +53,23 @@ class Article
     {
         $this->code = $code;
 
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string|null $name
+     */
+    public function setName(?string $name): self
+    {
+        $this->name = $name;
         return $this;
     }
 

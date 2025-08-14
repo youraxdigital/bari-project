@@ -1,0 +1,296 @@
+{# templates/manager/articles.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %}Configuration des Articles{% endblock %}
+
+{% block header_title %}Configuration des Articles{% endblock %}
+
+{% block body %}
+    <div class="container py-10">
+        <div class="d-flex justify-content-between align-items-center mb-5">
+            <h2 class="fw-bold"></h2>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalArticle">
+                <i class="bi bi-plus-circle me-2"></i> Ajouter Article
+            </button>
+        </div>
+        <div class="card p-10" id="resultsContainer" style="display: block;">
+            <div class="table-responsive" style="max-height:500px; overflow-y:auto;">
+                <table id="articlesTable" class="table table-row-dashed table-row-gray-300 gy-4">
+                    <thead>
+                    <tr class="fw-bold fs-6 text-gray-800">
+                        <th>Code<br><input id="filter_code" type="text" class="form-control form-control-sm" placeholder="Code"></th>
+                        <th>Name<br><input id="filter_name" type="text" class="form-control form-control-sm" placeholder="name"></th>
+                        <th>TVA<br><input id="filter_tva" type="text" class="form-control form-control-sm" placeholder="Ex: 20, >=10, 10-20"></th>
+                        <th>Prix unitaire<br><input id="filter_prix" type="text" class="form-control form-control-sm" placeholder="Ex: 100, <=50, 10-30"></th>
+                        <th>Catégorie<br><input id="filter_categorie" type="text" class="form-control form-control-sm" placeholder="Catégorie"></th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal Article -->
+    <div class="modal fade" id="modalArticle" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ajouter Article</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="articleForm">
+                    <div class="modal-body">
+                        <input type="hidden" name="id" id="articleId">
+                        <div class="mb-3">
+                            <label class="form-label">Code</label>
+                            <input type="text" name="code" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">name</label>
+                            <input type="text" name="name" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">TVA (%)</label>
+                            <input type="number" step="0.01" name="tva" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Prix unitaire</label>
+                            <input type="number" step="0.01" name="prixUnitaire" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Catégorie</label>
+                            <select name="categorieId" class="form-select" required>
+                                <option value="">-- Sélectionner --</option>
+                                {% for ca in categories %}
+                                    <option value="{{ ca.id }}">{{ ca.label }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="articleSubmitBtn" class="btn btn-primary">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editArticleModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="editArticleForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modifier Article</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="editArticleId" name="id">
+                        <div class="mb-3">
+                            <label for="editCode" class="form-label">Code</label>
+                            <input type="text" class="form-control" id="editCode" name="code">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="editName" name="name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editTva" class="form-label">TVA</label>
+                            <input type="number" class="form-control" id="editTva" name="tva">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editPrixUnitaire" class="form-label">Prix Unitaire</label>
+                            <input type="number" step="0.01" class="form-control" id="editPrixUnitaire" name="prixUnitaire">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editCategorie" class="form-label">Catégorie</label>
+                            <input type="text" class="form-control" id="editCategorie" name="categorie">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="articleSubmitEditBtn" class="btn btn-primary">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        const $modal = $('#modalArticle');
+        const $form  = $('#articleForm');
+        const $btnAdd = $('#btnAddArticle');
+
+        $(document).ready(function () {
+            console.log("totot");
+            const $table = $('#articlesTable');
+
+            const table = $table.DataTable({
+                processing: true,
+                serverSide: true,
+                searching: false,
+                ordering: false,              // toggle true if you add server-side ordering below
+                pageLength: 10,
+                lengthMenu: [10, 25, 50, 100],
+                ajax: {
+                    url: '/app/v1/articles/datatable',
+                    type: 'GET',
+                    data: function (d) {
+                        d.code      = $('#filter_code').val() || '';
+                        d.name      = $('#filter_name').val() || '';
+                        d.tva       = $('#filter_tva').val() || '';
+                        d.prix      = $('#filter_prix').val() || '';
+                        d.categorie = $('#filter_categorie').val() || '';
+                    }
+                },
+                columns: [
+                    { data: 'code' },
+                    { data: 'name' },
+                    { data: 'tva', render: v => `<span class="badge badge-light-primary">${v}%</span>` },
+                    { data: 'prixUnitaire', render: v => `<span class="badge badge-light-info">${v}</span>` },
+                    { data: 'categorie' },
+                    {
+                        data: 'id',
+                        orderable: false,
+                        render: function (id, _, row) {
+                            const payload = encodeURIComponent(JSON.stringify(row));
+                            return `<button class="btn btn-icon btn-sm btn-light-info editArticle" data-article="${payload}">
+                    <i class="bi bi-pencil"></i>
+                  </button>`;
+                        }
+                    }
+                ],
+                language: { url: '/custom/datatables/i18n/French.json' }
+            });
+
+            // Reload on filter change (debounced for keyup)
+            const reload = () => table.ajax.reload();
+            let debounce;
+            $('#filter_code, #filter_name, #filter_tva, #filter_prix, #filter_categorie')
+                .on('change', reload)
+                .on('keyup', function () {
+                    clearTimeout(debounce);
+                    debounce = setTimeout(reload, 300);
+                });
+
+
+            // When user clicks the edit button
+            $('#articlesTable').on('click', '.editArticle', function () {
+                try {
+                    // Get the data from the attribute and decode it
+                    const row = JSON.parse(decodeURIComponent($(this).data('article')));
+
+                    // Example: fill a modal form with the article data
+                    $('#editArticleId').val(row.id);
+                    $('#editCode').val(row.code);
+                    $('#editName').val(row.name);
+                    $('#editTva').val(row.tva);
+                    $('#editPrixUnitaire').val(row.prixUnitaire);
+                    $('#editCategorie').val(row.categorie);
+
+                    // Show the modal
+                    $('#editArticleModal').modal('show');
+
+                } catch (e) {
+                    console.error('Invalid article data', e);
+                }
+            });
+
+            // When user submits the edit form
+            $('#editArticleForm').on('submit', function (e) {
+                e.preventDefault();
+
+                const $submitBtn = $('#articleSubmitEditBtn');
+                const originalHtml = $submitBtn.html();
+                // Disable button & show spinner
+                $submitBtn.prop('disabled', true)
+                    .html('<span class="spinner-border spinner-border-sm me-2"></span>Enregistrement...');
+
+                $.ajax({
+                    url: '/app/v1/articles/update/' + $('#editArticleId').val(),
+                    method: 'POST',
+                    data: $(this).serialize(),
+                    success: function () {
+                        $('#editArticleModal').modal('hide');
+                        $('#articlesTable').DataTable().ajax.reload(null, false); // reload without reset page
+                    },
+                    error: function (xhr) {
+                        alert('Update failed: ' + xhr.responseText);
+                    },
+                    complete: function () {
+                        // Restore button
+                        $submitBtn.prop('disabled', false).html(originalHtml);
+                    }
+                });
+            });
+
+
+
+            // ----------- add article
+
+            // Open modal in "add" mode
+            $btnAdd.on('click', function () {
+                // reset form
+                $form[0].reset();
+                $('#articleId').val(''); // empty id => add mode
+                $modal.find('.modal-title').text('Ajouter Article');
+                $modal.modal('show');
+            });
+
+            // Submit (create or update if you later reuse the same modal)
+            $form.on('submit', function (e) {
+                e.preventDefault();
+
+                const $submitBtn = $('#articleSubmitBtn');
+                const originalHtml = $submitBtn.html();
+
+                // Disable button & show spinner
+                $submitBtn.prop('disabled', true)
+                    .html('<span class="spinner-border spinner-border-sm me-2"></span>Enregistrement...');
+
+                const payload = $form.serialize();
+
+                $.ajax({
+                    url: '/app/v1/articles', // create endpoint
+                    method: 'POST',
+                    data: payload,
+                    success: function (resp) {
+                        $modal.modal('hide');
+                        $form[0].reset();
+                        $('#articlesTable').DataTable().ajax.reload(null, false);
+
+                        if (resp && resp.message) {
+                            console.log(resp.message);
+                        }
+                    },
+                    error: function (xhr) {
+                        let msg = 'Erreur lors de l’enregistrement.';
+                        try {
+                            const j = JSON.parse(xhr.responseText);
+                            if (j.message) msg = j.message;
+                            if (j.errors)   msg += '\n' + Object.values(j.errors).join('\n');
+                        } catch(_){}
+                        alert(msg);
+                    },
+                    complete: function () {
+                        // Restore button
+                        $submitBtn.prop('disabled', false).html(originalHtml);
+                    }
+                });
+            });
+
+
+            // (Optional) when using Bootstrap 5, clear validation on close
+            $modal.on('hidden.bs.modal', () => {
+                $form.removeClass('was-validated');
+            });
+
+        });
+
+
+    </script>
+{% endblock %}

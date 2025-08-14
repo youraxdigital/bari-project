@@ -1,11 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Configuration des Demandes{% endblock %}
+{% block header_title %}Configuration des demandes{% endblock %}
+{% block show_import %}{{ true }}{% endblock %}
 
 {% block body %}
+    <!-- HEADER MENU NAVIGATION -->
+    {# }<div class="d-flex justify-content-between align-items-center px-10 py-5 border-bottom">
+        <h2 class="mb-0 fw-bold text-dark">Gestion des Demandes</h2>
+        <div class="d-flex gap-3">
+            <a href="{{ path('app_clients_manage') }}" class="btn btn-light-warning">
+                <i class="bi bi-person-fill fs-2x me-2"></i> Clients
+            </a>
+            <a href="{{ path('app_articles_manage') }}" class="btn btn-light-danger">
+                <i class="bi bi-box-seam fs-2x me-2"></i> Articles
+            </a>
+            <a href="#" class="btn btn-light-success">
+                <i class="bi bi-graph-up-arrow fs-2x me-2"></i> Dashboard
+            </a>
+            <a href="#" class="btn btn-light-primary" data-bs-toggle="modal" data-bs-target="#importModal">
+                <i class="bi bi-file-earmark-spreadsheet-fill fs-2x me-2"></i> Import Excel
+            </a>
+        </div>
+    </div> #}
     <div class="container py-10">
         <!-- BOUTONS (alignés à droite) -->
-        <div class="d-flex justify-content-end gap-4 mb-10 flex-wrap">
+        {# <div class="d-flex justify-content-end gap-4 mb-10 flex-wrap">
             <span class="btn btn-flex btn-light-warning" data-bs-toggle="modal" data-bs-target="#modalClient">
                 <i class="bi bi-person-fill fs-2x me-2"></i> Client
             </span>
@@ -18,7 +38,7 @@
             <a href="#" class="btn btn-flex btn-light-primary" data-bs-toggle="modal" data-bs-target="#importModal">
                 <i class="bi bi-file-earmark-spreadsheet-fill fs-2x me-2"></i> Import Excel
             </a>
-        </div>
+        </div>#}
 
         <!-- BARRE DE RECHERCHE -->
         <div class="mb-5">
@@ -29,43 +49,34 @@
         </div>
 
         <!-- RÉSULTATS -->
-        <div class="card p-10" id="resultsContainer" style="display: block;">
-            <!-- EN-TÊTE -->
-            <!--<div class="d-flex flex-wrap justify-content-between align-items-center mb-10">
-                <div>
-                    <h4 class="mb-0 text-dark fw-bold">Code journal : <span class="text-primary">254584</span></h4>
-                    <div class="text-muted">
-                        Nom : <strong>Ali</strong> |
-                        Date : <span class="badge badge-light-info fs-7 px-3 py-2">25/02/2025</span> |
-                        Montant : <span class="badge badge-light-success fs-7 px-3 py-2">2 525 000</span>
-                    </div>
-                </div>
-                <a href="#" class="btn btn-warning fw-bold">
-                    <i class="bi bi-file-earmark-pdf-fill me-2"></i>PDF
-                </a>
-            </div>-->
-
-            <!-- TABLEAU SCROLLABLE -->
-            <div class="table-responsive" style="max-height:500px; overflow-y:auto;">
-                <table id="kt_datatable_results" class="table table-row-dashed table-row-gray-300 gy-4">
-                    <thead>
-                    <tr class="fw-bold fs-6 text-gray-800">
-                        <th>Code<br><input id="filter_code" type="text" class="form-control form-control-sm" placeholder="Code"></th>
-                        <th>Nom<br><input id="filter_nom" type="text" class="form-control form-control-sm" placeholder="Nom"></th>
-                        <th>Date<br><input id="filter_date" type="text" class="form-control form-control-sm" placeholder="jj/mm/aaaa"></th>
-                        <th>Type</th>
-                        <th>Effectif</th>
-                        <th>Prix</th>
-                        <th>Montant</th>
-                        <th>Flux</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+        <div class="container py-10">
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <h2 class="fw-bold"></h2>
+                <button class="btn btn-light-primary" data-bs-toggle="modal" data-bs-target="#importModal">
+                    <i class="bi bi-file-earmark-spreadsheet-fill fs-2x me-2"></i> Import Excel
+                </button>
             </div>
-
-
+            <div class="card p-10" id="resultsContainer" style="display: block;">
+                <!-- TABLEAU SCROLLABLE -->
+                <div class="table-responsive" style="max-height:500px; overflow-y:auto;">
+                    <table id="kt_datatable_results" class="table table-row-dashed table-row-gray-300 gy-4">
+                        <thead>
+                        <tr class="fw-bold fs-6 text-gray-800">
+                            <th>Code<br><input id="filter_code" type="text" class="form-control form-control-sm" placeholder="Code"></th>
+                            <th>Nom<br><input id="filter_nom" type="text" class="form-control form-control-sm" placeholder="Nom"></th>
+                            <th>Date<br><input id="filter_date" type="text" class="form-control form-control-sm" placeholder="jj/mm/aaaa"></th>
+                            <th>Type</th>
+                            <th>Effectif</th>
+                            <th>Prix</th>
+                            <th>Montant</th>
+                            <th>Flux</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
 
@@ -86,7 +97,7 @@
                         <input type="file" name="excel_file" class="form-control" accept=".xls,.xlsx" required>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary" id="importSubmitBtn">
                             <i class="bi bi-upload"></i> Importer
                         </button>
                     </div>
@@ -326,6 +337,12 @@
         $(document).on('submit', '#importExcelForm', function (e) {
             e.preventDefault();
 
+            const $submitBtn = $('#importSubmitBtn');
+            const originalHtml = $submitBtn.html();
+            // Disable button & show spinner
+            $submitBtn.prop('disabled', true)
+                .html('<span class="spinner-border spinner-border-sm me-2"></span>Importation des lignes...');
+
             let formData = new FormData(this);
 
             $.ajax({
@@ -344,6 +361,10 @@
                 },
                 error: function () {
                     toastr.error('Échec de l’importation');
+                },
+                complete: function () {
+                    // Restore button
+                    $submitBtn.prop('disabled', false).html(originalHtml);
                 }
             });
         });

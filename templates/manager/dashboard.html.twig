@@ -1,0 +1,213 @@
+{% extends 'base.html.twig' %}
+{% block title %}Dashboard{% endblock %}
+{% block header_title %}Dashboard{% endblock %}
+{% block body %}
+    <div class="container py-10">
+
+        <!-- KPIs -->
+        <div class="row g-5 mb-5">
+
+            <!-- Clients -->
+            <div class="col-md-3">
+                <div class="card p-5 h-100 shadow-sm rounded-3">
+                    <div class="d-flex align-items-start">
+                        <div class="symbol symbol-45px me-4">
+                            <div class="symbol-label bg-light-primary">
+                                <i class="bi bi-people fs-2 text-primary"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1">
+                            <div class="fs-2 fw-bold" id="kpiClients">—</div>
+                            <div class="fs-7 text-muted">Clients</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Articles -->
+            <div class="col-md-3">
+                <div class="card p-5 h-100 shadow-sm rounded-3">
+                    <div class="d-flex align-items-start">
+                        <div class="symbol symbol-45px me-4">
+                            <div class="symbol-label bg-light-warning">
+                                <i class="bi bi-box-seam fs-2 text-warning"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1">
+                            <div class="fs-2 fw-bold" id="kpiArticles">—</div>
+                            <div class="fs-7 text-muted">Articles</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Demandes (30 jours) -->
+            <div class="col-md-3">
+                <div class="card p-5 h-100 shadow-sm rounded-3">
+                    <div class="d-flex align-items-start">
+                        <div class="symbol symbol-45px me-4">
+                            <div class="symbol-label bg-light-info">
+                                <i class="bi bi-clipboard-data fs-2 text-info"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1">
+                            <div class="fs-2 fw-bold" id="kpiDemandes">—</div>
+                            <div class="fs-7 text-muted">Demandes (30 jours)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chiffre d’affaires (30 jours) -->
+            <div class="col-md-3">
+                <div class="card p-5 h-100 shadow-sm rounded-3">
+                    <div class="d-flex align-items-start">
+                        <div class="symbol symbol-45px me-4">
+                            <div class="symbol-label bg-light-success">
+                                <i class="bi bi-cash-stack fs-2 text-success"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1">
+                            <div class="fs-2 fw-bold" id="kpiCA">—</div>
+                            <div class="fs-7 text-muted">Chiffre d’affaires (30 jours)</div>
+                        </div>
+                    </div>
+                    {# <div class="mt-4">
+                        <span id="kpiCADelta" class="badge badge-light-success">
+                          <i class="bi bi-arrow-up-short me-1"></i>2.1%
+                        </span>
+                    </div> #}
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Charts -->
+        <div class="row g-5">
+            <div class="col-lg-8">
+                <div class="card p-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="mb-0">Demandes & CA — 30 derniers jours</h5>
+                    </div>
+                    <div id="chartDemandesCA" style="height: 340px;"></div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card p-5">
+                    <h5 class="mb-3">Répartition par Catégorie</h5>
+                    <div id="chartCategories" style="height: 340px;"></div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card p-5">
+                    <h5 class="mb-3">Répartition TVA</h5>
+                    <div id="chartTVA" style="height: 320px;"></div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card p-5">
+                    <h5 class="mb-3">Top 5 Clients par CA (30 jours)</h5>
+                    <div id="chartTopClients" style="height: 320px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {# ApexCharts CDN #}
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Helpers
+            const fmtInt = (n)=> new Intl.NumberFormat('fr-FR').format(n||0);
+            const fmtMoney = (n)=> (new Intl.NumberFormat('fr-FR', { style:'currency', currency:'MAD' }).format(n||0));
+
+            // Skeleton loaders (optional)
+            document.querySelectorAll('#kpiClients,#kpiArticles,#kpiDemandes,#kpiCA')
+                .forEach(el => el.innerHTML = '<span class="placeholder col-6"></span>');
+
+            // Fetch stats
+            fetch('/app/v1/dashboard/stats')
+                .then(r => r.json())
+                .then(({ kpis, timeseries, categories, tva, topClients }) => {
+
+                    // KPIs
+                    document.getElementById('kpiClients').textContent  = fmtInt(kpis.totalClients);
+                    document.getElementById('kpiArticles').textContent = fmtInt(kpis.totalArticles);
+                    document.getElementById('kpiDemandes').textContent = fmtInt(kpis.demandes30j);
+                    document.getElementById('kpiCA').textContent       = fmtMoney(kpis.ca30j);
+
+                    // 1) Courbe/aires Demandes & CA
+                    const demSeries = timeseries.map(p => p.count);
+                    const caSeries  = timeseries.map(p => p.ca);
+                    const labels    = timeseries.map(p => p.date); // 'YYYY-MM-DD'
+
+                    new ApexCharts(document.querySelector("#chartDemandesCA"), {
+                        chart: { type: 'line', height: 340, toolbar: { show: false } },
+                        stroke: { curve: 'smooth', width: 3 },
+                        markers: { size: 0 },
+                        series: [
+                            { name: 'Demandes', type: 'column', data: demSeries },
+                            { name: 'CA (MAD)', type: 'line',   data: caSeries  }
+                        ],
+                        xaxis: { categories: labels, labels: { rotate: -45 } },
+                        yaxis: [
+                            { title: { text: 'Demandes' } },
+                            { opposite: true, title: { text: 'CA (MAD)' } }
+                        ],
+                        tooltip: {
+                            shared: true,
+                            y: [
+                                { formatter: (val)=> fmtInt(val) },
+                                { formatter: (val)=> fmtMoney(val) }
+                            ]
+                        },
+                        legend: { position: 'top' }
+                    }).render();
+
+                    // 2) Donut Catégories
+                    new ApexCharts(document.querySelector("#chartCategories"), {
+                        chart: { type: 'donut', height: 340 },
+                        labels: categories.map(c => c.label),
+                        series: categories.map(c => c.count),
+                        legend: { position: 'bottom' },
+                        tooltip: { y: { formatter: (val)=> fmtInt(val) } }
+                    }).render();
+
+                    // 3) Bar TVA
+                    new ApexCharts(document.querySelector("#chartTVA"), {
+                        chart: { type: 'bar', height: 320, toolbar: { show: false } },
+                        series: [{ name: 'Articles', data: tva.map(x => x.count) }],
+                        xaxis: { categories: tva.map(x => x.bucket) }, // ex: “0%”, “10%”, “20%”, “>20%”
+                        dataLabels: { enabled: false },
+                        tooltip: { y: { formatter: (val)=> fmtInt(val) } }
+                    }).render();
+
+                    // 4) Top clients (bar horizontale)
+                    new ApexCharts(document.querySelector("#chartTopClients"), {
+                        chart: { type: 'bar', height: 320, toolbar: { show: false } },
+                        plotOptions: { bar: { horizontal: true } },
+                        series: [{ name: 'CA (MAD)', data: topClients.map(c => c.ca) }],
+                        xaxis: { categories: topClients.map(c => c.client) },
+                        tooltip: { y: { formatter: (val)=> fmtMoney(val) } }
+                    }).render();
+
+                })
+                .catch(err => {
+                    console.error(err);
+                    // Afficher un message d’erreur sommaire
+                    document.getElementById('kpiClients').textContent = 'Erreur';
+                    document.getElementById('kpiArticles').textContent = 'Erreur';
+                    document.getElementById('kpiDemandes').textContent = 'Erreur';
+                    document.getElementById('kpiCA').textContent = 'Erreur';
+                });
+        });
+
+
+
+    </script>
+{% endblock %}

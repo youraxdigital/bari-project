@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Metronic App{% endblock %}</title>
+    <title>{% block title %}App{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="/metronic_assets/css/style.bundle.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -13,6 +13,15 @@
     {% block stylesheets %}{% endblock %}
 </head>
 <body class="bg-body">
+{# Shared header menu #}
+{% set default_header_title = 'Gestion' %}
+{% include 'partials/_header_nav.html.twig' with {
+    header_title: block('header_title') is defined ? block('header_title') : default_header_title,
+    show_import: block('show_import') is defined ? block('show_import') : false
+} %}
+
+{# Page content #}
+
 {% block body %}{% endblock %}
 <script src="/metronic_assets/js/scripts.bundle.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -20,6 +29,7 @@
 <script src="/metronic_assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
 <script src="/metronic_assets/plugins/custom/datatables/datatables.bundle.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
 {% block javascripts %}{% endblock %}
 </body>
