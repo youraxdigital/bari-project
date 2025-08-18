@@ -29,6 +29,8 @@ final class ClientController extends AbstractController
         $prenom = trim((string)$request->request->get('prenom', ''));
         $telephone = trim((string)$request->request->get('telephone', ''));
         $categorieId = $request->request->get('categorieId');
+        $localisation = trim((string)$request->request->get('localisation', ''));
+
 
         $errors = [];
         if ($code === '') { $errors['code'] = 'Code requis.'; }
@@ -48,6 +50,7 @@ final class ClientController extends AbstractController
         $client->setNom($nom);
         $client->setPrenom($prenom);
         $client->setTelephone($telephone);
+        $client->setLocalisation($localisation);
 
         // Catégorie si utilisée
         if ($categorieId) {
@@ -68,6 +71,7 @@ final class ClientController extends AbstractController
         $client->setNom($request->request->get('nom'));
         $client->setPrenom($request->request->get('prenom'));
         $client->setTelephone($request->request->get('telephone'));
+        $client->setLocalisation($request->request->get('localisation'));
 
         $categorieId = $request->request->get('categorieId');
         if ($categorieId !== null) {
@@ -136,6 +140,7 @@ final class ClientController extends AbstractController
                 'categorie'  => $c->getCategorie()?->getLabel(),
                 // optionally return categorieId to preselect in edit modal
                 'categorieId'=> $c->getCategorie()?->getId(),
+                'localisation' => $c->getLocalisation(),
             ];
         }, $rows);
 

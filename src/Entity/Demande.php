@@ -37,6 +37,9 @@ class Demande
     #[ORM\JoinColumn(nullable: false)]
     private ?StatusDemande $status = null;
 
+    #[ORM\Column(type: 'float')]
+    private bool|null $deleted = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -113,4 +116,23 @@ class Demande
 
         return $this;
     }
+
+    /**
+     * @return bool|null
+     */
+    public function getDeleted(): ?bool
+    {
+        return $this->deleted;
+    }
+
+    /**
+     * @param bool|null $deleted
+     */
+    public function setDeleted(?bool $deleted): self
+    {
+        $this->deleted = $deleted;
+        return $this;
+    }
+
+
 }

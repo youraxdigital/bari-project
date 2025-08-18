@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\CategorieClient;
+use App\Repository\ArticleRepository;
 use App\Repository\CategorieArticleRepository;
 use App\Repository\CategorieClientRepository;
 use App\Repository\DemandeRepository;
+use App\Repository\StatusDemandeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -21,12 +23,17 @@ use Doctrine\ORM\EntityManagerInterface;
 final class ManagerController extends AbstractController
 {
     #[Route('/app/v1/manager', name: 'app_index')]
-    public function index(CategorieClientRepository $catClientRepo, CategorieArticleRepository $catArticleRepo): Response
+    public function index(CategorieClientRepository $catClientRepo,
+                          CategorieArticleRepository $catArticleRepo,
+                          ArticleRepository $articleRepository,
+                          StatusDemandeRepository $statusDemandeRepository): Response
     {
 
         return $this->render('manager/index.html.twig', [
             'categories' => $catClientRepo->findBy([], ['label' => 'ASC']),            // pour le modal client
             'categoriesArticle' => $catArticleRepo->findBy([], ['label' => 'ASC']),    // pour le modal article
+            'articles' => $articleRepository->findBy([], ['name' => 'ASC']),
+            'statusDemandes' => $statusDemandeRepository->findBy([], ['status' => 'ASC']),
         ]);
     }
 

@@ -64,12 +64,27 @@
                         <tr class="fw-bold fs-6 text-gray-800">
                             <th>Code<br><input id="filter_code" type="text" class="form-control form-control-sm" placeholder="Code"></th>
                             <th>Nom<br><input id="filter_nom" type="text" class="form-control form-control-sm" placeholder="Nom"></th>
-                            <th>Date<br><input id="filter_date" type="text" class="form-control form-control-sm" placeholder="jj/mm/aaaa"></th>
+                            <th>Date<br><input id="filter_date" type="text" class="form-control form-control-sm" placeholder="Date" autocomplete="off"></th>
+                            <th>Article<br>
+                                <select id="filter_article" class="form-select form-select-solid">
+                                    <option value="">— Sélectionner —</option>
+                                    {% for a in articles %}
+                                        <option value="{{ a.id }}">{{ a.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </th>
                             <th>Type</th>
                             <th>Effectif</th>
                             <th>Prix</th>
                             <th>Montant</th>
-                            <th>Flux</th>
+                            <th>Flux<br>
+                                <select id="filter_flux" class="form-select form-select-solid">
+                                    <option value="">— Sélectionner —</option>
+                                    {% for s in statusDemandes %}
+                                        <option value="{{ s.id }}">{{ s.status }}</option>
+                                    {% endfor %}
+                                </select>
+                            </th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -211,12 +226,42 @@
     </div>
 
 
+    <!-- MODAL DE CONFIRMATION SUPPRESSION -->
+    <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Voulez-vous vraiment supprimer cette demande ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">
+                        <span class="indicator-label">Supprimer</span>
+                        <span class="indicator-progress" style="display:none;">Suppression...
+                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                    </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
 
 {% block javascripts %}
     <script>
         $(document).ready(function () {
+            // Initialisation du datepicker pour le filtre date avec Metronic8 flatpickr
+            flatpickr("#filter_date", {
+                mode: "range",
+                dateFormat: "d/m/Y",
+                locale: "fr"
+            });
+
             const $table = $('#kt_datatable_results');
             //const $tbody = $table.find('tbody');
             // Affichage du loader
@@ -303,23 +348,31 @@
                         d.code = $('#filter_code').val() || '';
                         d.nom  = $('#filter_nom').val()  || '';
                         d.date = $('#filter_date').val() || ''; // if empty, backend uses today by default
+                        d.article = $('#filter_article').val() || '';
+                        d.flux = $('#filter_flux').val() || '';
                     }
                 },
                 columns: [
                     { data: 'code' },
                     { data: 'nom' },
                     { data: 'date', render: (v)=> `<span class="badge badge-light-info">${v}</span>` },
+                    { data: 'article' },
                     { data: 'type' },
                     { data: 'effectif' },
                     { data: 'prix' },
                     { data: 'montant', render: (v)=> `<span class="badge ${v>=0?'badge-light-success':'badge-light-danger'}">${v}</span>` },
                     { data: 'flux', render: (v)=> `<span class="badge badge-light-primary">${v ?? ''}</span>` },
-                    { data: 'id', orderable:false, render: (id)=> `
-          <button class="btn btn-icon btn-sm btn-light-danger delete-btn" data-id="${id}">
-            <i class="bi bi-trash"></i>
-          </button>`
+                    { data: 'id', orderable:false, render: (id, _, row)=> `
+                    <button class="btn btn-icon btn-sm btn-light-danger delete-btn" data-id="${id}">
+                        <i class="bi bi-trash"></i>
+                    </button>`
                     }
                 ],
+                rowCallback: function(row, data) {
+                    if (data.deleted === true) {
+                        $(row).addClass('text-muted text-decoration-line-through');
+                    }
+                },
                 language: {
                     // host this file locally to avoid CORS
                     //url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/French.json'
@@ -328,8 +381,35 @@
             });
 
             // reload on filter change
-            $('#filter_code, #filter_nom, #filter_date').on('keyup change', () => table.ajax.reload());
+            $('#filter_code, #filter_nom, #filter_article,  #filter_flux, #filter_date').on('keyup change', () => table.ajax.reload());
 
+            $(document).on('click', '.delete-btn', function () {
+                demandeToDelete = $(this).data('id');
+                $('#deleteConfirmModal').modal('show');
+            });
+
+            $('#confirmDeleteBtn').on('click', function () {
+                const $btn = $(this);
+                $btn.find('.indicator-label').hide();
+                $btn.find('.indicator-progress').show();
+
+                $.ajax({
+                    url: `/app/v1/manager/demandes/${demandeToDelete}/delete`,
+                    type: 'POST',
+                    success: function () {
+                        toastr.success('Demande marquée comme supprimée.');
+                        $('#deleteConfirmModal').modal('hide');
+                        table.ajax.reload(null, false);
+                    },
+                    error: function () {
+                        toastr.error('Erreur lors de la suppression.');
+                    },
+                    complete: function () {
+                        $btn.find('.indicator-progress').hide();
+                        $btn.find('.indicator-label').show();
+                    }
+                });
+            });
 
         });
 

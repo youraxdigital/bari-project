@@ -14,6 +14,53 @@
 
         <div class="card p-10">
             <div class="table-responsive" style="max-height:500px; overflow-y:auto;">
+                <!--<table class="table table-row-dashed table-row-gray-300 gy-4" id="clientsTableArabic">
+                    <thead>
+                    <tr class="fw-bold fs-6 text-gray-800 text-center">
+                        <th>الرمز</th>
+                        <th>الاسم الكامل</th>
+                        <th>رقم الهاتف</th>
+                        <th>الفئة</th>
+                        <th>الإجراء</th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-center">
+                    <tr>
+                        <td>CL001</td>
+                        <td>محمد العلوي</td>
+                        <td>0600000000</td>
+                        <td>عادي</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning">
+                                <i class="bi bi-pencil"></i> تعديل
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>CL002</td>
+                        <td>فاطمة الزهراء</td>
+                        <td>0611111111</td>
+                        <td>مميز</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning">
+                                <i class="bi bi-pencil"></i> تعديل
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>CL003</td>
+                        <td>سعيد بنسعيد</td>
+                        <td>0622222222</td>
+                        <td>عادي</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning">
+                                <i class="bi bi-pencil"></i> تعديل
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>-->
+
                 <table id="clientsTable" class="table table-row-dashed table-row-gray-300 gy-4">
                     <thead>
                     <tr class="fw-bold fs-6 text-gray-800">
@@ -32,7 +79,7 @@
 
     {# ---------- ADD MODAL ---------- #}
     <div class="modal fade" id="modalClient" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <form id="clientForm">
                     <div class="modal-header">
@@ -66,6 +113,12 @@
                                 {% endfor %}
                             </select>
                         </div>
+                        <div class="mb-3">
+                            <label class="form-label">Localisation</label>
+                            <div id="addMap" style="height: 300px;"></div>
+                            <input type="hidden" name="localisation" id="addLocalisation">
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="submit" id="clientSubmitBtn" class="btn btn-primary">Enregistrer</button>
@@ -77,7 +130,7 @@
 
     {# ---------- EDIT MODAL ---------- #}
     <div class="modal fade" id="editClientModal" tabindex="-1">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <form id="editClientForm">
                     <div class="modal-header">
@@ -111,6 +164,12 @@
                                 {% endfor %}
                             </select>
                         </div>
+                        <div class="mb-3">
+                            <label class="form-label">Localisation</label>
+                            <div id="editMap" style="height: 300px;"></div>
+                            <input type="hidden" name="localisation" id="editLocalisation">
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="submit" id="clientSubmitEditBtn" class="btn btn-primary">Enregistrer</button>
@@ -172,6 +231,11 @@
                 });
 
             // ---------- ADD ----------
+            // Lors de l'ouverture du modal d'ajout
+            $('#modalClient').on('shown.bs.modal', function () {
+                setTimeout(() => initLeafletMap('addMap', 'addLocalisation'), 200);
+            });
+
             const $addModal = $('#modalClient');
             const $addForm = $('#clientForm');
             $('#clientForm')[0].reset();
@@ -204,19 +268,28 @@
             const $editModal = $('#editClientModal');
             const $editForm  = $('#editClientForm');
 
-            $('#clientsTable').on('click', '.editClient', function(){
+            // Lors de l'ouverture du modal de modification
+            $('#clientsTable').on('click', '.editClient', function () {
                 try {
                     const row = JSON.parse(decodeURIComponent($(this).data('client')));
                     $('#editClientId').val(row.id);
                     $('#editCode').val(row.code);
-                    // Split if you store separate nom/prenom server-side
                     const parts = (row.nomComplet || '').trim().split(/\s+/);
                     $('#editNom').val(parts[0] || '');
                     $('#editPrenom').val(parts.slice(1).join(' ') || '');
                     $('#editTelephone').val(row.telephone || '');
-                    // preselect category if you returned categorieId in datatable; fallback by label
-                    if (row.categorieId) $('#editCategorieId').val(row.categorieId);
-                    $editModal.modal('show');
+                    $('#editCategorieId').val(row.categorieId || '');
+                    $('#editLocalisation').val(row.localisation || '');
+
+                    console.log("row.localisation ====>>", row.localisation);
+
+                    $('#editClientModal').modal('show');
+
+                    setTimeout(() => {
+                        const defaultPos = row.localisation ? row.localisation.split(',').map(Number) : [33.5731, -7.5898];
+                        initLeafletMap('editMap', 'editLocalisation', defaultPos);
+                    }, 200);
+
                 } catch (e) {
                     console.error(e);
                 }
@@ -245,5 +318,75 @@
                 });
             });
         });
+
+        // Initialisation des cartes Leaflet
+        function initLeafletMap(mapId, inputId, defaultLatLng = [33.5731, -7.5898]) {
+            const value = document.getElementById(inputId).value;
+            let coords = defaultLatLng;
+
+            if (value && value.includes(',')) {
+                const parts = value.split(',').map(parseFloat);
+                if (!isNaN(parts[0]) && !isNaN(parts[1])) {
+                    coords = parts;
+                }
+            }
+
+            // Reset Leaflet container if already initialized
+            const mapContainer = document.getElementById(mapId);
+            if (mapContainer._leaflet_id) {
+                mapContainer._leaflet_id = null;
+            }
+
+            const map = L.map(mapId).setView(coords, 16);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap'
+            }).addTo(map);
+
+            const marker = L.marker(coords, { draggable: true }).addTo(map);
+            marker.bindPopup("Déplacez le marqueur ou cliquez sur la carte pour le positionner.").openPopup();
+            document.getElementById(inputId).value = coords.join(',');
+
+            // Géocoder
+            L.Control.geocoder({
+                defaultMarkGeocode: false
+            })
+                .on('markgeocode', function(e) {
+                    const latlng = e.geocode.center;
+                    marker.setLatLng(latlng);
+                    map.setView(latlng, 17);
+                    document.getElementById(inputId).value = `${latlng.lat},${latlng.lng}`;
+                })
+                .addTo(map);
+
+            marker.on('dragend', function () {
+                const pos = marker.getLatLng();
+                document.getElementById(inputId).value = `${pos.lat},${pos.lng}`;
+            });
+
+            // Fix: do not update marker when user is just dragging the map
+            let mapDragged = false;
+
+            map.on('movestart', function () {
+                mapDragged = true;
+            });
+
+            map.on('moveend', function () {
+                setTimeout(() => { mapDragged = false; }, 200); // slight delay for drag detection
+            });
+
+            map.on('click', function (e) {
+                if (mapDragged) return; // ignore clicks during drag
+
+                marker.setLatLng(e.latlng);
+                document.getElementById(inputId).value = `${e.latlng.lat},${e.latlng.lng}`;
+                marker.bindPopup("Position mise à jour.").openPopup();
+            });
+
+            return map;
+        }
+
+
+
     </script>
 {% endblock %}

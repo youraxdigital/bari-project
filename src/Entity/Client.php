@@ -27,6 +27,9 @@ class Client
     #[ORM\Column(length: 20, nullable: true)]
     private ?string $telephone = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $localisation = null;
+
     #[ORM\Column]
     private ?float $prix = null;
 
@@ -145,4 +148,24 @@ class Client
 
         return $this;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getLocalisation(): ?string
+    {
+        return $this->localisation;
+    }
+
+    /**
+     * @param string|null $localisation
+     */
+    public function setLocalisation(?string $localisation): self
+    {
+        $this->localisation = $localisation;
+
+        return $this;
+    }
+
+
 }
