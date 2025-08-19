@@ -1,73 +1,378 @@
 {% extends 'base.html.twig' %}
-{% block title %}Interface Caisse{% endblock %}
 
+{% block title %}Gestion de la caisse{% endblock %}
 
 {% block body %}
     <div class="container py-10">
-        <h2 class="mb-5">Gestion de la caisse</h2>
 
+        {# === 1. CAISSE ACTUELLE & MOUVEMENTS === #}
+        <div class="card mb-10">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h2 class="mb-0">
+                    <i class="bi bi-wallet2 me-2"></i>Gestion de la caisse
+                </h2>
 
-        {% if caisse %}
-            <div class="mb-4">
-                <h4>Montant actuel : <span class="badge bg-success">{{ caisse.montantActuel }} MAD</span></h4>
-                <form method="post" action="{{ path('app_caisse_mouvement') }}">
-                    <input type="hidden" name="caisse_id" value="{{ caisse.id }}">
-                    <div class="row g-3">
-                        <div class="col-md-3">
-                            <select name="type" class="form-select">
-                                <option value="ENTREE">Entrée</option>
-                                <option value="SORTIE">Sortie</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <input name="motif" class="form-control" placeholder="Motif" required>
-                        </div>
-                        <div class="col-md-3">
-                            <input name="montant" type="number" step="0.01" class="form-control" placeholder="Montant" required>
-                        </div>
-                        <div class="col-md-2">
-                            <button class="btn btn-primary">Ajouter</button>
-                        </div>
-                    </div>
-                </form>
+                {% if caisse %}
+                    <form id="close-caisse-form">
+                        <button type="submit" class="btn btn-danger btn-sm" id="close-caisse-btn">
+                            <i class="bi bi-lock-fill me-1"></i> Clôturer la caisse
+                            <span class="spinner-border spinner-border-sm d-none" id="close-loader"></span>
+                        </button>
+                    </form>
+                {% endif %}
             </div>
 
+            <div class="card-body">
+                {% if caisse %}
+                    <div class="mb-5">
+                        <h4>
+                            <i class="bi bi-cash-stack me-1"></i>Montant actuel :
+                            <span class="badge badge-light-success fs-2 fw-bold" id="montant-actuel">{{ caisse.montantActuel }} MAD</span>
+                            <span id="montant-sync-loader" class="spinner-border spinner-border-sm align-middle text-success d-none"></span>
+                        </h4>
+                    </div>
 
-            <h4>Demandes à encaisser</h4>
-            <table class="table">
-                <thead>
-                <tr><th>Client</th><th>Article</th><th>Date</th><th>Montant</th><th>Action</th></tr>
-                </thead>
-                <tbody>
-                {% for d in demandes %}
-                    <tr>
-                        <td>{{ d.client.nom }} {{ d.client.prenom }}</td>
-                        <td>{{ d.article.name }}</td>
-                        <td>{{ d.date|date('d/m/Y') }}</td>
-                        <td>{{ d.montant }}</td>
-                        <td><button class="btn btn-success encaisser-btn" data-id="{{ d.id }}">Encaisser</button></td>
-                    </tr>
-                {% else %}<tr><td colspan="4">Aucune demande</td></tr>{% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <form method="post" action="{{ path('app_caisse_open') }}">
-                <input type="number" name="montant" step="0.01" class="form-control mb-3" placeholder="Montant initial" required>
-                <button class="btn btn-primary">Ouvrir la caisse</button>
-            </form>
+                    {# Formulaire mouvement #}
+                    <form id="form-mouvement" action="{{ path('app_caisse_mouvement') }}" method="post" class="row g-3 align-items-end mb-7">
+                        <input type="hidden" name="caisse_id" value="{{ caisse.id }}">
+
+                        <div class="col-md-3">
+                            <label class="form-label">Type</label>
+                            <select name="type" class="form-select" required>
+                                <option value="ENTREE">➕ Entrée</option>
+                                <option value="SORTIE">➖ Sortie</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-5">
+                            <label class="form-label">Motif</label>
+                            <input name="motif" class="form-control" required>
+                        </div>
+
+                        <div class="col-md-2">
+                            <label class="form-label">Montant</label>
+                            <input name="montant" type="number" step="0.01" class="form-control" required>
+                        </div>
+
+                        <div class="col-md-2">
+                            <label class="form-label d-block">&nbsp;</label>
+                            <button type="submit" class="btn btn-primary w-100" id="ajouter-mouvement-btn">
+                                <i class="bi bi-plus-circle me-1"></i>Ajouter
+                                <span class="spinner-border spinner-border-sm d-none" id="ajouter-loader"></span>
+                            </button>
+                        </div>
+                    </form>
+
+                    {# Historique mouvements #}
+                    <div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="mb-0">
+                                <i class="bi bi-clock-history me-1"></i>Historique des mouvements
+                            </h4>
+                            <button id="export-pdf-btn" class="btn btn-light-info btn-sm">
+                                <i class="bi bi-printer me-1"></i>Exporter PDF
+                                <span class="spinner-border spinner-border-sm d-none" id="export-loader"></span>
+                            </button>
+                        </div>
+
+                        <table class="table table-striped align-middle" id="table-mouvements">
+                            <thead>
+                            <tr class="text-muted fw-bold text-uppercase">
+                                <th><i class="bi bi-calendar2 me-1"></i>Date</th>
+                                <th><i class="bi bi-arrow-repeat me-1"></i>Type</th>
+                                <th><i class="bi bi-card-text me-1"></i>Motif</th>
+                                <th><i class="bi bi-cash me-1"></i>Montant</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for m in caisse.mouvements %}
+                                <tr>
+                                    <td>{{ m.createdAt|date('d/m/Y H:i') }}</td>
+                                    <td>
+                                        {% if m.type == 'ENTREE' %}
+                                            <span class="badge badge-light-success">Entrée</span>
+                                        {% elseif m.type == 'ENCAISSEMENT' %}
+                                            <span class="badge badge-light-info">Encaissement</span>
+                                        {% else %}
+                                            <span class="badge badge-light-danger">Sortie</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ m.motif }}</td>
+                                    <td>{{ m.montant }} MAD</td>
+                                </tr>
+                            {% else %}
+                                <tr><td colspan="4" class="text-center text-muted">Aucun mouvement</td></tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                {% else %}
+                    <div class="d-flex justify-content-end">
+                        <form method="post" action="{{ path('app_caisse_open') }}">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <input type="number" name="montant" step="0.01" class="form-control" placeholder="Montant initial" required>
+                                </div>
+                                <div class="col-auto">
+                                    <button class="btn btn-success">
+                                        <i class="bi bi-unlock-fill me-1"></i>Ouvrir la caisse
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        {# === 2. DEMANDES A ENCAISSER === #}
+        {% if caisse %}
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">
+                        <i class="bi bi-journal-check me-1"></i>Demandes à encaisser
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <table class="table align-middle table-row-dashed" id="table-demandes">
+                        <thead>
+                        <tr class="text-muted fw-bold text-uppercase">
+                            <th><i class="bi bi-person me-1"></i>Client</th>
+                            <th><i class="bi bi-box-seam me-1"></i>Article</th>
+                            <th><i class="bi bi-calendar-event me-1"></i>Date</th>
+                            <th><i class="bi bi-cash-coin me-1"></i>Montant</th>
+                            <th><i class="bi bi-gear me-1"></i>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for d in demandes %}
+                            <tr>
+                                <td>{{ d.client.nom }} {{ d.client.prenom }}</td>
+                                <td>{{ d.article.name }}</td>
+                                <td>{{ d.date|date('d/m/Y') }}</td>
+                                <td>{{ d.montant }} MAD</td>
+                                <td>
+                                    <button class="btn btn-sm btn-success encaisser-btn" data-id="{{ d.id }}">
+                                        <i class="bi bi-cash-stack me-1"></i>Encaisser
+                                    </button>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr><td colspan="5" class="text-center text-muted">Aucune demande</td></tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         {% endif %}
-    </div>
-{% endblock %}
 
+    </div>
+
+
+
+    <div class="modal fade" id="confirmEncaisseModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmation d'encaissement</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    Voulez-vous vraiment encaisser cette demande ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-success" id="confirm-encaisse-btn">
+                        <span class="spinner-border spinner-border-sm d-none" id="encaisse-loader"></span>
+                        Oui, encaisser
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="confirmCloseModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmation de clôture</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    Voulez-vous vraiment clôturer la caisse ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-danger" id="confirm-close-btn">
+                        <span class="spinner-border spinner-border-sm d-none" id="confirm-close-loader"></span>
+                        Oui, clôturer
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
 
 {% block javascripts %}
     <script>
-        $(document).on('click', '.encaisser-btn', function () {
-            const id = $(this).data('id');
-            $.post(`/app/v1/caisse/encaisser/${id}`, function () {
-                toastr.success('Demande encaissée');
-                location.reload();
+        let demandeIdToEncaisser = null;
+        const encaisseModal = new bootstrap.Modal(document.getElementById('confirmEncaisseModal'));
+
+        $(document).ready(function () {
+            const demandesTable = $('#table-demandes').DataTable();
+            const mouvementsTable = $('#table-mouvements').DataTable();
+            const encaisseModal = new bootstrap.Modal(document.getElementById('confirmEncaisseModal'));
+            const closeModal = new bootstrap.Modal(document.getElementById('confirmCloseModal'));
+
+            let demandeIdToEncaisser = null;
+
+            // Modal Encaissement
+            $(document).on('click', '.encaisser-btn', function () {
+                demandeIdToEncaisser = $(this).data('id');
+                $('#encaisse-loader').addClass('d-none');
+                $('#confirm-encaisse-btn').prop('disabled', false);
+                encaisseModal.show();
+            });
+
+            $('#confirm-encaisse-btn').on('click', function () {
+                const btn = $(this);
+                btn.prop('disabled', true);
+                $('#encaisse-loader').removeClass('d-none');
+                showMontantLoader();
+
+                $.post(`/app/v1/caisse/encaisser/${demandeIdToEncaisser}`, function () {
+                    toastr.success('✅ Demande encaissée');
+                    reloadTables();
+                }).fail(function () {
+                    toastr.error("❌ Erreur lors de l'encaissement");
+                }).always(function () {
+                    btn.prop('disabled', false);
+                    $('#encaisse-loader').addClass('d-none');
+                    encaisseModal.hide();
+                });
+            });
+
+            // Confirmation modale de clôture
+            $('#close-caisse-form').on('submit', function (e) {
+                e.preventDefault();
+                closeModal.show();
+            });
+
+            $('#confirm-close-btn').on('click', function () {
+                const btn = $(this);
+                btn.prop('disabled', true);
+                $('#confirm-close-loader').removeClass('d-none');
+
+                $.post('{{ path("app_caisse_close") }}', function (response) {
+                    if (response.success) {
+                        toastr.success("✅ Caisse clôturée avec succès !");
+                        setTimeout(() => window.location.reload(), 1000);
+                    } else {
+                        toastr.error(response.message || "❌ Erreur inconnue");
+                    }
+                }).fail(() => {
+                    toastr.error("❌ Erreur serveur lors de la clôture.");
+                }).always(() => {
+                    btn.prop('disabled', false);
+                    $('#confirm-close-loader').addClass('d-none');
+                    closeModal.hide();
+                });
+            });
+
+            // Ajout de mouvement avec loader + resync
+            $('#form-mouvement').on('submit', function (e) {
+                e.preventDefault();
+                const form = $(this);
+                const btn = $('#ajouter-mouvement-btn');
+                const loader = $('#ajouter-loader');
+
+                btn.prop('disabled', true);
+                loader.removeClass('d-none');
+                showMontantLoader();
+
+                $.post(form.attr('action'), form.serialize())
+                    .done(function () {
+                        toastr.success("💰 Mouvement ajouté avec succès !");
+                        reloadTables(); // recharge les mouvements + montant + demandes
+                        form.trigger('reset');
+                    })
+                    .fail(function () {
+                        toastr.error("❌ Erreur lors de l'ajout du mouvement");
+                    })
+                    .always(function () {
+                        btn.prop('disabled', false);
+                        loader.addClass('d-none');
+                    });
+            });
+
+
+            function reloadTables() {
+                $.get(window.location.href, function (html) {
+                    const updatedDemandes = $(html).find('#table-demandes tbody').html();
+                    const updatedMouvements = $(html).find('#table-mouvements tbody').html();
+                    const updatedMontant = $(html).find('#montant-actuel').text();
+
+                    // Mettre à jour les tables
+                    $('#table-demandes').DataTable().clear().destroy();
+                    $('#table-mouvements').DataTable().clear().destroy();
+
+                    $('#table-demandes tbody').html(updatedDemandes);
+                    $('#table-mouvements tbody').html(updatedMouvements);
+                    $('#montant-actuel').text(updatedMontant);
+
+                    $('#table-demandes').DataTable();
+                    $('#table-mouvements').DataTable();
+
+                    hideMontantLoader();
+                });
+            }
+
+
+            function showMontantLoader() {
+                $('#montant-sync-loader').removeClass('d-none');
+            }
+
+            function hideMontantLoader() {
+                $('#montant-sync-loader').addClass('d-none');
+            }
+
+            $('#export-pdf-btn').on('click', function () {
+                const btn = $(this);
+                const loader = $('#export-loader');
+
+                btn.prop('disabled', true);
+                loader.removeClass('d-none');
+
+                fetch('{{ path("app_caisse_export") }}', {
+                    method: 'GET'
+                })
+                    .then(response => {
+                        if (!response.ok) throw new Error("Erreur lors de l'export PDF");
+                        return response.blob();
+                    })
+                    .then(blob => {
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = "historique-caisse.pdf";
+                        document.body.appendChild(a);
+                        a.click();
+                        a.remove();
+                        window.URL.revokeObjectURL(url);
+                    })
+                    .catch(() => {
+                        toastr.error("❌ Une erreur est survenue lors de la génération du PDF.");
+                    })
+                    .finally(() => {
+                        btn.prop('disabled', false);
+                        loader.addClass('d-none');
+                    });
             });
         });
+
     </script>
+
 {% endblock %}

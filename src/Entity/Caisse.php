@@ -5,6 +5,8 @@ namespace App\Entity;
 
 use App\Repository\CaisseRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 
 #[ORM\Entity(repositoryClass: CaisseRepository::class)]
@@ -33,6 +35,14 @@ class Caisse
 
     #[ORM\Column(type: 'float')]
     private $montantActuel;
+
+    #[ORM\OneToMany(mappedBy: 'caisse', targetEntity: MouvementCaisse::class, orphanRemoval: true)]
+    private Collection $mouvements;
+
+    public function __construct()
+    {
+        $this->mouvements = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -106,6 +116,24 @@ class Caisse
     {
         $this->closedAt = $closedAt;
     }
+
+    /**
+     * @return Collection
+     */
+    public function getMouvements(): Collection
+    {
+        return $this->mouvements;
+    }
+
+    /**
+     * @param Collection $mouvements
+     */
+    public function setMouvements(Collection $mouvements): void
+    {
+        $this->mouvements = $mouvements;
+    }
+
+
 
 
 

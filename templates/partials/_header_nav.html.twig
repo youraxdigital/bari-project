@@ -16,31 +16,34 @@
 <div class="d-flex justify-content-between align-items-center px-10 py-5 border-bottom">
     <h2 class="mb-0 fw-bold text-dark">{{ header_title|default('Gestion des demandes') }}</h2>
 
-    <div class="d-flex gap-3">
-        {# Dashboard link: require the page to pass dashboard_route #}
-        {% set dash_route = dashboard_route|default('app_dashboard') %}
-        <a href="{{ path(dash_route) }}"
-           class="{{ cls_dash }}"
-           {% if is_index %}aria-current="page"{% endif %}>
-            <i class="bi bi-graph-up-arrow fs-2x me-2"></i> Dashboard
-        </a>
+    {% if current != "app_caisse" %}
+        <div class="d-flex gap-3">
+            {# Dashboard link: require the page to pass dashboard_route #}
+            {% set dash_route = dashboard_route|default('app_dashboard') %}
+            <a href="{{ path(dash_route) }}"
+               class="{{ cls_dash }}"
+               {% if is_index %}aria-current="page"{% endif %}>
+                <i class="bi bi-graph-up-arrow fs-2x me-2"></i> Dashboard
+            </a>
 
-        <a href="{{ path('app_index') }}"
-           class="{{ cls_demandes }}"
-           {% if is_clients %}aria-current="page"{% endif %}>
-            <i class="bi bi-journal-text fs-2x me-2"></i> Demandes
-        </a>
+            <a href="{{ path('app_index') }}"
+               class="{{ cls_demandes }}"
+               {% if is_clients %}aria-current="page"{% endif %}>
+                <i class="bi bi-journal-text fs-2x me-2"></i> Demandes
+            </a>
 
-        <a href="{{ path('app_clients_manage') }}"
-           class="{{ cls_clients }}"
-           {% if is_clients %}aria-current="page"{% endif %}>
-            <i class="bi bi-person-fill fs-2x me-2"></i> Clients
-        </a>
+            <a href="{{ path('app_clients_manage') }}"
+               class="{{ cls_clients }}"
+               {% if is_clients %}aria-current="page"{% endif %}>
+                <i class="bi bi-person-fill fs-2x me-2"></i> Clients
+            </a>
 
-        <a href="{{ path('app_articles_manage') }}"
-           class="{{ cls_articles }}"
-           {% if is_articles %}aria-current="page"{% endif %}>
-            <i class="bi bi-box-seam fs-2x me-2"></i> Articles
-        </a>
-    </div>
+            <a href="{{ path('app_articles_manage') }}"
+               class="{{ cls_articles }}"
+               {% if is_articles %}aria-current="page"{% endif %}>
+                <i class="bi bi-box-seam fs-2x me-2"></i> Articles
+            </a>
+        </div>
+    {% endif %}
+
 </div>

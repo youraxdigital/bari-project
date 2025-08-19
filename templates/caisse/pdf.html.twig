@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: DejaVu Sans, sans-serif; font-size: 12px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #000; padding: 8px; text-align: left; }
+        th { background-color: #f0f0f0; }
+    </style>
+</head>
+<body>
+<h2>📄 Historique de la caisse</h2>
+<p><strong>Date ouverture :</strong> {{ caisse.openedAt|date('d/m/Y H:i') }}</p>
+{% if caisse.closedAt %}
+    <p><strong>Date clôture :</strong> {{ caisse.closedAt|date('d/m/Y H:i') }}</p>
+{% endif %}
+<p><strong>Montant actuel :</strong> {{ caisse.montantActuel }} MAD</p>
+
+<h3>📊 Mouvements</h3>
+<table>
+    <thead>
+    <tr>
+        <th>Date</th>
+        <th>Type</th>
+        <th>Motif</th>
+        <th>Montant</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for m in caisse.mouvements %}
+        <tr>
+            <td>{{ m.createdAt|date('d/m/Y H:i') }}</td>
+            <td>{{ m.type }}</td>
+            <td>{{ m.motif }}</td>
+            <td>{{ m.montant }} MAD</td>
+        </tr>
+    {% else %}
+        <tr><td colspan="4">Aucun mouvement</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>

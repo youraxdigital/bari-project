@@ -16,8 +16,9 @@ class MouvementCaisse
     private $id;
 
 
-    #[ORM\ManyToOne(targetEntity: Caisse::class)]
-    private $caisse;
+    #[ORM\ManyToOne(targetEntity: Caisse::class, inversedBy: 'mouvements')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Caisse $caisse = null;
 
 
     #[ORM\Column(type: 'string')]
@@ -34,6 +35,9 @@ class MouvementCaisse
 
     #[ORM\Column(type: 'datetime')]
     private $createdAt;
+
+    #[ORM\ManyToOne(targetEntity: Demande::class)]
+    private ?Demande $demande = null;
 
     /**
      * @return mixed
@@ -122,6 +126,17 @@ class MouvementCaisse
     public function setCreatedAt($createdAt): void
     {
         $this->createdAt = $createdAt;
+    }
+
+    public function getDemande(): ?Demande
+    {
+        return $this->demande;
+    }
+
+    public function setDemande(?Demande $demande): self
+    {
+        $this->demande = $demande;
+        return $this;
     }
 
 
