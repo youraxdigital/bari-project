@@ -37,8 +37,11 @@ class Demande
     #[ORM\JoinColumn(nullable: false)]
     private ?StatusDemande $status = null;
 
-    #[ORM\Column(type: 'float')]
-    private bool|null $deleted = false;
+    #[ORM\Column(type: 'boolean')]
+    private bool $deleted = false;
+
+    #[ORM\ManyToOne(targetEntity: Caisse::class)]
+    private $caisse;
 
     public function getId(): ?int
     {
@@ -126,13 +129,31 @@ class Demande
     }
 
     /**
-     * @param bool|null $deleted
+     * @param bool $deleted
      */
     public function setDeleted(?bool $deleted): self
     {
         $this->deleted = $deleted;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCaisse()
+    {
+        return $this->caisse;
+    }
+
+    /**
+     * @param mixed $caisse
+     */
+    public function setCaisse($caisse): void
+    {
+        $this->caisse = $caisse;
+    }
+
+
 
 
 }

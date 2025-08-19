@@ -6,39 +6,9 @@
 
 {% block body %}
     <!-- HEADER MENU NAVIGATION -->
-    {# }<div class="d-flex justify-content-between align-items-center px-10 py-5 border-bottom">
-        <h2 class="mb-0 fw-bold text-dark">Gestion des Demandes</h2>
-        <div class="d-flex gap-3">
-            <a href="{{ path('app_clients_manage') }}" class="btn btn-light-warning">
-                <i class="bi bi-person-fill fs-2x me-2"></i> Clients
-            </a>
-            <a href="{{ path('app_articles_manage') }}" class="btn btn-light-danger">
-                <i class="bi bi-box-seam fs-2x me-2"></i> Articles
-            </a>
-            <a href="#" class="btn btn-light-success">
-                <i class="bi bi-graph-up-arrow fs-2x me-2"></i> Dashboard
-            </a>
-            <a href="#" class="btn btn-light-primary" data-bs-toggle="modal" data-bs-target="#importModal">
-                <i class="bi bi-file-earmark-spreadsheet-fill fs-2x me-2"></i> Import Excel
-            </a>
-        </div>
-    </div> #}
+
     <div class="container py-10">
         <!-- BOUTONS (alignés à droite) -->
-        {# <div class="d-flex justify-content-end gap-4 mb-10 flex-wrap">
-            <span class="btn btn-flex btn-light-warning" data-bs-toggle="modal" data-bs-target="#modalClient">
-                <i class="bi bi-person-fill fs-2x me-2"></i> Client
-            </span>
-            <span href="#" class="btn btn-flex btn-light-danger" data-bs-toggle="modal" data-bs-target="#modalArticle">
-                <i class="bi bi-box-seam fs-2x me-2"></i> Article
-            </span>
-            <a href="#" class="btn btn-flex btn-light-success">
-                <i class="bi bi-graph-up-arrow fs-2x me-2"></i> Dashboard
-            </a>
-            <a href="#" class="btn btn-flex btn-light-primary" data-bs-toggle="modal" data-bs-target="#importModal">
-                <i class="bi bi-file-earmark-spreadsheet-fill fs-2x me-2"></i> Import Excel
-            </a>
-        </div>#}
 
         <!-- BARRE DE RECHERCHE -->
         <div class="mb-5">
@@ -109,7 +79,25 @@
                 </div>
                 <form id="importExcelForm" enctype="multipart/form-data">
                     <div class="modal-body">
-                        <input type="file" name="excel_file" class="form-control" accept=".xls,.xlsx" required>
+                        <div id="importErrorMsg" class="alert alert-danger d-none" role="alert">
+                            <!-- message d'erreur ici -->
+                        </div>
+                        <div id="typeTotalsContainer" class="mb-4">
+                            {% for article in articles %}
+                                <div class="row align-items-center mb-2">
+                                    <div class="col-md-6">
+                                        <label>{{ article.name }}</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="number" min="0" class="form-control form-control-sm" name="type_totals[{{ article.name }}]" placeholder="Total attendu">
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="mb-4">
+                            <input type="file" name="excel_file" class="form-control" accept=".xls,.xlsx" required>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" id="importSubmitBtn">
@@ -263,75 +251,6 @@
             });
 
             const $table = $('#kt_datatable_results');
-            //const $tbody = $table.find('tbody');
-            // Affichage du loader
-            //$tbody.html(`
-            //    <tr>
-            //        <td colspan="9" class="text-center py-10">
-            //            <div class="spinner-border text-primary" role="status">
-            //                <span class="visually-hidden">Chargement...</span>
-            //            </div>
-            //        </td>
-            //    </tr>
-            //`);
-
-            // Chargement des données AJAX
-            //$.ajax({
-            //    url: '/app/v1/manager/demandes',
-            //    method: 'GET',
-            //    success: function (data) {
-            //        let rows = '';
-            //        data.forEach(function (item) {
-            //            rows += `
-            //        <tr>
-            //            <td>${item.code}</td>
-            //            <td>${item.nom}</td>
-            //            <td><span class="badge badge-light-info">${item.date}</span></td>
-            //            <td>${item.type}</td>
-            //            <td>${item.effectif}</td>
-            //            <td>${item.prix}</td>
-            //            <td>
-            //                <span class="badge ${item.montant >= 0 ? 'badge-light-success' : 'badge-light-danger'}">
-            //                    ${item.montant}
-            //                </span>
-            //            </td>
-            //            <td><span class="badge badge-light-primary">${item.flux}</span></td>
-            //            <td>
-            //                <button class="btn btn-icon btn-sm btn-light-danger delete-btn" data-id="${item.id}">
-            //                    <i class="bi bi-trash"></i>
-            //                </button>
-            //            </td>
-            //        </tr>
-            //    `;
-            //        });
-//
-            //        $tbody.html(rows);
-//
-            //        // Initialiser DataTable avec options françaises
-            //        const table = $table.DataTable({
-            //            destroy: true,
-            //            responsive: true,
-            //            pageLength: 5,
-            //            lengthMenu: [5, 10, 25, 50, 100],
-            //            ordering: false,
-            //            language: {
-            //                url: "//cdn.datatables.net/plug-ins/1.10.25/i18n/French.json"
-            //            }
-            //        });
-//
-            //        // Filtres personnalisés
-            //        $('.filter-input').on('keyup change', function () {
-            //            let i = $(this).data('column'); // Index de colonne
-            //            table.column(i).search(this.value).draw();
-            //        });
-            //    },
-            //    error: function () {
-            //        $tbody.html(`
-            //    <tr><td colspan="9" class="text-center text-danger">Erreur lors du chargement des données</td></tr>
-            //`);
-            //    }
-            //});
-
 
             // SERVER SIDE -----------------------
             const table = $table.DataTable({
@@ -418,12 +337,24 @@
             e.preventDefault();
 
             const $submitBtn = $('#importSubmitBtn');
+            const $errorBox = $('#importErrorMsg');
             const originalHtml = $submitBtn.html();
+
+            // Reset error box
+            $errorBox.addClass('d-none').text('');
+
             // Disable button & show spinner
             $submitBtn.prop('disabled', true)
                 .html('<span class="spinner-border spinner-border-sm me-2"></span>Importation des lignes...');
 
             let formData = new FormData(this);
+
+            // Ajoute dynamiquement les valeurs des totaux saisis
+            $('#typeTotalsContainer input').each(function () {
+                const name = $(this).attr('name');
+                const value = $(this).val();
+                formData.append(name, value);
+            });
 
             $.ajax({
                 url: '/app/v1/manager/import',
@@ -439,8 +370,13 @@
                     $('#importModal').modal('hide');
                     location.reload(); // ou recharger la liste dynamiquement
                 },
-                error: function () {
+                error: function (xhr) {
                     toastr.error('Échec de l’importation');
+                    let msg = 'Erreur inconnue lors de l’importation.';
+                    if (xhr.responseJSON && xhr.responseJSON.error) {
+                        msg = xhr.responseJSON.error;
+                    }
+                    $errorBox.removeClass('d-none').text(msg); // Affiche dans la modale
                 },
                 complete: function () {
                     // Restore button

@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+{% block title %}Interface Caisse{% endblock %}
+
+
+{% block body %}
+    <div class="container py-10">
+        <h2 class="mb-5">Gestion de la caisse</h2>
+
+
+        {% if caisse %}
+            <div class="mb-4">
+                <h4>Montant actuel : <span class="badge bg-success">{{ caisse.montantActuel }} MAD</span></h4>
+                <form method="post" action="{{ path('app_caisse_mouvement') }}">
+                    <input type="hidden" name="caisse_id" value="{{ caisse.id }}">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <select name="type" class="form-select">
+                                <option value="ENTREE">Entrée</option>
+                                <option value="SORTIE">Sortie</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <input name="motif" class="form-control" placeholder="Motif" required>
+                        </div>
+                        <div class="col-md-3">
+                            <input name="montant" type="number" step="0.01" class="form-control" placeholder="Montant" required>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-primary">Ajouter</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+            <h4>Demandes à encaisser</h4>
+            <table class="table">
+                <thead>
+                <tr><th>Client</th><th>Article</th><th>Date</th><th>Montant</th><th>Action</th></tr>
+                </thead>
+                <tbody>
+                {% for d in demandes %}
+                    <tr>
+                        <td>{{ d.client.nom }} {{ d.client.prenom }}</td>
+                        <td>{{ d.article.name }}</td>
+                        <td>{{ d.date|date('d/m/Y') }}</td>
+                        <td>{{ d.montant }}</td>
+                        <td><button class="btn btn-success encaisser-btn" data-id="{{ d.id }}">Encaisser</button></td>
+                    </tr>
+                {% else %}<tr><td colspan="4">Aucune demande</td></tr>{% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <form method="post" action="{{ path('app_caisse_open') }}">
+                <input type="number" name="montant" step="0.01" class="form-control mb-3" placeholder="Montant initial" required>
+                <button class="btn btn-primary">Ouvrir la caisse</button>
+            </form>
+        {% endif %}
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    <script>
+        $(document).on('click', '.encaisser-btn', function () {
+            const id = $(this).data('id');
+            $.post(`/app/v1/caisse/encaisser/${id}`, function () {
+                toastr.success('Demande encaissée');
+                location.reload();
+            });
+        });
+    </script>
+{% endblock %}

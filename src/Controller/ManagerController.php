@@ -42,6 +42,7 @@ final class ManagerController extends AbstractController
     public function importExcel(Request $request, EntityManagerInterface $em): JsonResponse
     {
         $file = $request->files->get('excel_file');
+        $expectedTotals = $request->request->all('type_totals'); // array associatif: ['OVIN' => 20, 'BOVIN' => 30]
 
         if (!$file) {
             return new JsonResponse(['error' => 'No file uploaded'], 400);
@@ -51,6 +52,34 @@ final class ManagerController extends AbstractController
         $spreadsheet = IOFactory::load($file->getPathname());
         $sheet = $spreadsheet->getActiveSheet();
         $rows = $sheet->toArray();
+
+        // check sous totals
+        $calculatedTotals = [];
+
+        for ($i = 1; $i < count($rows); $i++) {
+            [, , , , $type, $effectif] = $rows[$i];
+
+            if (!$type || !$effectif) continue;
+
+            if (!isset($calculatedTotals[$type])) {
+                $calculatedTotals[$type] = 0;
+            }
+            $calculatedTotals[$type] += (int) $effectif;
+        }
+
+        // Comparaison des valeurs attendues vs calculées
+        foreach ($expectedTotals as $type => $expected) {
+            $expected = (int) $expected;
+            $actual = (int) ($calculatedTotals[$type] ?? 0);
+
+            if ($expected !== $actual) {
+                return new JsonResponse([
+                    'error' => "Le total du type '$type' est incorrect : attendu $expected, trouvé $actual."
+                ], 400);
+            }
+        }
+
+
         // Status initial
         $status = $em->getRepository(StatusDemande::class)->findOneBy(['status' => StatusDemande::FACTURATION]);
         $categorieClient = $em->getRepository(CategorieClient::class)->findOneBy(['code' => 'BOUCHER']);
@@ -96,6 +125,7 @@ final class ManagerController extends AbstractController
                 $demande->setQuantite($quantite);
                 $demande->setMontant($montant);
                 $demande->setStatus($status);
+                $demande->setDeleted(false);
 
                 $em->persist($demande);
             }

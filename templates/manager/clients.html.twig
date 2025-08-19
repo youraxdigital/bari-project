@@ -182,7 +182,8 @@
 
 {% block javascripts %}
     <script>
-        $(function () {
+
+        $(document).ready(function () {
             // DataTable
             const table = $('#clientsTable').DataTable({
                 processing: true,
@@ -319,6 +320,7 @@
             });
         });
 
+
         // Initialisation des cartes Leaflet
         function initLeafletMap(mapId, inputId, defaultLatLng = [33.5731, -7.5898]) {
             const value = document.getElementById(inputId).value;
@@ -385,6 +387,7 @@
 
             return map;
         }
+
 
 
 
