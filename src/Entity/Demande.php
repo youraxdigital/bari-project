@@ -11,6 +11,10 @@ use App\Entity\StatusDemande;
 #[ORM\Entity(repositoryClass: DemandeRepository::class)]
 class Demande
 {
+
+    const DEMANDE_STATUS_FACTURATION = "Facturation";
+    const DEMANDE_STATUS_ENCAISSEMENT = "Encaissement";
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

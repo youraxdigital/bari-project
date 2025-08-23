@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use App\Entity\Caisse;
@@ -54,10 +55,13 @@ final class CaisseController extends AbstractController
             ? $mouvementRepo->findBy(['caisse' => $caisse], ['createdAt' => 'DESC'])
             : [];
 
+        $articles = $em->getRepository(Article::class)->findAll();
+
         return $this->render('caisse/index.html.twig', [
             'caisse' => $caisse,
             'demandes' => $demandes,
-            'mouvements' => $mouvements
+            'mouvements' => $mouvements,
+            'articles' => $articles,
         ]);
     }
 
@@ -82,14 +86,27 @@ final class CaisseController extends AbstractController
         }
 
         $montant = (float)$request->request->get('montant');
+        $agent = $request->request->get('agentResponsable');
 
         $caisse = new Caisse();
         $caisse->setOpenedAt(new \DateTime());
         $caisse->setMontantInitial($montant);
         $caisse->setMontantActuel($montant);
+        $caisse->setAgentResponsable($agent);
 
         $em->persist($caisse);
         $em->flush();
+
+        if ($montant >= 0) {
+            $mouvement = new MouvementCaisse();
+            $mouvement->setCaisse($caisse);
+            $mouvement->setType("ENTREE");
+            $mouvement->setMotif("Début de caisse");
+            $mouvement->setMontant($montant);
+            $mouvement->setCreatedAt(new \DateTime());
+            $em->persist($mouvement);
+            $em->flush();
+        }
 
         return $this->redirectToRoute('app_caisse');
     }
@@ -122,7 +139,7 @@ final class CaisseController extends AbstractController
     }
 
     #[Route('/app/v1/caisse/encaisser/{id}', name: 'app_caisse_encaisse', methods: ['POST'])]
-    public function encaisser(Demande $demande, EntityManagerInterface $em, CaisseRepository $caisseRepo): Response
+    public function encaisser(Demande $demande, EntityManagerInterface $em, CaisseRepository $caisseRepo, Request $request): Response
     {
         $caisse = $caisseRepo->createQueryBuilder('c')
             ->where('c.closedAt IS NULL')
@@ -132,6 +149,11 @@ final class CaisseController extends AbstractController
             ->getOneOrNullResult();
 
         if (!$caisse) return new Response('Caisse non trouvée', 404);
+
+        $typePaiement = $request->request->get('typePaiement');
+        if (!in_array($typePaiement, ['espece', 'banque', 'carte'])) {
+            return new Response('Type de paiement invalide', 400);
+        }
 
         $montant = $demande->getMontant();
         $caisse->setMontantActuel($caisse->getMontantActuel() + $montant);
@@ -146,6 +168,7 @@ final class CaisseController extends AbstractController
         $mouvement = new MouvementCaisse();
         $mouvement->setCaisse($caisse);
         $mouvement->setType('ENCAISSEMENT');
+        $mouvement->setTypePaiement($typePaiement);
 
         $clientName = $demande->getClient()?->getNom() . ' ' . $demande->getClient()?->getPrenom();
         $articleName = $demande->getArticle()?->getName();
@@ -244,6 +267,66 @@ final class CaisseController extends AbstractController
             'Content-Disposition' => 'attachment; filename="historique-caisse.pdf"',
         ]);
 
+    }
+
+
+    #[Route('/app/v1/caisse/encaisser-lot', name: 'app_caisse_encaisser_lot', methods: ['POST'])]
+    public function encaisserLot(
+        Request $request,
+        CaisseRepository $caisseRepository,
+        DemandeRepository $demandeRepository,
+        EntityManagerInterface $em
+    ): JsonResponse {
+        $idsString = $request->request->get('ids'); // "24,25,41"
+        $typePaiement = $request->request->get('typePaiement');
+
+        if (!$idsString || !$typePaiement) {
+            return new JsonResponse(['success' => false, 'message' => 'Champs manquants'], 400);
+        }
+
+        $ids = explode(',', $idsString); // ['24', '25', '41']
+
+        $caisse = $caisseRepository->findOneBy(['closedAt' => null], ['openedAt' => 'DESC']);
+
+        $total = 0;
+        foreach ($ids as $id) {
+            /**
+             * @var Demande $demande
+             */
+            $demande = $demandeRepository->find($id);
+            if (!$demande || $demande->getStatus()->getStatus() !== Demande::DEMANDE_STATUS_FACTURATION) continue;
+
+            $montant = $demande->getMontant();
+            $clientName = $demande->getClient()?->getNom() . ' ' . $demande->getClient()?->getPrenom();
+            $articleName = $demande->getArticle()?->getName();
+            $date = $demande->getDate()?->format('d/m/Y');
+
+            $motif = "Encaissement de {$clientName} - {$articleName} ({$date})";
+
+            $mvt = new MouvementCaisse();
+            $mvt->setCaisse($caisse);
+            $mvt->setMontant($montant);
+            $mvt->setType('ENCAISSEMENT');
+            $mvt->setMotif($motif);
+            $mvt->setDemande($demande);
+            $mvt->setTypePaiement($typePaiement);
+            $mvt->setCreatedAt(new \DateTime());
+
+            $caisse->setMontantActuel($caisse->getMontantActuel() + $montant);
+
+            $status = $em->getRepository(StatusDemande::class)
+                ->findOneBy(['status' => StatusDemande::ENCAISSEMENT]);
+            $demande->setStatus($status);
+
+            $em->persist($mvt);
+            $em->persist($demande);
+            $total += $montant;
+        }
+
+        $em->persist($caisse);
+        $em->flush();
+
+        return new JsonResponse(['success' => true, 'total' => $total]);
     }
 
 

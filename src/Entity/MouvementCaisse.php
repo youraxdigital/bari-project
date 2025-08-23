@@ -36,8 +36,15 @@ class MouvementCaisse
     #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
+
     #[ORM\ManyToOne(targetEntity: Demande::class)]
     private ?Demande $demande = null;
+
+    // src/Entity/Mouvement.php
+
+    #[ORM\Column(length: 20, nullable: true)]
+    private ?string $typePaiement = null;
+
 
     /**
      * @return mixed
@@ -138,6 +145,24 @@ class MouvementCaisse
         $this->demande = $demande;
         return $this;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getTypePaiement(): ?string
+    {
+        return $this->typePaiement;
+    }
+
+    /**
+     * @param string|null $typePaiement
+     */
+    public function setTypePaiement(?string $typePaiement): void
+    {
+        $this->typePaiement = $typePaiement;
+    }
+
+
 
 
 }

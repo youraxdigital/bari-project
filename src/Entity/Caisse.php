@@ -21,6 +21,9 @@ class Caisse
     //#[ORM\ManyToOne(targetEntity: User::class)]
     //private $agent;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private string $agentResponsable;
+
 
     #[ORM\Column(type: 'datetime')]
     private $openedAt;
@@ -132,6 +135,25 @@ class Caisse
     {
         $this->mouvements = $mouvements;
     }
+
+    /**
+     * @return string
+     */
+    public function getAgentResponsable(): string
+    {
+        return $this->agentResponsable;
+    }
+
+    /**
+     * @param string $agentResponsable
+     */
+    public function setAgentResponsable(string $agentResponsable): self
+    {
+        $this->agentResponsable = $agentResponsable;
+        return $this;
+    }
+
+
 
 
 
