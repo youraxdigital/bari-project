@@ -40,6 +40,19 @@ class Client
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Demande::class, orphanRemoval: true)]
     private Collection $demandes;
 
+
+    #[ORM\Column(length: 15, nullable: true, unique: true)]
+    private ?string $ice = null;
+
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $patente = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $adresse = null;
+
+    #[ORM\Column(length: 10, nullable: true)]
+    private ?string $codePostal = null;
+
     public function __construct()
     {
         $this->demandes = new ArrayCollection();
@@ -166,6 +179,75 @@ class Client
 
         return $this;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getIce(): ?string
+    {
+        return $this->ice;
+    }
+
+    /**
+     * @param string|null $ice
+     */
+    public function setIce(?string $ice): void
+    {
+        $this->ice = $ice;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPatente(): ?string
+    {
+        return $this->patente;
+    }
+
+    /**
+     * @param string|null $patente
+     */
+    public function setPatente(?string $patente): self
+    {
+        $this->patente = $patente;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAdresse(): ?string
+    {
+        return $this->adresse;
+    }
+
+    /**
+     * @param string|null $adresse
+     */
+    public function setAdresse(?string $adresse): self
+    {
+        $this->adresse = $adresse;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCodePostal(): ?string
+    {
+        return $this->codePostal;
+    }
+
+    /**
+     * @param string|null $codePostal
+     */
+    public function setCodePostal(?string $codePostal): self
+    {
+        $this->codePostal = $codePostal;
+        return $this;
+    }
+
+
 
 
 }

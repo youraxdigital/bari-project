@@ -114,6 +114,23 @@
                             </select>
                         </div>
                         <div class="mb-3">
+                            <label class="form-label">ICE</label>
+                            <input type="text" name="ice" class="form-control" maxlength="15" placeholder="15 chiffres">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Patente</label>
+                            <input type="text" name="patente" class="form-control" maxlength="50">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Adresse</label>
+                            <input type="text" name="adresse" class="form-control" maxlength="255">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Code postal</label>
+                            <input type="text" name="codePostal" class="form-control" maxlength="10" placeholder="ex: 20000">
+                        </div>
+
+                        <div class="mb-3">
                             <label class="form-label">Localisation</label>
                             <div id="addMap" style="height: 300px;"></div>
                             <input type="hidden" name="localisation" id="addLocalisation">
@@ -163,6 +180,22 @@
                                     <option value="{{ ca.id }}">{{ ca.label }}</option>
                                 {% endfor %}
                             </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">ICE</label>
+                            <input type="text" class="form-control" id="editIce" name="ice" maxlength="15">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Patente</label>
+                            <input type="text" class="form-control" id="editPatente" name="patente" maxlength="50">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Adresse</label>
+                            <input type="text" class="form-control" id="editAdresse" name="adresse" maxlength="255">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Code postal</label>
+                            <input type="text" class="form-control" id="editCodePostal" name="codePostal" maxlength="10">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Localisation</label>
@@ -280,6 +313,10 @@
                     $('#editPrenom').val(parts.slice(1).join(' ') || '');
                     $('#editTelephone').val(row.telephone || '');
                     $('#editCategorieId').val(row.categorieId || '');
+                    $('#editIce').val(row.ice || '');
+                    $('#editPatente').val(row.patente || '');
+                    $('#editAdresse').val(row.adresse || '');
+                    $('#editCodePostal').val(row.codePostal || '');
                     $('#editLocalisation').val(row.localisation || '');
 
                     console.log("row.localisation ====>>", row.localisation);

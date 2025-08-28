@@ -127,12 +127,14 @@ class CaisseManagerController extends AbstractController
         ]);
     }
 
+
+
     #[Route('/app/v1/manager-caisses/{id}/ticket', name: 'app_caisse_pdf_ticket', methods: ['GET'])]
     public function exportTicket(
         int $id,
         CaisseRepository $caisseRepository,
         MouvementCaisseRepository $mouvementRepo,
-        Environment $twig
+        \Twig\Environment $twig
     ): Response {
         $caisse = $caisseRepository->find($id);
         if (!$caisse) {
@@ -140,33 +142,44 @@ class CaisseManagerController extends AbstractController
         }
 
         $mouvements = $mouvementRepo->findBy(['caisse' => $caisse], ['createdAt' => 'ASC']);
-        $total = 0;
-        $grouped = [];
+
+        // Regroupement serveur (plus propre) ENTREE / SORTIE / ENCAISSEMENT
+        $grouped = ['ENTREE' => [], 'ENCAISSEMENT' => [], 'SORTIE' => []];
+        $totaux  = ['ENTREE' => 0.0, 'ENCAISSEMENT' => 0.0, 'SORTIE' => 0.0];
 
         foreach ($mouvements as $mvt) {
-            $type = $mvt->getType(); // e.g., "ENTREE" ou "SORTIE"
+            $type = strtoupper($mvt->getType() ?? '');
+            if (!isset($grouped[$type])) { $grouped[$type] = []; $totaux[$type] = 0.0; }
             $grouped[$type][] = $mvt;
-            $grouped[$type.'_total'] = ($grouped[$type.'_total'] ?? 0) + $mvt->getMontant();
-            $total += $mvt->getMontant();
+            $totaux[$type] += (float)$mvt->getMontant();
         }
 
-        $ecart = $total - $caisse->getMontantCloture();
-
-        //dd($grouped);
+        $total = array_sum($totaux);
+        $ecart = $total - (float)$caisse->getMontantCloture();
 
         $html = $twig->render('partials/ticket_caisse.html.twig', [
-            'caisse' => $caisse,
-            'mouvementsGroupes' => $grouped,
-            'total' => $total,
-            'ecart' => $ecart,
-            'now' => new \DateTime(),
+            'agent'            => $caisse->getAgentResponsable(),
+            'caisse'           => $caisse,
+            'grouped'          => $grouped,
+            'totaux'           => $totaux,
+            'total'            => $total,
+            'ecart'            => $ecart,
+            'now'              => new \DateTime(),
         ]);
 
         $options = new Options();
-        $options->set('defaultFont', 'Courier');
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isRemoteEnabled', true);
+        $options->set('defaultFont', 'DejaVu Sans Mono'); // meilleur rendu + accents
+
         $dompdf = new Dompdf($options);
         $dompdf->loadHtml($html);
-        $dompdf->setPaper([0, 0, 226.77, 841.89], 'portrait'); // 80mm x A4
+
+        // 80mm = 226.77pt ; hauteur “grande” (pagine automatiquement si ça dépasse)
+        $widthPt  = 226.77;     // 80 mm
+        $heightPt = 1200;       // ~423 mm ; augmente si tes tickets sont très longs
+        $dompdf->setPaper([$widthPt, 0, $widthPt, $heightPt], 'portrait');
+
         $dompdf->render();
 
         return new Response($dompdf->output(), 200, [

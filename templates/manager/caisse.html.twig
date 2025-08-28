@@ -50,14 +50,19 @@
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header d-flex justify-content-between align-items-center">
-                        <i class="bi bi-clock-history me-2"></i><h5 class="modal-title">Historique des mouvements</h5>
-                        <button id="btnPrintTicket" class="btn btn-light-primary mb-3" data-id="" type="button">
-                            <i class="bi bi-printer-fill"></i> Télécharger le ticket PDF
-                        </button>
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-clock-history me-2"></i>
+                            <h5 class="modal-title mb-0">Historique des mouvements</h5>
+                        </div>
 
-
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        <div class="d-flex align-items-center ms-auto">
+                            <button id="btnPrintTicket" class="btn btn-light-primary me-2" type="button">
+                                <i class="bi bi-printer-fill"></i> Télécharger le ticket PDF
+                            </button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
                     </div>
+
 
                     <div class="modal-body">
                         <div id="resumeCaisse" class="mb-4"></div>
@@ -169,20 +174,30 @@
                         </tr>`;
                     });
 
+                    const isSortie = type.toUpperCase() === 'SORTIE';
+                    const headerClass = isSortie ? 'bg-light text-danger text-white' : 'bg-light text-success text-white';
+                    const badgeClass  = isSortie ? 'bg-danger text-white' : 'bg-success text-white';
+
                     const html = `
-                        <div class="card mb-4">
-                            <div class="card-header bg-light fw-bold pt-4">
-                                ${type} <span class="badge bg-secondary float-end">Total : ${total} MAD</span>
-                            </div>
-                            <div class="card-body">
-                                <table class="table table-striped table-${type.toLowerCase()}">
-                                    <thead>
-                                        <tr><th>Motif</th><th>Montant</th><th>Date</th></tr>
-                                    </thead>
-                                    <tbody>${rows}</tbody>
-                                </table>
-                            </div>
-                        </div>`;
+                      <div class="card mb-4">
+                        <div class="card-header fw-bold pt-4 d-flex justify-content-between align-items-center ${headerClass}">
+                          <span>${type}</span>
+                          <span class="badge ${badgeClass} fs-7">Total : ${total} MAD</span>
+                        </div>
+                        <div class="card-body">
+                          <table class="table table-striped table-${type.toLowerCase()}">
+                            <thead>
+                              <tr>
+                                <th>Motif</th>
+                                <th>Montant</th>
+                                <th>Date</th>
+                              </tr>
+                            </thead>
+                            <tbody>${rows}</tbody>
+                          </table>
+                        </div>
+                      </div>`;
+
 
                     $('#groupesMouvements').append(html);
 

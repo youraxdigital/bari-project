@@ -1,54 +1,168 @@
-<style>
-    body { font-family: monospace; font-size: 10px; line-height: 1.4; }
-    .center { text-align: center; }
-    .line { border-top: 1px dashed #000; margin: 5px 0; }
-    .row  { display: flex; justify-content: space-between; }
-    ul    { list-style: none; padding-left: 0; margin: 2px 0; }
-</style>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket caisse</title>
+    <style>
+        /* Page 80mm sans marges – HAUTEUR indicative (Dompdf pagine si >) */
+        @page { size: 80mm 300mm; margin: 0; }
 
-<div class="center">
-    <h3>🧾 CAISSE – REÇU</h3>
-    <div>Société / Établissement</div>
-    <div>Adresse ligne 1</div>
-    <div>Tél: 05 xx xx xx xx</div>
+        /* Base stricte */
+        * { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; }
+        body {
+            width: 80mm;                           /* = largeur papier */
+            font-family: "DejaVu Sans Mono","DejaVu Sans",monospace;
+            font-size: 11px;
+            line-height: 1.33;                     /* compact mais lisible */
+            color: #000;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* Wrapper : petit padding partout + “safe bottom” pour éviter collage bas */
+        .ticket { width: 100%; padding: 2mm 1.5mm 3mm 1.5mm; }
+
+        .center { text-align: center; }
+        .right  { text-align: right; }
+        .bold   { font-weight: 700; }
+        .muted  { opacity: .85; }
+        .small  { font-size: .9em; }
+
+        .sep       { border-top: 1px dashed #000; margin: 5px 0; }
+        .sep-thick { border-top: 2px solid #000; margin: 7px 0; }
+
+        /* Tables = meilleure maîtrise des largeurs */
+        table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+        td { padding: 0.5mm 0; vertical-align: top; }  /* micro padding vertical */
+
+        /* Clé/valeur (largeurs calculées pour 80mm – padding) */
+        table.kv col.label { width: 40mm; }
+        table.kv col.fill  { width: 8mm;  }
+        table.kv col.val   { width: 29mm; }
+        table.kv td.val { text-align: right; white-space: nowrap; }
+        .dots { border-bottom: 1px dotted #000; height: 3mm; margin: 0 1mm; }
+
+        /* Mouvements (date | libellé cassable | montant) */
+        table.mv col.date { width: 15mm; }
+        table.mv col.type { width: 46mm; }
+        table.mv col.amt  { width: 16mm; }
+        table.mv td.date { white-space: nowrap; }
+        table.mv td.type { overflow-wrap: break-word; word-break: break-word; }
+        table.mv td.amt  { text-align: right; white-space: nowrap; }
+
+        /* Titres de section (type de mouvement) */
+        .section-title {
+            margin: 2mm 0 1mm 0;
+            font-weight: 700;
+        }
+
+        /* Empêcher des coupures moches dans les petits blocs */
+        .no-break { page-break-inside: avoid; }
+    </style>
+</head>
+<body>
+<div class="ticket">
+
+    <!-- En-tête -->
+    <div class="center no-break">
+        <div class="bold">CAISSE — REÇU</div>
+        <div class="small muted">Société / Établissement</div>
+        <div class="small muted">Adresse ligne 1</div>
+        <div class="small muted">Tél: 05 xx xx xx xx</div>
+        <div class="small muted">Agent : {{ agent }}</div>
+    </div>
+
+    <div class="sep"></div>
+
+    <!-- Infos caisse -->
+    <table class="kv no-break">
+        <colgroup><col class="label"><col class="fill"><col class="val"></colgroup>
+        <tr>
+            <td class="label">Ouverture</td>
+            <td class="fill"><div class="dots"></div></td>
+            <td class="val">{{ caisse.openedAt|date('d/m/Y H:i') }}</td>
+        </tr>
+        <tr>
+            <td class="label">Clôture</td>
+            <td class="fill"><div class="dots"></div></td>
+            <td class="val">{{ caisse.closedAt ? caisse.closedAt|date('d/m/Y H:i') : 'EN COURS' }}</td>
+        </tr>
+        <tr>
+            <td class="label">Montant actuel</td>
+            <td class="fill"><div class="dots"></div></td>
+            <td class="val bold">{{ caisse.montantActuel|number_format(2, ',', ' ') }} MAD</td>
+        </tr>
+    </table>
+
+    <div class="sep-thick"></div>
+
+    <!-- Mouvements regroupés par type dans l’ordre ENTREE / SORTIE / ENCAISSEMENT -->
+    {% set ordre = ['ENTREE','SORTIE','ENCAISSEMENT'] %}
+    {% set libelles = {'ENTREE':'Entrée','SORTIE':'Sortie','ENCAISSEMENT':'Encaissement'} %}
+
+    {% for t in ordre %}
+        {% if grouped[t] is defined and grouped[t]|length %}
+            <div class="section-title">{{ libelles[t] }}</div>
+
+            <table class="mv">
+                <colgroup><col class="date"><col class="type"><col class="amt"></colgroup>
+                {% for m in grouped[t] %}
+                    <tr>
+                        <td class="date">{{ m.createdAt|date('H:i') }}</td>
+                        <td class="type">
+                            {% if t != 'ENCAISSEMENT' %} {{ libelles[t] }} {% endif %}
+                            {% if m.typePaiement %} {{ m.typePaiement|upper }}{% endif %}
+                            {% if m.demande is not null %}
+                                — {{ m.demande.client.code }} — {{ m.demande.article.name }} — {{ m.demande.date|date('d/m/Y') }}
+                            {% endif %}
+                        </td>
+                        <td class="amt">{{ (m.montant >= 0 ? '+' : '') ~ m.montant|number_format(2, ',', ' ') }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+            <table class="kv no-break">
+                <colgroup><col class="label"><col class="fill"><col class="val"></colgroup>
+                <tr>
+                    <td class="label"><strong>Total {{ libelles[t]|lower }}</strong></td>
+                    <td class="fill"><div class="dots"></div></td>
+                    <td class="val"><strong>{{ totaux[t]|number_format(2, ',', ' ') }} MAD</strong></td>
+                </tr>
+            </table>
+
+            <div class="sep"></div>
+        {% endif %}
+    {% endfor %}
+
+    <!-- Totaux généraux -->
+    <table class="kv no-break">
+        <colgroup><col class="label"><col class="fill"><col class="val"></colgroup>
+        <tr>
+            <td class="label bold">Total</td>
+            <td class="fill"><div class="dots"></div></td>
+            <td class="val bold">{{ total|number_format(2, ',', ' ') }} MAD</td>
+        </tr>
+        <tr>
+            <td class="label">Clôture</td>
+            <td class="fill"><div class="dots"></div></td>
+            <td class="val">{{ caisse.montantCloture|number_format(2, ',', ' ') }} MAD</td>
+        </tr>
+        <tr>
+            <td class="label">Écart</td>
+            <td class="fill"><div class="dots"></div></td>
+            <td class="val">{{ ecart|number_format(2, ',', ' ') }} MAD</td>
+        </tr>
+    </table>
+
+    <div class="sep-thick"></div>
+
+    <!-- Pied avec marge basse de sécurité (via padding .ticket) -->
+    <div class="center small muted no-break">
+        Ticket généré le {{ now|date('d/m/Y H:i') }}<br>
+        Merci !
+    </div>
+
 </div>
-
-<div class="line"></div>
-
-<div>
-    Ouverture ............. {{ caisse.openedAt|date('d/m/Y H:i') }}<br>
-    Clôture   ............. {{ caisse.closedAt ? caisse.closedAt|date('d/m/Y H:i') : 'EN COURS' }}<br>
-    Montant actuel ........ {{ caisse.montantActuel|number_format(2, '.', ' ') }} MAD
-</div>
-
-<div class="line"></div>
-
-{% for type, mouvements in mouvementsGroupes %}
-    {% if type == 'ENTREE' or type == 'ENCAISSEMENT' or type == 'ENTREE' %}
-        <strong>{{ type|capitalize }}</strong>
-        <ul>
-            {% for m in mouvements %}
-                <li>
-                    {{ m.createdAt|date('H:i') }} | {{ m.typePaiement|upper }} |
-                    {{ m.montant > 0 ? '+' : '' }}{{ m.montant|number_format(2, '.', ' ') }} MAD
-                </li>
-            {% endfor %}
-        </ul>
-        <div class="row">
-            <strong>Total {{ type|lower }} :</strong>
-            <strong>{{ mouvementsGroupes[type ~ '_total']|number_format(2, '.', ' ') }} MAD</strong>
-        </div>
-        <div class="line"></div>
-    {% endif %}
-{% endfor %}
-
-<div class="row"><strong>Total :</strong> <strong>{{ total|number_format(2, '.', ' ') }} MAD</strong></div>
-<div class="row"><strong>Clôture :</strong> <strong>{{ caisse.montantCloture|number_format(2, '.', ' ') }} MAD</strong></div>
-<div class="row"><strong>Écart :</strong> <strong>{{ ecart|number_format(2, '.', ' ') }} MAD</strong></div>
-
-<div class="line"></div>
-
-<div class="center">
-    Merci pour votre visite 🧾<br>
-    Ticket généré le {{ now|date('d/m/Y H:i') }}
-</div>
+</body>
+</html>
