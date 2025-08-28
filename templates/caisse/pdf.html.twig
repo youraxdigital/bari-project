@@ -2,43 +2,175 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <title>Ticket de caisse</title>
     <style>
-        body { font-family: DejaVu Sans, sans-serif; font-size: 12px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #000; padding: 8px; text-align: left; }
-        th { background-color: #f0f0f0; }
+        /* ===== Largeur ticket ===== */
+        :root {
+            /* 80mm classique ; mets 58mm si tu utilises des rouleaux 58mm */
+            --ticket-width: 80mm; /* ou 58mm */
+            --font-size: 11px;    /* 10px conseillé pour 58mm */
+            --pad: 4mm;
+        }
+
+        /* Dompdf gère bien @page avec 2 dimensions.
+           On donne une hauteur “grande” pour éviter les coupures intempestives.
+           (Dompdf coupera proprement si le contenu dépasse.) */
+        @page {
+            size: var(--ticket-width) 300mm; /* augmente à 400–600mm si besoin */
+            margin: 0;
+        }
+
+        /* Reset/base */
+        * { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; }
+        body {
+            font-family: "DejaVu Sans Mono", "DejaVu Sans", monospace;
+            font-size: var(--font-size);
+            line-height: 1.25;
+            color: #000;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        .ticket {
+            width: var(--ticket-width);
+            padding: var(--pad);
+        }
+
+        .center { text-align: center; }
+        .right  { text-align: right; }
+        .muted  { opacity: .85; }
+        .small  { font-size: 0.9em; }
+        .bold   { font-weight: 700; }
+
+        /* Séparateurs façon caisse */
+        .sep       { border-top: 1px dashed #000; margin: 6px 0; }
+        .sep-thick { border-top: 2px solid #000; margin: 8px 0; }
+
+        /* Lignes libellé ... valeur (table 2 colonnes) */
+        table.kv { width: 100%; border-collapse: collapse; }
+        table.kv td {
+            padding: 2px 0;
+            vertical-align: top;
+        }
+        table.kv td.label { width: 55%; }
+        table.kv td.dots  { width: 15%; }
+        table.kv td.val   { width: 30%; text-align: right; white-space: nowrap; }
+
+        /* Points (leaders) : une suite de points qui passe bien avec Dompdf */
+        .leaders {
+            letter-spacing: 2px;
+            color: #000;
+            white-space: nowrap;
+        }
+
+        /* Tableau des mouvements (3 colonnes) */
+        table.mv { width: 100%; border-collapse: collapse; }
+        table.mv td {
+            padding: 2px 0;
+            vertical-align: top;
+        }
+        table.mv td.date { width: 22%; white-space: nowrap; }
+        table.mv td.type { width: 53%; }
+        table.mv td.amt  { width: 25%; text-align: right; white-space: nowrap; }
+
+        /* Empêcher les coupures laides dans certains blocs */
+        .no-break, h1, h2, h3 { page-break-inside: avoid; }
+
+        /* Pied */
+        .footer { margin-top: 8px; }
     </style>
 </head>
 <body>
-<h2>📄 Historique de la caisse</h2>
-<p><strong>Date ouverture :</strong> {{ caisse.openedAt|date('d/m/Y H:i') }}</p>
-{% if caisse.closedAt %}
-    <p><strong>Date clôture :</strong> {{ caisse.closedAt|date('d/m/Y H:i') }}</p>
-{% endif %}
-<p><strong>Montant actuel :</strong> {{ caisse.montantActuel }} MAD</p>
+<div class="ticket">
+    <!-- En-tête -->
+    <div class="center no-break">
+        <div class="bold">🏦 CAISSE — REÇU</div>
+        <div class="small muted">Société / Établissement</div>
+        <div class="small muted">Adresse ligne 1</div>
+        <div class="small muted">Tél: 05 xx xx xx xx</div>
+    </div>
 
-<h3>📊 Mouvements</h3>
-<table>
-    <thead>
-    <tr>
-        <th>Date</th>
-        <th>Type</th>
-        <th>Motif</th>
-        <th>Montant</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for m in caisse.mouvements %}
+    <div class="sep"></div>
+
+    <!-- Infos session (key/val) -->
+    <table class="kv no-break">
         <tr>
-            <td>{{ m.createdAt|date('d/m/Y H:i') }}</td>
-            <td>{{ m.type }}</td>
-            <td>{{ m.motif }}</td>
-            <td>{{ m.montant }} MAD</td>
+            <td class="label">Ouverture</td>
+            <td class="dots"><span class="leaders">................</span></td>
+            <td class="val">25/08/2025 09:00</td>
         </tr>
-    {% else %}
-        <tr><td colspan="4">Aucun mouvement</td></tr>
-    {% endfor %}
-    </tbody>
-</table>
+        <tr>
+            <td class="label">Clôture</td>
+            <td class="dots"><span class="leaders">................</span></td>
+            <td class="val">25/08/2025 15:30</td>
+        </tr>
+        <tr>
+            <td class="label">Montant actuel</td>
+            <td class="dots"><span class="leaders">.................</span></td>
+            <td class="val bold">1 500,50 MAD</td>
+        </tr>
+    </table>
+
+    <div class="sep-thick"></div>
+
+    <!-- Mouvements -->
+    <div class="bold">Mouvements</div>
+    <table class="mv">
+        <tr>
+            <td class="date">09:15</td>
+            <td class="type">Entrée — Dépôt initial</td>
+            <td class="amt">+100,00</td>
+        </tr>
+        <tr>
+            <td class="date">10:45</td>
+            <td class="type">Sortie — Achat de fournitures</td>
+            <td class="amt">-50,00</td>
+        </tr>
+        <tr>
+            <td class="date">11:30</td>
+            <td class="type">Entrée — Vente de produits</td>
+            <td class="amt">+750,00</td>
+        </tr>
+        <tr>
+            <td class="date">14:00</td>
+            <td class="type">Entrée — Vente de services</td>
+            <td class="amt">+700,50</td>
+        </tr>
+        <tr>
+            <td class="date">15:00</td>
+            <td class="type">Sortie — Remboursement client</td>
+            <td class="amt">-50,00</td>
+        </tr>
+    </table>
+
+    <div class="sep"></div>
+
+    <!-- Totaux -->
+    <table class="kv no-break">
+        <tr>
+            <td class="label">Total Entrées</td>
+            <td class="dots"><span class="leaders">................</span></td>
+            <td class="val">1 550,50 MAD</td>
+        </tr>
+        <tr>
+            <td class="label">Total Sorties</td>
+            <td class="dots"><span class="leaders">................</span></td>
+            <td class="val">100,00 MAD</td>
+        </tr>
+        <tr>
+            <td class="label bold">Solde</td>
+            <td class="dots"><span class="leaders">................</span></td>
+            <td class="val bold">1 450,50 MAD</td>
+        </tr>
+    </table>
+
+    <div class="sep-thick"></div>
+
+    <!-- Pied -->
+    <div class="center footer small muted no-break">
+        Merci pour votre visite 💙<br>
+        Ticket généré le 25/08/2025 15:30
+    </div>
+</div>
 </body>
 </html>

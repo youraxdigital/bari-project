@@ -1,0 +1,228 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Historique des Caisses{% endblock %}
+
+{% block body %}
+    <div class="container py-10">
+        <div class="d-flex justify-content-between align-items-center mb-5">
+            <h2 class="fw-bold">
+                <i class="bi bi-cash-coin text-success me-2"></i>Suivi des Caisses
+            </h2>
+        </div>
+
+        <div class="card p-5 mb-5">
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <input type="text" id="filter_agent" class="form-control" placeholder="Filtrer par agent">
+                </div>
+                <div class="col-md-4">
+                    <input type="text" id="filter_date" class="form-control" placeholder="Filtrer par date" autocomplete="off">
+                </div>
+                <div class="col-md-4 d-flex gap-2">
+                    <button class="btn btn-light-primary" id="btn_filter">
+                        <i class="bi bi-funnel-fill me-1"></i> Filtrer
+                    </button>
+                    <button class="btn btn-light-secondary" id="btn_reset">
+                        <i class="bi bi-x-circle-fill me-1"></i> Réinitialiser
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="table-responsive">
+                <table id="caissesTable" class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Agent</th>
+                        <th>Date ouverture</th>
+                        <th>Date clôture</th>
+                        <th>Montant initial</th>
+                        <th>Montant clôture</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalMouvements" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header d-flex justify-content-between align-items-center">
+                        <i class="bi bi-clock-history me-2"></i><h5 class="modal-title">Historique des mouvements</h5>
+                        <button id="btnPrintTicket" class="btn btn-light-primary mb-3" data-id="" type="button">
+                            <i class="bi bi-printer-fill"></i> Télécharger le ticket PDF
+                        </button>
+
+
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div id="resumeCaisse" class="mb-4"></div>
+                        <div id="groupesMouvements"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        // Initialisation du Flatpickr avec dateFormat cohérent
+        flatpickr("#filter_date", {
+            mode: "range",
+            dateFormat: "Y-m-d", // 🟢 Important : format exploitable côté backend
+            locale: "fr"
+        });
+
+        $('#btn_reset').on('click', function () {
+            $('#filter_agent').val('');
+            $('#filter_date').val('');
+            table.ajax.reload(); // recharge la table avec filtres vides
+        });
+
+
+        // DataTable avec filtre
+        const table = $('#caissesTable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: '{{ path("app_manager_caisses_datatable") }}',
+                data: function (d) {
+                    d.agent = $('#filter_agent').val();
+                    d.date = $('#filter_date').val(); // Format YYYY-MM-DD to YYYY-MM-DD
+                }
+            },
+            columns: [
+                { data: 'agentResponsable' },
+                { data: 'openedAt' },
+                { data: 'closedAt' },
+                { data: 'montantInitial' },
+                { data: 'montantCloture' },
+                {
+                    data: 'id',
+                    render: function (id) {
+                        return `<button class="btn btn-sm btn-light-primary btn-mouvements" data-id="${id}">
+                            <i class="bi bi-clock-history"></i> Voir
+                        </button>`;
+                    }
+                }
+            ],
+            language: { url: "/custom/datatables/i18n/French.json" }
+        });
+
+        $('#btn_filter').on('click', () => table.ajax.reload());
+
+
+        $(document).on('click', '.btn-mouvements', function () {
+            const id = $(this).data('id');
+            $('#btnPrintTicket').data('id', id); // On stocke l'ID pour le bouton
+            $('#resumeCaisse').html('Chargement...');
+            $('#groupesMouvements').html('');
+
+            $.get(`/app/v1/manager-caisses/${id}/mouvements`, function (res) {
+                const statusBadge = res.closedAt
+                    ? `<span class="badge badge-light-danger">Clôturée</span>`
+                    : `<span class="badge badge-light-success">Toujours ouverte</span>`;
+
+                const closedDate = res.closedAt ? res.closedAt : '—';
+
+                const resume = `
+                    <div class="alert alert-primary d-flex flex-column flex-md-row justify-content-between align-items-start gap-5">
+                        <div>
+                            <div class="d-flex align-items-center mb-2">
+                                <div class="symbol symbol-75px me-3 bg-light">
+                                    <i class="bi bi-person-circle fs-2 text-primary"></i>
+                                </div>
+                                <div>
+                                    <div class="fw-bold fs-5">Agent : ${res.agentResponsable}</div>
+                                    <div class="text-muted small">
+                                        Ouverture : ${res.openedAt} —
+                                        Clôture : ${closedDate} —
+                                        Statut : ${statusBadge}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <strong>Total des mouvements :</strong><br>
+                            <span class="badge badge-primary fs-3">${res.totalGlobal} MAD</span>
+                        </div>
+                    </div>
+                `;
+
+                $('#resumeCaisse').html(resume);
+
+
+                for (const [type, mouvements] of Object.entries(res.groupes)) {
+                    const total = res.totauxParType[type] || '0.00';
+                    let rows = '';
+
+                    mouvements.forEach(m => {
+                        rows += `<tr>
+                            <td>${m.motif}</td>
+                            <td>${m.montant}</td>
+                            <td>${m.date}</td>
+                        </tr>`;
+                    });
+
+                    const html = `
+                        <div class="card mb-4">
+                            <div class="card-header bg-light fw-bold pt-4">
+                                ${type} <span class="badge bg-secondary float-end">Total : ${total} MAD</span>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-striped table-${type.toLowerCase()}">
+                                    <thead>
+                                        <tr><th>Motif</th><th>Montant</th><th>Date</th></tr>
+                                    </thead>
+                                    <tbody>${rows}</tbody>
+                                </table>
+                            </div>
+                        </div>`;
+
+                    $('#groupesMouvements').append(html);
+
+                    $(`.table-${type.toLowerCase()}`).DataTable({
+                        paging: true,
+                        pageLength: 10,
+                        ordering: false,
+                        language: { url: "/custom/datatables/i18n/French.json" }
+                    });
+                }
+
+                $('#modalMouvements').modal('show');
+            });
+
+            // Code AJAX pour télécharger le PDF
+            $('#btnPrintTicket').on('click', function () {
+                const id = $(this).data('id');
+                const url = `/app/v1/manager-caisses/${id}/ticket`;
+
+                // Appel Ajax avec responseType 'blob' pour récupérer le PDF
+                fetch(url)
+                    .then(response => {
+                        if (!response.ok) throw new Error("Erreur serveur");
+                        return response.blob();
+                    })
+                    .then(blob => {
+                        const blobUrl = window.URL.createObjectURL(blob);
+                        const link = document.createElement('a');
+                        link.href = blobUrl;
+                        link.download = `ticket-caisse-${id}.pdf`;
+                        document.body.appendChild(link);
+                        link.click();
+                        link.remove();
+                        window.URL.revokeObjectURL(blobUrl);
+                    })
+                    .catch(() => {
+                        toastr.error("❌ Impossible de télécharger le ticket");
+                    });
+            });
+
+        });
+    </script>
+{% endblock %}

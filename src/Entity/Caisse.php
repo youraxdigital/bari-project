@@ -39,6 +39,9 @@ class Caisse
     #[ORM\Column(type: 'float')]
     private $montantActuel;
 
+    #[ORM\Column(type: 'float', nullable: true)]
+    private $montantCloture = null;
+
     #[ORM\OneToMany(mappedBy: 'caisse', targetEntity: MouvementCaisse::class, orphanRemoval: true)]
     private Collection $mouvements;
 
@@ -152,6 +155,27 @@ class Caisse
         $this->agentResponsable = $agentResponsable;
         return $this;
     }
+
+    /**
+     * @return float|null
+     */
+    public function getMontantCloture(): ?float
+    {
+        return $this->montantCloture;
+    }
+
+    /**
+     * @param float $montantCloture
+     */
+    public function setMontantCloture(float $montantCloture): self
+    {
+        $this->montantCloture = $montantCloture;
+        return $this;
+    }
+
+
+
+
 
 
 

@@ -123,14 +123,18 @@ final class CaisseController extends AbstractController
         $mouvement->setCaisse($caisse);
         $mouvement->setType($type);
         $mouvement->setMotif($motif);
+        if ($type == MouvementCaisse::SORTIE_TYPE) {
+            $montant = $montant*-1;
+        }
         $mouvement->setMontant($montant);
         $mouvement->setCreatedAt(new \DateTime());
 
-        if ($type === 'ENTREE') {
-            $caisse->setMontantActuel($caisse->getMontantActuel() + $montant);
-        } else {
-            $caisse->setMontantActuel($caisse->getMontantActuel() - $montant);
-        }
+        $caisse->setMontantActuel($caisse->getMontantActuel() + $montant);
+        //if ($type === 'ENTREE') {
+        //    $caisse->setMontantActuel($caisse->getMontantActuel() + $montant);
+        //} else {
+        //    $caisse->setMontantActuel($caisse->getMontantActuel() - $montant);
+        //}
 
         $em->persist($mouvement);
         $em->flush();
@@ -208,7 +212,7 @@ final class CaisseController extends AbstractController
     }
 
     #[Route('/app/v1/caisse/close', name: 'app_caisse_close', methods: ['POST'])]
-    public function close(CaisseRepository $repo, EntityManagerInterface $em): JsonResponse
+    public function close(Request $request, CaisseRepository $repo, EntityManagerInterface $em): JsonResponse
     {
         $today = (new \DateTime())->format('Y-m-d');
 
@@ -225,11 +229,20 @@ final class CaisseController extends AbstractController
             return new JsonResponse(['success' => false, 'message' => 'Aucune caisse ouverte trouvée.'], 404);
         }
 
+        $montantCloture = $request->request->get('montantCloture');
+
+        if (!is_numeric($montantCloture)) {
+            return new JsonResponse(['success' => false, 'message' => 'Montant invalide'], 400);
+        }
+
+
         $caisse->setClosedAt(new \DateTime());
+        $caisse->setMontantCloture((float) $montantCloture);
         $em->flush();
 
         return new JsonResponse(['success' => true]);
     }
+
 
     #[Route('/app/v1/caisse/export', name: 'app_caisse_export')]
     public function exportPdf(CaisseRepository $repo): Response
@@ -259,7 +272,11 @@ final class CaisseController extends AbstractController
 
         $dompdf = new Dompdf($options);
         $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4', 'portrait');
+        // 80mm = ~226.77pt ; on donne une hauteur “grande” (ex: 1200pt)
+        // Dompdf recoupera si nécessaire. Adapte si ton ticket est plus long/court.
+        $widthPt  = 226.77;         // 80mm
+        $heightPt = 1200;           // ~423mm
+        $dompdf->setPaper([$widthPt, 0, $widthPt, $heightPt], 'portrait');
         $dompdf->render();
 
         return new Response($dompdf->output(), 200, [

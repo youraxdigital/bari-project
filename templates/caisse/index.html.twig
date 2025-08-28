@@ -9,7 +9,7 @@
         <div class="card mb-10">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h2 class="mb-0">
-                    <i class="bi bi-wallet2 me-2"></i>Gestion de la caisse
+                    <i class="bi bi-wallet2 me-2"></i>Gestion de caisse
                 </h2>
 
                 {% if caisse %}
@@ -166,7 +166,7 @@
                             <strong id="selected-total">0.00</strong> MAD
                         </div>
                         <button class="btn btn-info" id="encaisser-lot-btn">
-                            <i class="bi bi-cash-stack me-1"></i>Encaisser l’ensemble
+                            <i class="bi bi-cash-stack me-1"></i>Encaisser
                         </button>
                     </div>
 
@@ -188,7 +188,7 @@
                                 <th>Date<br><input id="filter_date_range" class="form-control form-control-sm" placeholder="Plage de dates" /></th>
                                 <th>Effectif</th>
                                 <th>Montant</th>
-                                <th>Action</th>
+                                {#<th>Action</th>#}
                             </tr>
                             </thead>
                             <tbody>
@@ -201,11 +201,11 @@
                                     <td data-date="{{ d.date|date('Y-m-d') }}">{{ d.date|date('d/m/Y') }}</td>
                                     <td>{{ d.quantite }}</td>
                                     <td>{{ d.montant }} MAD</td>
-                                    <td>
+                                    {# <td>
                                         <button class="btn btn-sm btn-success encaisser-btn" data-id="{{ d.id }}">
                                             <i class="bi bi-cash-stack me-1"></i>Encaisser
                                         </button>
-                                    </td>
+                                    </td> #}
                                 </tr>
                             {% else %}
                                 <tr><td colspan="7" class="text-center text-muted">Aucune demande</td></tr>
@@ -254,24 +254,30 @@
 
     <div class="modal fade" id="confirmCloseModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Confirmation de clôture</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <form id="form-close-caisse">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Clôturer la caisse</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">Montant de clôture</label>
+                            <input type="number" step="0.01" name="montantCloture" class="form-control" required min="0">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-danger" id="confirm-close-btn">
+                            <span class="spinner-border spinner-border-sm d-none" id="confirm-close-loader"></span>
+                            Oui, clôturer
+                        </button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    Voulez-vous vraiment clôturer la caisse ?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn btn-danger" id="confirm-close-btn">
-                        <span class="spinner-border spinner-border-sm d-none" id="confirm-close-loader"></span>
-                        Oui, clôturer
-                    </button>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
+
 
     <div class="modal fade" id="confirmEncaisseLotModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
@@ -283,15 +289,26 @@
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label class="form-label">Type de paiement</label>
-                            <select name="typePaiement" class="form-select" required>
-                                <option value="">— Sélectionner —</option>
-                                <option value="espece">Espèce</option>
-                                <option value="banque">Banque</option>
-                                <option value="carte">Carte</option>
-                            </select>
+                            <label class="form-label d-block mb-2">Type de paiement</label>
+
+                            <div class="btn-group w-100" data-kt-buttons="true">
+                                <label class="btn btn-outline btn-outline-success active">
+                                    <input type="radio" class="btn-check" name="typePaiement" value="espece" autocomplete="off" checked>
+                                    <i class="bi bi-cash-coin me-1"></i> Espèce
+                                </label>
+
+                                <label class="btn btn-outline btn-outline-primary">
+                                    <input type="radio" class="btn-check" name="typePaiement" value="banque" autocomplete="off">
+                                    <i class="bi bi-bank2 me-1"></i> Banque
+                                </label>
+
+                                <label class="btn btn-outline btn-outline-warning">
+                                    <input type="radio" class="btn-check" name="typePaiement" value="carte" autocomplete="off">
+                                    <i class="bi bi-credit-card-2-front me-1"></i> Carte
+                                </label>
+                                <input type="hidden" name="ids" id="lot-ids">
+                            </div>
                         </div>
-                        <input type="hidden" name="ids" id="lot-ids">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
@@ -304,6 +321,9 @@
             </form>
         </div>
     </div>
+
+
+
 
 
 
@@ -371,12 +391,19 @@
                 closeModal.show();
             });
 
-            $('#confirm-close-btn').on('click', function () {
-                const btn = $(this);
-                btn.prop('disabled', true);
-                $('#confirm-close-loader').removeClass('d-none');
+            $('#form-close-caisse').on('submit', function (e) {
+                e.preventDefault();
 
-                $.post('{{ path("app_caisse_close") }}', function (response) {
+                const form = $(this);
+                const btn = $('#confirm-close-btn');
+                const loader = $('#confirm-close-loader');
+
+                btn.prop('disabled', true);
+                loader.removeClass('d-none');
+
+                const montantCloture = form.find('[name="montantCloture"]').val();
+
+                $.post('{{ path("app_caisse_close") }}', { montantCloture }, function (response) {
                     if (response.success) {
                         toastr.success("✅ Caisse clôturée avec succès !");
                         setTimeout(() => window.location.reload(), 1000);
@@ -387,10 +414,11 @@
                     toastr.error("❌ Erreur serveur lors de la clôture.");
                 }).always(() => {
                     btn.prop('disabled', false);
-                    $('#confirm-close-loader').addClass('d-none');
-                    closeModal.hide();
+                    loader.addClass('d-none');
+                    $('#confirmCloseModal').modal('hide');
                 });
             });
+
 
             // Ajout de mouvement avec loader + resync
             $('#form-mouvement').on('submit', function (e) {
@@ -639,7 +667,8 @@
                 loader.removeClass('d-none');
 
                 // 🔽 Récupération manuelle des champs
-                const typePaiement = form.find('[name="typePaiement"]').val();
+                const typePaiement = form.find('[name="typePaiement"]:checked').val();
+                console.log("typePaiement=======>>>>",typePaiement);
                 const idsRaw = form.find('[name="ids"]').val(); // "24,25,41"
                 const idsArray = idsRaw.split(',').map(id => id.trim());
 

@@ -10,6 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: MouvementCaisseRepository::class)]
 class MouvementCaisse
 {
+    const ENTREE_TYPE = "ENTREE";
+    const SORTIE_TYPE = "SORTIE";
+    const ENCAISSEMENT_TYPE = "ENCAISSEMENT";
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
