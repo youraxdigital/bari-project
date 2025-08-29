@@ -1,0 +1,3926 @@
+[
+    {
+        "quartier": "AL ISMAILIA II",
+        "cp": "14070"
+    },
+    {
+        "quartier": "ARSATE CADI",
+        "cp": "14010"
+    },
+    {
+        "quartier": "ARSATE HERBOUZE",
+        "cp": "14070"
+    },
+    {
+        "quartier": "BLED ZHAR",
+        "cp": "14030"
+    },
+    {
+        "quartier": "BLOC A",
+        "cp": "14070"
+    },
+    {
+        "quartier": "BLOC A",
+        "cp": "14080"
+    },
+    {
+        "quartier": "BLOC A EXTENSION",
+        "cp": "14090"
+    },
+    {
+        "quartier": "BLOC A1",
+        "cp": "14090"
+    },
+    {
+        "quartier": "BLOC A2",
+        "cp": "14090"
+    },
+    {
+        "quartier": "BLOC AB",
+        "cp": "14070"
+    },
+    {
+        "quartier": "BLOC B",
+        "cp": "14070"
+    },
+    {
+        "quartier": "BLOC B",
+        "cp": "14080"
+    },
+    {
+        "quartier": "BLOC B2",
+        "cp": "14090"
+    },
+    {
+        "quartier": "BLOC B3",
+        "cp": "14090"
+    },
+    {
+        "quartier": "BLOC B4",
+        "cp": "14090"
+    },
+    {
+        "quartier": "BLOC C",
+        "cp": "14070"
+    },
+    {
+        "quartier": "BLOC C",
+        "cp": "14080"
+    },
+    {
+        "quartier": "BLOC C",
+        "cp": "14090"
+    },
+    {
+        "quartier": "BLOC D",
+        "cp": "14070"
+    },
+    {
+        "quartier": "BLOC D",
+        "cp": "14080"
+    },
+    {
+        "quartier": "BLOC D",
+        "cp": "14090"
+    },
+    {
+        "quartier": "BLOC D EXTENSION",
+        "cp": "14090"
+    },
+    {
+        "quartier": "BLOC E",
+        "cp": "14010"
+    },
+    {
+        "quartier": "BLOC E",
+        "cp": "14070"
+    },
+    {
+        "quartier": "BLOC E",
+        "cp": "14080"
+    },
+    {
+        "quartier": "BLOC F",
+        "cp": "14070"
+    },
+    {
+        "quartier": "BLOC F",
+        "cp": "14080"
+    },
+    {
+        "quartier": "BLOC F1",
+        "cp": "14090"
+    },
+    {
+        "quartier": "BLOC F2",
+        "cp": "14090"
+    },
+    {
+        "quartier": "BLOC G1",
+        "cp": "14080"
+    },
+    {
+        "quartier": "BLOC G2",
+        "cp": "14080"
+    },
+    {
+        "quartier": "BLOC H",
+        "cp": "14070"
+    },
+    {
+        "quartier": "BLOC H",
+        "cp": "14080"
+    },
+    {
+        "quartier": "BLOC I",
+        "cp": "14070"
+    },
+    {
+        "quartier": "BLOC I",
+        "cp": "14080"
+    },
+    {
+        "quartier": "BLOC J",
+        "cp": "14070"
+    },
+    {
+        "quartier": "BLOC K",
+        "cp": "14070"
+    },
+    {
+        "quartier": "BLOC K",
+        "cp": "14080"
+    },
+    {
+        "quartier": "BLOC L",
+        "cp": "14070"
+    },
+    {
+        "quartier": "BLOC L",
+        "cp": "14080"
+    },
+    {
+        "quartier": "BLOC LA MARINE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "BLOC M",
+        "cp": "14070"
+    },
+    {
+        "quartier": "BLOC M",
+        "cp": "14080"
+    },
+    {
+        "quartier": "BLOC N",
+        "cp": "14070"
+    },
+    {
+        "quartier": "BLOC N",
+        "cp": "14080"
+    },
+    {
+        "quartier": "CITE ATLAS",
+        "cp": "14030"
+    },
+    {
+        "quartier": "CITE CALIENI",
+        "cp": "14000"
+    },
+    {
+        "quartier": "CITE DES CADRES",
+        "cp": "14080"
+    },
+    {
+        "quartier": "CITE DES URGENCES",
+        "cp": "14070"
+    },
+    {
+        "quartier": "CITE EL FATH",
+        "cp": "14030"
+    },
+    {
+        "quartier": "CITE INARA",
+        "cp": "14030"
+    },
+    {
+        "quartier": "CITE INDUSTRIEL SAKNIA",
+        "cp": "14050"
+    },
+    {
+        "quartier": "CITE NOUVELLE MEDINA",
+        "cp": "14030"
+    },
+    {
+        "quartier": "CITE ORMVAG",
+        "cp": "14090"
+    },
+    {
+        "quartier": "CITE UNIVERSITAIRE",
+        "cp": "14050"
+    },
+    {
+        "quartier": "COMMUNE AL ASSAM",
+        "cp": "14060"
+    },
+    {
+        "quartier": "COMPLEXE NASSIM",
+        "cp": "14010"
+    },
+    {
+        "quartier": "COMPLEXE SABAH BILADI",
+        "cp": "14070"
+    },
+    {
+        "quartier": "DIOUR BENSAID",
+        "cp": "14060"
+    },
+    {
+        "quartier": "DIOUR CHAABI",
+        "cp": "14030"
+    },
+    {
+        "quartier": "DIOUR CMCP",
+        "cp": "14060"
+    },
+    {
+        "quartier": "DIOUR EL MERNISSI",
+        "cp": "14010"
+    },
+    {
+        "quartier": "DIOUR JILALI BENNANI",
+        "cp": "14010"
+    },
+    {
+        "quartier": "DIOUR MAKHZEN",
+        "cp": "14030"
+    },
+    {
+        "quartier": "DOUAR AIN SEBAA",
+        "cp": "14060"
+    },
+    {
+        "quartier": "DOUAR ASSAM",
+        "cp": "14060"
+    },
+    {
+        "quartier": "DOUAR DOUAR AIN AARISS",
+        "cp": "14070"
+    },
+    {
+        "quartier": "DOUAR HANCHA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "DOUAR LAMGADID",
+        "cp": "14070"
+    },
+    {
+        "quartier": "DOUAR MKHALIF AIN SEBAA",
+        "cp": "14060"
+    },
+    {
+        "quartier": "DOUAR NKHAKHSA",
+        "cp": "14060"
+    },
+    {
+        "quartier": "DOUAR OULAD ARFA",
+        "cp": "14060"
+    },
+    {
+        "quartier": "DOUAR OULAD MOUSSA",
+        "cp": "14060"
+    },
+    {
+        "quartier": "DOUAR OULED MBAREK",
+        "cp": "14090"
+    },
+    {
+        "quartier": "DOUAR OULED MLIK",
+        "cp": "14070"
+    },
+    {
+        "quartier": "DOUAR OULED MOUSSA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "GROUPE 1",
+        "cp": "14030"
+    },
+    {
+        "quartier": "GROUPE 10",
+        "cp": "14030"
+    },
+    {
+        "quartier": "GROUPE 100",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE 101",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE 102",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE 103",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE 104",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE 105",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE 11",
+        "cp": "14030"
+    },
+    {
+        "quartier": "GROUPE 12",
+        "cp": "14030"
+    },
+    {
+        "quartier": "GROUPE 2",
+        "cp": "14030"
+    },
+    {
+        "quartier": "GROUPE 3",
+        "cp": "14030"
+    },
+    {
+        "quartier": "GROUPE 4",
+        "cp": "14030"
+    },
+    {
+        "quartier": "GROUPE 5",
+        "cp": "14030"
+    },
+    {
+        "quartier": "GROUPE 6",
+        "cp": "14030"
+    },
+    {
+        "quartier": "GROUPE 7",
+        "cp": "14030"
+    },
+    {
+        "quartier": "GROUPE 8",
+        "cp": "14030"
+    },
+    {
+        "quartier": "GROUPE 9",
+        "cp": "14030"
+    },
+    {
+        "quartier": "GROUPE 90",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE 91",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE 92",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE 93",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE 94",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE 95",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE 96",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE 97",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE 98",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE 99",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE A1",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE B2",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE C3",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE D4",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE E5",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE EL FARAH",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE G7",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE H8",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE IMOUZER",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE KHENIFRA",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE NAJMA",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE OUEZZANE",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE SALE",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE TADLA",
+        "cp": "14040"
+    },
+    {
+        "quartier": "GROUPE TAROUDANT",
+        "cp": "14040"
+    },
+    {
+        "quartier": "HAJ MANSOUR",
+        "cp": "14060"
+    },
+    {
+        "quartier": "HAY AL BASATINE",
+        "cp": "14030"
+    },
+    {
+        "quartier": "HAY ALWAFA",
+        "cp": "14060"
+    },
+    {
+        "quartier": "HAY AMAL",
+        "cp": "14040"
+    },
+    {
+        "quartier": "HAY AZHAROUN 2",
+        "cp": "14070"
+    },
+    {
+        "quartier": "HAY AZHAROUNE",
+        "cp": "14070"
+    },
+    {
+        "quartier": "HAY BOUCHTIYINE",
+        "cp": "14030"
+    },
+    {
+        "quartier": "HAY CHAABI",
+        "cp": "14030"
+    },
+    {
+        "quartier": "HAY CHABAB",
+        "cp": "14040"
+    },
+    {
+        "quartier": "HAY CHABAB",
+        "cp": "14060"
+    },
+    {
+        "quartier": "HAY EL ATLAS",
+        "cp": "14030"
+    },
+    {
+        "quartier": "HAY EL FATH",
+        "cp": "14030"
+    },
+    {
+        "quartier": "HAY EL FOUARAT",
+        "cp": "14060"
+    },
+    {
+        "quartier": "HAY EL IDARI",
+        "cp": "14050"
+    },
+    {
+        "quartier": "HAY EL INARA",
+        "cp": "14030"
+    },
+    {
+        "quartier": "HAY EL MAAMOURA SAKNIA",
+        "cp": "14050"
+    },
+    {
+        "quartier": "HAY EL MASJID",
+        "cp": "14000"
+    },
+    {
+        "quartier": "HAY EL MENZEH",
+        "cp": "14060"
+    },
+    {
+        "quartier": "HAY EL OUAHDA",
+        "cp": "14030"
+    },
+    {
+        "quartier": "HAY ENNOUR",
+        "cp": "14040"
+    },
+    {
+        "quartier": "HAY ESSAFAE",
+        "cp": "14060"
+    },
+    {
+        "quartier": "HAY ESSALAMA",
+        "cp": "14030"
+    },
+    {
+        "quartier": "HAY HMICHE",
+        "cp": "14030"
+    },
+    {
+        "quartier": "HAY IRAK",
+        "cp": "14040"
+    },
+    {
+        "quartier": "HAY IRCHAD",
+        "cp": "14030"
+    },
+    {
+        "quartier": "HAY IRCHAD",
+        "cp": "14040"
+    },
+    {
+        "quartier": "HAY IRCHAD",
+        "cp": "14050"
+    },
+    {
+        "quartier": "HAY IRCHAD EXTENTION",
+        "cp": "14050"
+    },
+    {
+        "quartier": "HAY JDID",
+        "cp": "14030"
+    },
+    {
+        "quartier": "HAY LAGLAOUI",
+        "cp": "14060"
+    },
+    {
+        "quartier": "HAY LALLA MERYEM",
+        "cp": "14030"
+    },
+    {
+        "quartier": "HAY L'HABITAT",
+        "cp": "14030"
+    },
+    {
+        "quartier": "HAY MAAMOURA",
+        "cp": "14040"
+    },
+    {
+        "quartier": "HAY NACER",
+        "cp": "14030"
+    },
+    {
+        "quartier": "HAY NASR",
+        "cp": "14030"
+    },
+    {
+        "quartier": "HAY OUAHDA",
+        "cp": "14030"
+    },
+    {
+        "quartier": "HAY OURIDA",
+        "cp": "14030"
+    },
+    {
+        "quartier": "HAY OURIDA 2",
+        "cp": "14030"
+    },
+    {
+        "quartier": "HAY RABIA",
+        "cp": "14030"
+    },
+    {
+        "quartier": "HAY RABII",
+        "cp": "14030"
+    },
+    {
+        "quartier": "HAY RAHMA",
+        "cp": "14060"
+    },
+    {
+        "quartier": "HAY RAJAA",
+        "cp": "14050"
+    },
+    {
+        "quartier": "HAY SAFA 1",
+        "cp": "14060"
+    },
+    {
+        "quartier": "HAY SAFA 2",
+        "cp": "14060"
+    },
+    {
+        "quartier": "HAY SAFAA",
+        "cp": "14060"
+    },
+    {
+        "quartier": "HAY SALAM",
+        "cp": "14030"
+    },
+    {
+        "quartier": "HAY WIAM",
+        "cp": "14060"
+    },
+    {
+        "quartier": "IMM KARAKCHOU",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE 11 JANVIER",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AATABA MOUBARAKA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE ABDELKAERIM",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE ABDELMOUTALIB",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE ABDESSAMAD",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE ABOU BAKR SEDDIK",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE ACHRAF",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE ADAM",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE ADAM",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE ADAM",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE ADAM",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE ADIL",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE ADOUHA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AGADIR",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE AHMED",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE AICHA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE AJERAR",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE AJIAD",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AJYAD",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE AKRAM",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE AL ABRAR",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL AFRAH",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL AHBAS",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL AHD AL JADID",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE AL AHRAM",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL AHRAM",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE AL AMAL",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL AMAL",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE AL AMANE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL AMANE",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE AL ANDALOUS",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL ANDALOUS",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE AL ANOUAR",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE AL BAHJA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL BARAKA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL BASSATINE",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE AL BOURJ",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL BOUSTANE",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE AL BOUSTANE",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE AL FADILA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE AL FAHIM",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL FAJR",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL FARAH",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL FATH",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL FATH",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE AL FILLINE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL FIRDAOUS",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL FOUSSOUL AL ARBAA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE AL GHOUFRANE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL HADIKA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL HAMD",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL HAMDOLILLAH",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE AL HARMAINE",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE AL HOUDA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL HOUDA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE AL HOURRIYA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE AL IKHOUANE",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE AL JAMOUR",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL KARAM",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL KARAMA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL KAWTAR",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL MAGHRIB AL ARABI",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE AL MAHATTA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL MAHDI",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL MAJD",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE AL MAJD",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE AL MAMOUNE",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE AL MAMOUNIA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL MAMOUNIA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE AL MANAR",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL MANZAH",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL MASJID",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE AL MONTAJAA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL MOUNTAZAH",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL MOURABITINE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL MOUSTAKBAL",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL MOUSTAKBAL",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE AL MOUSTAKBALIA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL OURDI",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE AL QODS",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE AL QODS",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE AL WAHA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL WIAM",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL WID",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE AL YAMAMA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE AL YARMOUK",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL YAZID",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AL YOUSSR",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE ALAA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE ALAE",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE ALAE",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE ALAMI",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE ALAMI",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE ALI",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE ALIA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE ALLAMI",
+        "cp": "14030"
+    },
+    {
+        "quartier": "IMMEUBLE AMAL",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE AMANA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AMINA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AMINE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AMINE",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE AMINE",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE AMIR",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AMIR",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE ANAS",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE ANCIENNE PROVINCE",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE ANIS",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE ANISS",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE ANISSA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE ANNAIM",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE ANNAKHLA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE ANNASER",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE ANNASIM",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE ARAFA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE ARAFAT",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE ARGANA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE ARRAHMA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE ARRAHMANE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE ASDIQAA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE ASMAE",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE ASOUANE",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE ASSAADA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE ASSAMIA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE ASSOUROUR",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE ATLANTA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE ATTAISSIR",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE ATTAKWA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE ATTAOUHID",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE ATTAQOUA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE AWAD",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AYA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE AYA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE AYMANE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE AYMANE",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE AYOUB",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE AYOUB",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE AZZAHRAE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE BAAMRANI",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE BAB AL FATH",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE BAB ESSALAM",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE BADR",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE BADR",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE BADR",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE BADR AL KOUBRA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE BAGHDAD",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE BAHIA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE BAIT AL KHEIR",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE BASMA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE BASMA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE BEAU SOLEIL",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE BELCADI",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE BELGOUTTE",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE BELLA ROSA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE BEN ALI",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE BENHAMOU",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE BENYOUNESS",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE BERKIA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE BETICH",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE BETTICH",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE BILAL",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE BISM ALLAH",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE BISSMI ALLAH",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE BOUALAM",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE BOUALAM",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE BOUARFA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE BOUCHRA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE BOUCHRA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE BOUCHRA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE BOULAKDAM",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE BOUSSELHAM",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE BOUTAINA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE BOUTKHIL",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE BRAIDA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE CHAABI SALAMA 4",
+        "cp": "14070"
+    },
+    {
+        "quartier": "IMMEUBLE CHAIMAE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE CHAIMAE ET HAMZA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE CHALLAH",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE CHAMS",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE CHAMS",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE CHARAFEDDINE",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE CHARIF",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE CHAYMAE",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE CHELLAH",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE CHEMS MAMOURA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE CHOUROUK",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE DAOUDI",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE DAR ESSALAM",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE DAR ESSALOUANE",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE DAWLIZ",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE DIMACHQ",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE DIOURI",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE DIYAE",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE DIYAR SALAM",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE DOHA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE DOUNIA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE EL ANDALOUS",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE EL AZHAR",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE EL BARAKA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE EL FATH",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE EL FETOUAKI",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE EL HAJ BOUCHTA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE EL HANAA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE EL HARRATI",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE EL MAJED",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE EL MASJID",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE EL MIR",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE EL MOUKHTAR",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE EL OUROUD",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE EL YAMANI",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE EL YAZID",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE ELISSA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE ERRACHAD",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE ESAADA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE ESSAKINI",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE ESSALAM",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE FADEL",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE FADEL ALLAH",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE FADIL",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE FATIMA ZOHRA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE FATINE",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE FATINE",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE FEDOUL",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE FES",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE FES",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE FILALI",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE FIRDAOUS",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE FIRDAOUS",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE GHANDI",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE GHARNATA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE GHITA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE GHITA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE GHIZLAN",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE GHIZLANE",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE HAB EL MELOUK",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE HAFSA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE HAIFA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE HAJAR",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE HAJAR",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE HAJAR",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE HALA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE HAMMOUCH",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE HAMZA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE HAMZA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE HAMZA ET HAJAR",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE HANACH",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE HANANE",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE HARAKAT",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE HAROICHE",
+        "cp": "14070"
+    },
+    {
+        "quartier": "IMMEUBLE HASNA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE HASSAN",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE HATIM",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE HIBA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE HIBA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE HIKMAT",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE HOUBOUSS",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE HOUDA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE IBN CHEIKH",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE IBN HADDOU",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE IBN HAZME",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE IBN KHALDOUN",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE IBN TOUFAIL",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE IBTISSAM",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE ICHBILIA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE IKBAL",
+        "cp": "14080"
+    },
+    {
+        "quartier": "IMMEUBLE IKTIMAL",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE ILHAM",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE ILHAM",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE ILYAS",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE IMANE",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE IMANE",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE INASS",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE INASS",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE INES",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE INTISSAR",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE INTISSAR",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE ISMAHANE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE ISMAILIA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE ISMAILIA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE ISSAMAL HAYAT",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE JABRANE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE JALAL",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE JALILA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE JAMAL",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE JANNAH DIAR",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE JAOUHARA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE JEDDA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE JIHAD",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE JIHANE",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE JOUD",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE JOUHARA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE JOUMANA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE KALTOUM",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE KAMAR",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE KAOUTAR",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE KARIM",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE KAROUACHE",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE KASR AL HAMRA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE KENZA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE KENZA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE KHADIJA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE KHADIJA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE KHADIJA OUM MOUMININE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE KHAIRI",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE KHALID IBN WALID",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE KHAWLA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE KHAYRI",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE LAFHAL",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE LAILA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE LARGOU",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE LATIFA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE LE CAIRE",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE LE CHALLET VERT",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE LE NID",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE LE PRINTEMPS",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE LEILA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE LES 3 ROIS",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE LES AMIS",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE LES ORANGES",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE LES TROIS PRINCES",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE LILIF",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE LINA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE LINA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE LIRABLIE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE LOUBNA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE LOUBNA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE LOUKILI",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE MAAMOURA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE MACHAA ALLAH",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE MACHAA ALLAH",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE MAGINOTS",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE MAGNOLIA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE MAHA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE MAHJOUBA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE MAJDA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE MAJIENOU",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE MAJINOTS",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE MALAK",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE MALAK",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE MALAK",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE MALAK",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE MALISIA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE MARBOUH",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE MARIA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE MAROUA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE MAROUANE",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE MARRAKECH",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE MARRAKECH",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE MARWA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE MARWA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE MARZOUK",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE MAYSONNE",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE MECCA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE MEHDI",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE MEHDI",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE MEKNES",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE MERIEM",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE MERYEM",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE MESBAH",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE MESBAHI",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE METROPOLE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE MICHLIFEN",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE MIFTAH AL KHAIR",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE MIFTAHA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE MINAT ALLAH",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE MIRVET",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE MKINSI",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE MOHAMED ABDO",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE MOHAMED ADAM",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE MOHAMED ALAA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE MOHAMED ALI",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE MOHAMED AMINE",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE MOHAMED V",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE MOUBARAK",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE MOUHSSINE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE MOULAY IDRISS",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE MOULAY SLIMANE",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE MOULAY SMAIL",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE MOUNA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE MOUNIA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE MOUNIA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE MOUNIR",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE MOURJANA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE MOUSSA IBN NOUSSAIR",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE MOUZDALIFA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE NABIL",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE NABIL",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE NACHATE",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE NADA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE NADA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE NAJEM",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE NAJLAE",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE NAJMA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE NAKHIL",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE NAKHLA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE NARJIS",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE NARJIS",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE NARJISS",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE NASER",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE NASIM",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE NASMA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE NASR",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE NASSIM",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE NASSIM AL BAHR",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE NASSIMA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE NASSIRI",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE NAWAL",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE NISRINE",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE NIZAR",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE NIZAR",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE NORA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE NOUHA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE NOUHAILA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE NOUR",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE OASIS",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE OHOUD",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE OMAR",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE OMAR",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE OMAR IBN AL KHATTAB",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE OMARI",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE ORANGE",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE OUAFA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE OUAKKI",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE OUARDA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE OUAZZANIA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE OUHOUD",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE OUKIMDEN",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE OULAD MOHAMED",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE OULED MBAREK",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE OUM AL QOURA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE OUM EL KHAIR",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE OUM EL KORA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE OUMAIMA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE OUMAIMA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE OUMAIMA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE OURIKA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE OUSSAMA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE PARIS",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE PINED",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE PLAISANCE",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE PRESTIGE",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE QORTOBA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE RABAT",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE RABIAA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE RACHIDA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE RAHIMA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE RAMADAN",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE RANIA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE RANYA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE RAYAN",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE REDA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE REDA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE RIAD",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE RIAD AL ANBAR",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE RIAD AL ANDALOUS",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE RIAD AL ANDALOUS",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE RIAD AL MISK",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE RIAD AL YASSAMINE",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE RIAD MAAMORA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE RIAD MAAMOURA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE RIAD SALAM",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE RIAD ZOUHOUR",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE RIBAT AL KHAIR",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE RIHAB",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE RIHANA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE RIM",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE RIM",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE RINADE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE RIZKI",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE ROMANIA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE ROSA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE ROSE MARIE",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE RYAD",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE RYAD ZAYTOUNE",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE SAAD",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE SAAD ZAGHLOUL",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE SAADA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE SABAA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE SABIR",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE SABRE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE SABRINE",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE SADIK",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE SAFAA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE SAFAE",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE SAFAE",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE SAFIA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE SAKINA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE SALAHEDINE",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE SALAM",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE SALAM",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE SALIMA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE SALIMA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE SALMA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE SALOUA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE SAMI",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE SANAE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE SAOUD",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE SARA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE SARA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE SAWSANE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE SEBBAR",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE SEBOU",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE SEBOU",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE SELLAK",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE SIAL",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE SIHAM",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE SIRAJ",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE SOFIA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE SOUFIA 1",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE SOUFIA 2",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE SOUFIAN",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE SOUFIANE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE SOUHAIL",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE SOUKAINA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE SOUMIA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE SOUNDOUS",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE TACHFINE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE TAHA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE TAIBA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE TANGER",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE TAOUBA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE TAREK",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE TARIK IBN ZIAD",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE TASSAMOUH",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE TAYBA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE TAZI",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE TAZI OMAR",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE TAZI SAOUD",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE TEROUAL",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE TISSIR",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE TOLLET",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE TOURI",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE WAFAE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE WAFAE",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE WALILI",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE WARDA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE WIAM",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE WILAYA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE YASMINA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE YASMINE",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE YASMINE",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE YASSER",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE YASSINE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE YASSINE",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE YASSIR",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE YASSIR",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE YASSMINE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE YOUNES",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE YOUNES",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE YOUSSEF",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE YOUSSOUFIA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE ZAHRA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE ZAHRA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE ZAKARIA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE ZAKARIA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "IMMEUBLE ZAKARIA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE ZAZIA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE ZEMEZM",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE ZERKOUNI",
+        "cp": "14090"
+    },
+    {
+        "quartier": "IMMEUBLE ZINEB",
+        "cp": "14000"
+    },
+    {
+        "quartier": "IMMEUBLE ZINEB",
+        "cp": "14010"
+    },
+    {
+        "quartier": "IMMEUBLE ZOUBIR",
+        "cp": "14000"
+    },
+    {
+        "quartier": "KASBAT DU PORT",
+        "cp": "14110"
+    },
+    {
+        "quartier": "KASBAT MAHDIA",
+        "cp": "14110"
+    },
+    {
+        "quartier": "LOGEMENT EL KHIRIA",
+        "cp": "14030"
+    },
+    {
+        "quartier": "LOGEMENT HOPITAL IDRISSI",
+        "cp": "14000"
+    },
+    {
+        "quartier": "LOGEMENT MAKHZEN ADMINISTRATIF",
+        "cp": "14000"
+    },
+    {
+        "quartier": "LOGEMENT ONCF",
+        "cp": "14000"
+    },
+    {
+        "quartier": "LOT AL AMAL",
+        "cp": "14060"
+    },
+    {
+        "quartier": "LOT AL ANDALOUS",
+        "cp": "14060"
+    },
+    {
+        "quartier": "LOT AL FILAHA",
+        "cp": "14070"
+    },
+    {
+        "quartier": "LOT AL MANDAR AL JAMIL",
+        "cp": "14020"
+    },
+    {
+        "quartier": "LOT AL QODS",
+        "cp": "14090"
+    },
+    {
+        "quartier": "LOT ALAOUI",
+        "cp": "14020"
+    },
+    {
+        "quartier": "LOT AZHAROUN I",
+        "cp": "14070"
+    },
+    {
+        "quartier": "LOT AZHAROUN II",
+        "cp": "14070"
+    },
+    {
+        "quartier": "LOT BAIT EL KHEIR",
+        "cp": "14090"
+    },
+    {
+        "quartier": "LOT BARGACH",
+        "cp": "14020"
+    },
+    {
+        "quartier": "LOT BASMA",
+        "cp": "14080"
+    },
+    {
+        "quartier": "LOT BELLE VUE II",
+        "cp": "14070"
+    },
+    {
+        "quartier": "LOT BENNANI",
+        "cp": "14060"
+    },
+    {
+        "quartier": "LOT BOTERO",
+        "cp": "14070"
+    },
+    {
+        "quartier": "LOT BRIKA",
+        "cp": "14070"
+    },
+    {
+        "quartier": "LOT CHAOUI",
+        "cp": "14030"
+    },
+    {
+        "quartier": "LOT CLAIRE VIVER",
+        "cp": "14020"
+    },
+    {
+        "quartier": "LOT COOPERATIVE AGRICOLE",
+        "cp": "14070"
+    },
+    {
+        "quartier": "LOT CORSICA",
+        "cp": "14070"
+    },
+    {
+        "quartier": "LOT EL HOURIA",
+        "cp": "14070"
+    },
+    {
+        "quartier": "LOT EL IKHLAS",
+        "cp": "14090"
+    },
+    {
+        "quartier": "LOT EL KHAIR",
+        "cp": "14030"
+    },
+    {
+        "quartier": "LOT EL MANAR",
+        "cp": "14090"
+    },
+    {
+        "quartier": "LOT EL MENZEH",
+        "cp": "14060"
+    },
+    {
+        "quartier": "LOT EL OUAHDA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "LOT EL QODS",
+        "cp": "14090"
+    },
+    {
+        "quartier": "LOT FADL ALLAH",
+        "cp": "14070"
+    },
+    {
+        "quartier": "LOT FEDDANE LABIED",
+        "cp": "14030"
+    },
+    {
+        "quartier": "LOT HAJ MANSOUR",
+        "cp": "14060"
+    },
+    {
+        "quartier": "LOT HAMZA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "LOT IKHLASS",
+        "cp": "14090"
+    },
+    {
+        "quartier": "LOT ISMAILIA",
+        "cp": "14070"
+    },
+    {
+        "quartier": "LOT JAOUHARA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "LOT JEAN BAPTISTE",
+        "cp": "14090"
+    },
+    {
+        "quartier": "LOT JNAN LAYMOUNE",
+        "cp": "14090"
+    },
+    {
+        "quartier": "LOT LAHRICHI",
+        "cp": "14090"
+    },
+    {
+        "quartier": "LOT L'AVENIR",
+        "cp": "14090"
+    },
+    {
+        "quartier": "LOT LE VALLON",
+        "cp": "14070"
+    },
+    {
+        "quartier": "LOT MABROUKA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "LOT MANZAH",
+        "cp": "14070"
+    },
+    {
+        "quartier": "LOT MIMA ET BIAZ",
+        "cp": "14070"
+    },
+    {
+        "quartier": "LOT MORSI",
+        "cp": "14030"
+    },
+    {
+        "quartier": "LOT ONCF",
+        "cp": "14000"
+    },
+    {
+        "quartier": "LOT OULED MHAMED",
+        "cp": "14030"
+    },
+    {
+        "quartier": "LOT PONS",
+        "cp": "14020"
+    },
+    {
+        "quartier": "LOT RAIHANA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "LOT ROUICHA",
+        "cp": "14070"
+    },
+    {
+        "quartier": "LOT SABRI",
+        "cp": "14020"
+    },
+    {
+        "quartier": "LOT SABRI",
+        "cp": "14060"
+    },
+    {
+        "quartier": "LOT SADIKA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "LOT SALAH CHAOUI",
+        "cp": "14030"
+    },
+    {
+        "quartier": "LOT SALAM",
+        "cp": "14020"
+    },
+    {
+        "quartier": "LOT SALAMA 4",
+        "cp": "14070"
+    },
+    {
+        "quartier": "LOT SALIMA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "LOT SAYAD",
+        "cp": "14070"
+    },
+    {
+        "quartier": "LOT SAYAD I",
+        "cp": "14070"
+    },
+    {
+        "quartier": "LOT SAYAD II",
+        "cp": "14070"
+    },
+    {
+        "quartier": "LOT SIDI MOHAMED",
+        "cp": "14000"
+    },
+    {
+        "quartier": "LOT SOGETA",
+        "cp": "14060"
+    },
+    {
+        "quartier": "LOT SOUMIYA",
+        "cp": "14070"
+    },
+    {
+        "quartier": "LOT TAIBIA",
+        "cp": "14070"
+    },
+    {
+        "quartier": "LOT WAFA 1",
+        "cp": "14030"
+    },
+    {
+        "quartier": "LOT WAFA 2",
+        "cp": "14030"
+    },
+    {
+        "quartier": "LOTISSEMENT A1",
+        "cp": "14030"
+    },
+    {
+        "quartier": "LOTISSEMENT ANDALOUS",
+        "cp": "14060"
+    },
+    {
+        "quartier": "LOTISSEMENT BARGACHE",
+        "cp": "14070"
+    },
+    {
+        "quartier": "LOTISSEMENT BASMA",
+        "cp": "14080"
+    },
+    {
+        "quartier": "LOTISSEMENT BELLE VUE",
+        "cp": "14020"
+    },
+    {
+        "quartier": "LOTISSEMENT BIYAZ",
+        "cp": "14070"
+    },
+    {
+        "quartier": "LOTISSEMENT CHAABI",
+        "cp": "14030"
+    },
+    {
+        "quartier": "LOTISSEMENT CORSICA",
+        "cp": "14070"
+    },
+    {
+        "quartier": "LOTISSEMENT DAR KEBIRA",
+        "cp": "14090"
+    },
+    {
+        "quartier": "LOTISSEMENT EL BASMA",
+        "cp": "14080"
+    },
+    {
+        "quartier": "LOTISSEMENT EL MENZEH",
+        "cp": "14090"
+    },
+    {
+        "quartier": "LOTISSEMENT FADL ALLAH",
+        "cp": "14000"
+    },
+    {
+        "quartier": "LOTISSEMENT HADDADA",
+        "cp": "14070"
+    },
+    {
+        "quartier": "LOTISSEMENT IKHARRAZEN",
+        "cp": "14070"
+    },
+    {
+        "quartier": "LOTISSEMENT IRCHAD EXTENTION",
+        "cp": "14040"
+    },
+    {
+        "quartier": "LOTISSEMENT LE VALLON",
+        "cp": "14070"
+    },
+    {
+        "quartier": "LOTISSEMENT SABRI",
+        "cp": "14020"
+    },
+    {
+        "quartier": "LOTISSEMENT SAYAD",
+        "cp": "14070"
+    },
+    {
+        "quartier": "LOTISSEMENT WAFA 1",
+        "cp": "14040"
+    },
+    {
+        "quartier": "LOTISSEMENT WIFAK",
+        "cp": "14090"
+    },
+    {
+        "quartier": "MAISON CENTRALE",
+        "cp": "14070"
+    },
+    {
+        "quartier": "MAISON MUNICIPALE",
+        "cp": "14030"
+    },
+    {
+        "quartier": "PORT KENITRA",
+        "cp": "14110"
+    },
+    {
+        "quartier": "QUARTIER ADMINISTRATIF",
+        "cp": "14050"
+    },
+    {
+        "quartier": "QUARTIER AFCA",
+        "cp": "14030"
+    },
+    {
+        "quartier": "QUARTIER AL FATH",
+        "cp": "14030"
+    },
+    {
+        "quartier": "QUARTIER AL FIRDAOUS",
+        "cp": "14060"
+    },
+    {
+        "quartier": "QUARTIER AL HADDADA",
+        "cp": "14070"
+    },
+    {
+        "quartier": "QUARTIER AL HAOUZIA",
+        "cp": "14070"
+    },
+    {
+        "quartier": "QUARTIER AL HOURRIA",
+        "cp": "14070"
+    },
+    {
+        "quartier": "QUARTIER AL ISMAILIA",
+        "cp": "14070"
+    },
+    {
+        "quartier": "QUARTIER AL ISMAILIA II",
+        "cp": "14070"
+    },
+    {
+        "quartier": "QUARTIER ANNAHDA",
+        "cp": "14030"
+    },
+    {
+        "quartier": "QUARTIER ATLAS",
+        "cp": "14030"
+    },
+    {
+        "quartier": "QUARTIER AZHAROUN 2",
+        "cp": "14070"
+    },
+    {
+        "quartier": "QUARTIER AZHAROUNE",
+        "cp": "14070"
+    },
+    {
+        "quartier": "QUARTIER BAB FES",
+        "cp": "14010"
+    },
+    {
+        "quartier": "QUARTIER BIR RAMI",
+        "cp": "14090"
+    },
+    {
+        "quartier": "QUARTIER BIR RAMI EST",
+        "cp": "14080"
+    },
+    {
+        "quartier": "QUARTIER BIR RAMI EST",
+        "cp": "14090"
+    },
+    {
+        "quartier": "QUARTIER BIR RAMI OUEST",
+        "cp": "14080"
+    },
+    {
+        "quartier": "QUARTIER BIR RAMI OUEST",
+        "cp": "14090"
+    },
+    {
+        "quartier": "QUARTIER CENTRE VILLE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "QUARTIER CHAABI ASSAM",
+        "cp": "14060"
+    },
+    {
+        "quartier": "QUARTIER CLAIRE VIVRE",
+        "cp": "14070"
+    },
+    {
+        "quartier": "QUARTIER DES MARTYRS",
+        "cp": "14030"
+    },
+    {
+        "quartier": "QUARTIER EL ATLAS",
+        "cp": "14030"
+    },
+    {
+        "quartier": "QUARTIER EL HADDADA",
+        "cp": "14070"
+    },
+    {
+        "quartier": "QUARTIER EL HAOUZIA",
+        "cp": "14070"
+    },
+    {
+        "quartier": "QUARTIER EL HOURIA",
+        "cp": "14030"
+    },
+    {
+        "quartier": "QUARTIER EL MANZEH",
+        "cp": "14060"
+    },
+    {
+        "quartier": "QUARTIER EL MELLAH",
+        "cp": "14000"
+    },
+    {
+        "quartier": "QUARTIER EL OUAHDA",
+        "cp": "14030"
+    },
+    {
+        "quartier": "QUARTIER EL OULFA",
+        "cp": "14030"
+    },
+    {
+        "quartier": "QUARTIER ERAC",
+        "cp": "14050"
+    },
+    {
+        "quartier": "QUARTIER ESMAILIA",
+        "cp": "14070"
+    },
+    {
+        "quartier": "QUARTIER HAOUZIA",
+        "cp": "14070"
+    },
+    {
+        "quartier": "QUARTIER HIND HAAMOURA",
+        "cp": "14060"
+    },
+    {
+        "quartier": "QUARTIER INDUSTRIEL BIR RAMI",
+        "cp": "14090"
+    },
+    {
+        "quartier": "QUARTIER INDUSTRIEL MUNICIPAL",
+        "cp": "14010"
+    },
+    {
+        "quartier": "QUARTIER JARDIN AL CADI",
+        "cp": "14010"
+    },
+    {
+        "quartier": "QUARTIER JARDIN HERBOUZ",
+        "cp": "14070"
+    },
+    {
+        "quartier": "QUARTIER KHABBAZATE",
+        "cp": "14030"
+    },
+    {
+        "quartier": "QUARTIER LA CIGOGNE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "QUARTIER LA VILLE HAUTE",
+        "cp": "14020"
+    },
+    {
+        "quartier": "QUARTIER LAARIBI",
+        "cp": "14030"
+    },
+    {
+        "quartier": "QUARTIER LARMA",
+        "cp": "14030"
+    },
+    {
+        "quartier": "QUARTIER MAAMORA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "QUARTIER MAAMORA",
+        "cp": "14050"
+    },
+    {
+        "quartier": "QUARTIER MAGHRIB ARABI",
+        "cp": "14090"
+    },
+    {
+        "quartier": "QUARTIER MAISON MUNICIPALE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "QUARTIER MANTAQA MOUTAHARA",
+        "cp": "14050"
+    },
+    {
+        "quartier": "QUARTIER MERTYRES",
+        "cp": "14030"
+    },
+    {
+        "quartier": "QUARTIER MIMOUSA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "QUARTIER MIMOUZA",
+        "cp": "14070"
+    },
+    {
+        "quartier": "QUARTIER MOHAMED V",
+        "cp": "14000"
+    },
+    {
+        "quartier": "QUARTIER OULAD OUJIH",
+        "cp": "14080"
+    },
+    {
+        "quartier": "QUARTIER PAM 1",
+        "cp": "14040"
+    },
+    {
+        "quartier": "QUARTIER PAM 2",
+        "cp": "14040"
+    },
+    {
+        "quartier": "QUARTIER PAM I",
+        "cp": "14040"
+    },
+    {
+        "quartier": "QUARTIER QODS 1",
+        "cp": "14090"
+    },
+    {
+        "quartier": "QUARTIER RIAD",
+        "cp": "14030"
+    },
+    {
+        "quartier": "QUARTIER SAKNIA",
+        "cp": "14030"
+    },
+    {
+        "quartier": "QUARTIER SALAMA 4",
+        "cp": "14070"
+    },
+    {
+        "quartier": "QUARTIER VAL FLEURI",
+        "cp": "14020"
+    },
+    {
+        "quartier": "QUARTIER VALFLEURI",
+        "cp": "14020"
+    },
+    {
+        "quartier": "QUARTIER VILLE HAUTE",
+        "cp": "14020"
+    },
+    {
+        "quartier": "QUARTIER WAFA 1",
+        "cp": "14050"
+    },
+    {
+        "quartier": "QUARTIER WAFA 2",
+        "cp": "14050"
+    },
+    {
+        "quartier": "QUARTIER WAFA 3",
+        "cp": "14050"
+    },
+    {
+        "quartier": "QUARTIER WAFA 4",
+        "cp": "14050"
+    },
+    {
+        "quartier": "RESIDENCE ABDESSAMAD",
+        "cp": "14020"
+    },
+    {
+        "quartier": "RESIDENCE AL AKHAWAYNE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE AL AMINE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE AL ASSIL",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE AL BAHJA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE AL BASSATINE",
+        "cp": "14010"
+    },
+    {
+        "quartier": "RESIDENCE AL BOURAQ",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE AL BOUSTANE",
+        "cp": "14090"
+    },
+    {
+        "quartier": "RESIDENCE AL FOURATE",
+        "cp": "14020"
+    },
+    {
+        "quartier": "RESIDENCE AL HACHEMI",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE AL HADAIK",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE AL HANAE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE AL KHAIR",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE AL MOUSTAKBAL",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE AMINA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE ASSALAM CENTRE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE ASSOURI",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE BAB AL FATH",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE BAB SALAM",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE BILAL",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE BISMILAH",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE BOUTKHIL",
+        "cp": "14010"
+    },
+    {
+        "quartier": "RESIDENCE CHARIFA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE DELTA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE DELTA",
+        "cp": "14020"
+    },
+    {
+        "quartier": "RESIDENCE DES JARDINS",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE EL BASSATINE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE EL QODS",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE EL YASSMIN",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE FADEL",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE FATINE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE FERDAOUS",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE FIRDAOUS",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE HABIBA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE HAMZA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE HANANE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE HANANE",
+        "cp": "14010"
+    },
+    {
+        "quartier": "RESIDENCE HANIA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE HASSAN",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE IBN HAZEM",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE IBTISSAM",
+        "cp": "14080"
+    },
+    {
+        "quartier": "RESIDENCE ISMAIL",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE JIHAD",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE KARTAJ",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE KHADIJA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE LES AMIS",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE LES FLEURS",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE LINA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE MAHA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE MARINA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE MBAREK",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE MIMOUSA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE MOULAY ABDELAZIZ",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE MOUSSA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE MY DRISS",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE NABIL",
+        "cp": "14020"
+    },
+    {
+        "quartier": "RESIDENCE NABILA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE NADIA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE NAKHIL",
+        "cp": "14020"
+    },
+    {
+        "quartier": "RESIDENCE NARJISS",
+        "cp": "14090"
+    },
+    {
+        "quartier": "RESIDENCE NASSIM AL BAHR 4",
+        "cp": "14090"
+    },
+    {
+        "quartier": "RESIDENCE NASSIM AL BAHR 6",
+        "cp": "14090"
+    },
+    {
+        "quartier": "RESIDENCE NOUR",
+        "cp": "14010"
+    },
+    {
+        "quartier": "RESIDENCE OMAR BEN KHATTAB",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE OUARDA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE OUED DAHAB",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE PERLA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "RESIDENCE RACHID",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE RAIS",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE RANIA",
+        "cp": "14010"
+    },
+    {
+        "quartier": "RESIDENCE RAYAN",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE RAZANE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE RIAD",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE SABAH BILADI",
+        "cp": "14020"
+    },
+    {
+        "quartier": "RESIDENCE SABRIA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE SAFOUANE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE SALAMA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE SALMA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE SARA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE SOUFIA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE TAFOUGHALT",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE VANA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE YASSIR",
+        "cp": "14000"
+    },
+    {
+        "quartier": "RESIDENCE YASSMINA",
+        "cp": "14000"
+    },
+    {
+        "quartier": "SECTEUR A",
+        "cp": "14060"
+    },
+    {
+        "quartier": "SECTEUR B",
+        "cp": "14060"
+    },
+    {
+        "quartier": "SECTEUR C",
+        "cp": "14060"
+    },
+    {
+        "quartier": "SECTEUR D",
+        "cp": "14060"
+    },
+    {
+        "quartier": "SOUK SEBT",
+        "cp": "14060"
+    },
+    {
+        "quartier": "ZONE D'ACTIVITE",
+        "cp": "14000"
+    },
+    {
+        "quartier": "ZONE D'ACTIVITE",
+        "cp": "14070"
+    },
+    {
+        "quartier": "ZONE EL HIZAM",
+        "cp": "14030"
+    },
+    {
+        "quartier": "ZONE MANTAQUA MOTAHAR",
+        "cp": "14050"
+    }
+]

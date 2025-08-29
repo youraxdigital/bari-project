@@ -1,34 +1,31 @@
-{# templates/partials/_header_nav.html.twig #}
 {% set current = app.request.attributes.get('_route') %}
 
-{# Active flags based on route name prefixes — adjust to your names #}
 {% set is_clients  = current starts with 'app_clients_' %}
 {% set is_articles = current starts with 'app_articles_' %}
-{% set is_index    = current starts with 'app_demandes_' or current in ['app_home','app_index'] %}
-{% set is_dash    = current starts with 'app_dash' %}
+{% set is_index    = current starts with 'app_demandes_' or current in ['app_home','app_index', 'app_assistant_index'] %}
+{% set is_dash     = current starts with 'app_dash' %}
+{% set is_journal  = current starts with 'app_manager_caisses' %}
 
-{# Button classes: solid when active, light when inactive #}
-{% set cls_demandes  = is_index ? 'btn btn-info' : 'btn btn-light-info' %}
-{% set cls_clients  = is_clients  ? 'btn btn-warning' : 'btn btn-light-warning' %}
-{% set cls_articles = is_articles ? 'btn btn-danger'  : 'btn btn-light-danger' %}
-{% set cls_dash     = is_dash    ? 'btn btn-success' : 'btn btn-light-success' %}
+{% set cls_demandes  = is_index   ? 'btn btn-info'        : 'btn btn-light-info' %}
+{% set cls_clients   = is_clients ? 'btn btn-warning'     : 'btn btn-light-warning' %}
+{% set cls_articles  = is_articles? 'btn btn-danger'      : 'btn btn-light-danger' %}
+{% set cls_dash      = is_dash    ? 'btn btn-success'     : 'btn btn-light-success' %}
+{% set cls_journal   = is_journal ? 'btn btn-dark'        : 'btn btn-light-dark' %}
 
 <div class="d-flex justify-content-between align-items-center px-10 py-5 border-bottom">
     <h2 class="mb-0 fw-bold text-dark">{{ header_title|default('Gestion des demandes') }}</h2>
 
-    {% if current != "app_caisse" %}
+    {% if current != "app_caisse" and current != "app_assistant_index" %}
         <div class="d-flex gap-3">
-            {# Dashboard link: require the page to pass dashboard_route #}
-            {% set dash_route = dashboard_route|default('app_dashboard') %}
-            <a href="{{ path(dash_route) }}"
+            <a href="{{ path(dashboard_route|default('app_dashboard')) }}"
                class="{{ cls_dash }}"
-               {% if is_index %}aria-current="page"{% endif %}>
+               {% if is_dash %}aria-current="page"{% endif %}>
                 <i class="bi bi-graph-up-arrow fs-2x me-2"></i> Dashboard
             </a>
 
             <a href="{{ path('app_index') }}"
                class="{{ cls_demandes }}"
-               {% if is_clients %}aria-current="page"{% endif %}>
+               {% if is_index %}aria-current="page"{% endif %}>
                 <i class="bi bi-journal-text fs-2x me-2"></i> Demandes
             </a>
 
@@ -43,6 +40,28 @@
                {% if is_articles %}aria-current="page"{% endif %}>
                 <i class="bi bi-box-seam fs-2x me-2"></i> Articles
             </a>
+
+            <a href="{{ path('app_manager_caisses') }}"
+               class="{{ cls_journal }}"
+               {% if is_journal %}aria-current="page"{% endif %}>
+                <i class="bi bi-cash-stack fs-2x me-2"></i> Journal de caisse
+            </a>
+        </div>
+    {% elseif current == "app_assistant_index" %}
+        <div class="d-flex gap-3">
+
+            <a href="{{ path('app_assistant_index') }}"
+               class="{{ cls_demandes }}"
+               {% if is_index %}aria-current="page"{% endif %}>
+                <i class="bi bi-journal-text fs-2x me-2"></i> Demandes
+            </a>
+
+            <a href="{{ path('app_clients_manage') }}"
+               class="{{ cls_clients }}"
+               {% if is_clients %}aria-current="page"{% endif %}>
+                <i class="bi bi-person-fill fs-2x me-2"></i> Clients
+            </a>
+
         </div>
     {% endif %}
 

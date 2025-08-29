@@ -14,53 +14,6 @@
 
         <div class="card p-10">
             <div class="table-responsive" style="max-height:500px; overflow-y:auto;">
-                <!--<table class="table table-row-dashed table-row-gray-300 gy-4" id="clientsTableArabic">
-                    <thead>
-                    <tr class="fw-bold fs-6 text-gray-800 text-center">
-                        <th>الرمز</th>
-                        <th>الاسم الكامل</th>
-                        <th>رقم الهاتف</th>
-                        <th>الفئة</th>
-                        <th>الإجراء</th>
-                    </tr>
-                    </thead>
-                    <tbody class="text-center">
-                    <tr>
-                        <td>CL001</td>
-                        <td>محمد العلوي</td>
-                        <td>0600000000</td>
-                        <td>عادي</td>
-                        <td>
-                            <button class="btn btn-sm btn-warning">
-                                <i class="bi bi-pencil"></i> تعديل
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>CL002</td>
-                        <td>فاطمة الزهراء</td>
-                        <td>0611111111</td>
-                        <td>مميز</td>
-                        <td>
-                            <button class="btn btn-sm btn-warning">
-                                <i class="bi bi-pencil"></i> تعديل
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>CL003</td>
-                        <td>سعيد بنسعيد</td>
-                        <td>0622222222</td>
-                        <td>عادي</td>
-                        <td>
-                            <button class="btn btn-sm btn-warning">
-                                <i class="bi bi-pencil"></i> تعديل
-                            </button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>-->
-
                 <table id="clientsTable" class="table table-row-dashed table-row-gray-300 gy-4">
                     <thead>
                     <tr class="fw-bold fs-6 text-gray-800">
@@ -88,22 +41,27 @@
                     </div>
                     <div class="modal-body">
                         <input type="hidden" name="id" id="clientId">
+
                         <div class="mb-3">
                             <label class="form-label">Code</label>
                             <input type="text" name="code" class="form-control" required>
                         </div>
+
                         <div class="mb-3">
                             <label class="form-label">Nom</label>
                             <input type="text" name="nom" class="form-control" required>
                         </div>
+
                         <div class="mb-3">
                             <label class="form-label">Prénom</label>
                             <input type="text" name="prenom" class="form-control">
                         </div>
+
                         <div class="mb-3">
                             <label class="form-label">Téléphone</label>
                             <input type="text" name="telephone" class="form-control">
                         </div>
+
                         <div class="mb-3">
                             <label class="form-label">Catégorie</label>
                             <select name="categorieId" class="form-select">
@@ -113,21 +71,40 @@
                                 {% endfor %}
                             </select>
                         </div>
+
                         <div class="mb-3">
                             <label class="form-label">ICE</label>
                             <input type="text" name="ice" class="form-control" maxlength="15" placeholder="15 chiffres">
                         </div>
+
                         <div class="mb-3">
                             <label class="form-label">Patente</label>
                             <input type="text" name="patente" class="form-control" maxlength="50">
                         </div>
+
                         <div class="mb-3">
                             <label class="form-label">Adresse</label>
-                            <input type="text" name="adresse" class="form-control" maxlength="255">
+                            <input type="text" name="adresse" id="adresse" class="form-control" maxlength="255">
                         </div>
+
+                        {# Ville + Code postal dépendant #}
                         <div class="mb-3">
-                            <label class="form-label">Code postal</label>
-                            <input type="text" name="codePostal" class="form-control" maxlength="10" placeholder="ex: 20000">
+                            <label class="form-label">Ville</label>
+                            <select id="ville" name="ville" class="form-select">
+                                <option value="">-- Sélectionner --</option>
+                                <option value="TEMARA">Temara</option>
+                                <option value="RABAT">Rabat</option>
+                                <option value="SALE">Salé</option>
+                                <option value="KENITRA">Kénitra</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Code postal (recherche par quartier)</label>
+                            <select id="codePostal" name="codePostal" class="form-select" disabled>
+                                <option value="">-- Choisir une ville d’abord --</option>
+                            </select>
+                            <div class="form-text">Astuce : tape le nom du quartier pour filtrer.</div>
                         </div>
 
                         <div class="mb-3">
@@ -135,7 +112,6 @@
                             <div id="addMap" style="height: 300px;"></div>
                             <input type="hidden" name="localisation" id="addLocalisation">
                         </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="submit" id="clientSubmitBtn" class="btn btn-primary">Enregistrer</button>
@@ -156,22 +132,27 @@
                     </div>
                     <div class="modal-body">
                         <input type="hidden" id="editClientId" name="id">
+
                         <div class="mb-3">
                             <label class="form-label">Code</label>
                             <input type="text" class="form-control" id="editCode" name="code">
                         </div>
+
                         <div class="mb-3">
                             <label class="form-label">Nom</label>
                             <input type="text" class="form-control" id="editNom" name="nom">
                         </div>
+
                         <div class="mb-3">
                             <label class="form-label">Prénom</label>
                             <input type="text" class="form-control" id="editPrenom" name="prenom">
                         </div>
+
                         <div class="mb-3">
                             <label class="form-label">Téléphone</label>
                             <input type="text" class="form-control" id="editTelephone" name="telephone">
                         </div>
+
                         <div class="mb-3">
                             <label class="form-label">Catégorie</label>
                             <select id="editCategorieId" name="categorieId" class="form-select">
@@ -181,28 +162,47 @@
                                 {% endfor %}
                             </select>
                         </div>
+
                         <div class="mb-3">
                             <label class="form-label">ICE</label>
                             <input type="text" class="form-control" id="editIce" name="ice" maxlength="15">
                         </div>
+
                         <div class="mb-3">
                             <label class="form-label">Patente</label>
                             <input type="text" class="form-control" id="editPatente" name="patente" maxlength="50">
                         </div>
+
                         <div class="mb-3">
                             <label class="form-label">Adresse</label>
                             <input type="text" class="form-control" id="editAdresse" name="adresse" maxlength="255">
                         </div>
+
+                        {# Ville + Code postal dépendant #}
                         <div class="mb-3">
-                            <label class="form-label">Code postal</label>
-                            <input type="text" class="form-control" id="editCodePostal" name="codePostal" maxlength="10">
+                            <label class="form-label">Ville</label>
+                            <select id="editVille" name="ville" class="form-select">
+                                <option value="">-- Sélectionner --</option>
+                                <option value="TEMARA">Temara</option>
+                                <option value="RABAT">Rabat</option>
+                                <option value="SALE">Salé</option>
+                                <option value="KENITRA">Kénitra</option>
+                            </select>
                         </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Code postal (recherche par quartier)</label>
+                            <select id="editCodePostal" name="codePostal" class="form-select" disabled>
+                                <option value="">-- Choisir une ville d’abord --</option>
+                            </select>
+                            <div class="form-text">Astuce : tape le nom du quartier pour filtrer.</div>
+                        </div>
+
                         <div class="mb-3">
                             <label class="form-label">Localisation</label>
                             <div id="editMap" style="height: 300px;"></div>
                             <input type="hidden" name="localisation" id="editLocalisation">
                         </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="submit" id="clientSubmitEditBtn" class="btn btn-primary">Enregistrer</button>
@@ -215,9 +215,10 @@
 
 {% block javascripts %}
     <script>
-
+        /* ============================
+           DataTable
+        ============================ */
         $(document).ready(function () {
-            // DataTable
             const table = $('#clientsTable').DataTable({
                 processing: true,
                 serverSide: true,
@@ -245,16 +246,15 @@
                         render: function (id, _, row) {
                             const payload = encodeURIComponent(JSON.stringify(row));
                             return `
-            <button class="btn btn-icon btn-sm btn-light-info editClient" data-client="${payload}" title="Modifier">
-              <i class="bi bi-pencil"></i>
-            </button>`;
+                        <button class="btn btn-icon btn-sm btn-light-info editClient" data-client="${payload}" title="Modifier">
+                          <i class="bi bi-pencil"></i>
+                        </button>`;
                         }
                     }
                 ],
                 language: { url: '/custom/datatables/i18n/French.json' }
             });
 
-            // Filters
             const reload = () => table.ajax.reload();
             let debounce;
             $('#f_code,#f_nom,#f_tel,#f_cat')
@@ -263,102 +263,142 @@
                     clearTimeout(debounce);
                     debounce = setTimeout(reload, 300);
                 });
-
-            // ---------- ADD ----------
-            // Lors de l'ouverture du modal d'ajout
-            $('#modalClient').on('shown.bs.modal', function () {
-                setTimeout(() => initLeafletMap('addMap', 'addLocalisation'), 200);
-            });
-
-            const $addModal = $('#modalClient');
-            const $addForm = $('#clientForm');
-            $('#clientForm')[0].reset();
-
-            $addForm.on('submit', function(e){
-                e.preventDefault();
-                const $btn = $('#clientSubmitBtn');
-                const orig = $btn.html();
-                $btn.prop('disabled', true).html('<span class="spinner-border spinner-border-sm me-2"></span>Enregistrement...');
-
-                $.ajax({
-                    url: '/app/v1/clients',
-                    method: 'POST',
-                    data: $addForm.serialize(),
-                    success: function(resp){
-                        $addModal.modal('hide');
-                        $addForm[0].reset();
-                        table.ajax.reload(null, false);
-                    },
-                    error: function(xhr){
-                        alert(xhr.responseText || 'Erreur lors de l’enregistrement');
-                    },
-                    complete: function(){
-                        $btn.prop('disabled', false).html(orig);
-                    }
-                });
-            });
-
-            // ---------- EDIT ----------
-            const $editModal = $('#editClientModal');
-            const $editForm  = $('#editClientForm');
-
-            // Lors de l'ouverture du modal de modification
-            $('#clientsTable').on('click', '.editClient', function () {
-                try {
-                    const row = JSON.parse(decodeURIComponent($(this).data('client')));
-                    $('#editClientId').val(row.id);
-                    $('#editCode').val(row.code);
-                    const parts = (row.nomComplet || '').trim().split(/\s+/);
-                    $('#editNom').val(parts[0] || '');
-                    $('#editPrenom').val(parts.slice(1).join(' ') || '');
-                    $('#editTelephone').val(row.telephone || '');
-                    $('#editCategorieId').val(row.categorieId || '');
-                    $('#editIce').val(row.ice || '');
-                    $('#editPatente').val(row.patente || '');
-                    $('#editAdresse').val(row.adresse || '');
-                    $('#editCodePostal').val(row.codePostal || '');
-                    $('#editLocalisation').val(row.localisation || '');
-
-                    console.log("row.localisation ====>>", row.localisation);
-
-                    $('#editClientModal').modal('show');
-
-                    setTimeout(() => {
-                        const defaultPos = row.localisation ? row.localisation.split(',').map(Number) : [33.5731, -7.5898];
-                        initLeafletMap('editMap', 'editLocalisation', defaultPos);
-                    }, 200);
-
-                } catch (e) {
-                    console.error(e);
-                }
-            });
-
-            $editForm.on('submit', function(e){
-                e.preventDefault();
-                const $btn = $('#clientSubmitEditBtn');
-                const orig = $btn.html();
-                $btn.prop('disabled', true).html('<span class="spinner-border spinner-border-sm me-2"></span>Enregistrement...');
-
-                $.ajax({
-                    url: '/app/v1/clients/update/' + $('#editClientId').val(),
-                    method: 'POST',
-                    data: $editForm.serialize(),
-                    success: function(){
-                        $editModal.modal('hide');
-                        table.ajax.reload(null, false);
-                    },
-                    error: function(xhr){
-                        alert(xhr.responseText || 'Mise à jour échouée');
-                    },
-                    complete: function(){
-                        $btn.prop('disabled', false).html(orig);
-                    }
-                });
-            });
         });
 
+        /* =========================================================
+           ======= Ville -> CodePostal via JSON (aucun changement Leaflet) =======
+        ========================================================= */
 
-        // Initialisation des cartes Leaflet
+        const CP_CACHE = {}; // memo: { 'TEMARA': [ {quartier,cp}, ... ] }
+
+        // Active Select2 si disponible (Metronic) — sinon <select> natif
+        function enhanceSelect($el, $modal) {
+            if (window.jQuery && $.fn && $.fn.select2) {
+                $el.select2({
+                    width: '100%',
+                    placeholder: $el.find('option:first').text() || 'Sélectionner',
+                    dropdownParent: $modal || $(document.body)
+                });
+            }
+        }
+
+        async function loadCityJson(city) {
+            const key = (city || '').toUpperCase();
+            if (!key) return [];
+            if (CP_CACHE[key]) return CP_CACHE[key];
+
+            try {
+                const res = await fetch(`/data/postcodes/${key}.json`, { cache: 'no-store' });
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                const data = await res.json();
+                CP_CACHE[key] = Array.isArray(data) ? data : [];
+                return CP_CACHE[key];
+            } catch (e) {
+                console.error('Failed to load JSON for city:', key, e);
+                CP_CACHE[key] = [];
+                return [];
+            }
+        }
+
+        async function populateCpSelectAsync($ville, $cp, preselectValue) {
+            const city = ($ville.val() || '').toUpperCase();
+            $cp.empty();
+
+            if (!city) {
+                $cp.append('<option value="">-- Choisir une ville d’abord --</option>');
+                $cp.prop('disabled', true);
+                if ($cp.hasClass('select2-hidden-accessible')) $cp.trigger('change.select2');
+                return;
+            }
+
+            const list = await loadCityJson(city);
+            if (!list.length) {
+                $cp.append('<option value="">-- Aucun code disponible --</option>');
+                $cp.prop('disabled', true);
+                if ($cp.hasClass('select2-hidden-accessible')) $cp.trigger('change.select2');
+                return;
+            }
+
+            // Option vide pour autoriser la recherche (Select2)
+            $cp.append('<option value=""></option>');
+            list.forEach(item => {
+                const label = `${item.cp} — ${item.quartier}`;
+                $cp.append(new Option(label, item.cp, false, false));
+            });
+
+            $cp.prop('disabled', false);
+            if (preselectValue) $cp.val(preselectValue);
+            if ($cp.hasClass('select2-hidden-accessible')) $cp.trigger('change.select2');
+        }
+
+        /* ---------- ADD ---------- */
+        $('#modalClient').on('shown.bs.modal', async function () {
+            const $m = $(this);
+            const $ville = $('#ville');
+            const $cp    = $('#codePostal');
+
+            // Optionnel: habiller avec Select2
+            enhanceSelect($ville, $m);
+            enhanceSelect($cp, $m);
+
+            await populateCpSelectAsync($ville, $cp, null);
+
+            $ville.off('change.cpdep').on('change.cpdep', async function(){
+                await populateCpSelectAsync($ville, $cp, null);
+            });
+
+
+            // Leaflet (inchangé)
+            setTimeout(() => initLeafletMap('addMap', 'addLocalisation'), 200);
+        });
+
+        /* ---------- EDIT ---------- */
+        $('#clientsTable').on('click', '.editClient', function () {
+            try {
+                const row = JSON.parse(decodeURIComponent($(this).data('client')));
+
+                $('#editClientId').val(row.id);
+                $('#editCode').val(row.code);
+                const parts = (row.nomComplet || '').trim().split(/\s+/);
+                $('#editNom').val(parts[0] || '');
+                $('#editPrenom').val(parts.slice(1).join(' ') || '');
+                $('#editTelephone').val(row.telephone || '');
+                $('#editCategorieId').val(row.categorieId || '');
+                $('#editIce').val(row.ice || '');
+                $('#editPatente').val(row.patente || '');
+                $('#editAdresse').val(row.adresse || '');
+                $('#editLocalisation').val(row.localisation || '');
+
+                if (row.ville)      $('#editVille').val((row.ville || '').toUpperCase());
+                if (row.codePostal) $('#editCodePostal').val(row.codePostal);
+
+                $('#editClientModal').off('shown.bs.modal.cp').on('shown.bs.modal.cp', async function () {
+                    const $m = $(this);
+                    const $ville = $('#editVille');
+                    const $cp    = $('#editCodePostal');
+
+                    enhanceSelect($ville, $m);
+                    enhanceSelect($cp, $m);
+
+                    await populateCpSelectAsync($ville, $cp, row.codePostal || null);
+
+                    $ville.off('change.cpdep').on('change.cpdep', async function(){
+                        await populateCpSelectAsync($ville, $cp, null);
+                    });
+
+                    // Leaflet (inchangé)
+                    const defaultPos = row.localisation ? row.localisation.split(',').map(Number) : [33.5731, -7.5898];
+                    initLeafletMap('editMap', 'editLocalisation', defaultPos);
+                }).modal('show');
+
+
+
+            } catch (e) { console.error(e); }
+        });
+
+        /* ============================
+           LeafletJS (inchangé)
+        ============================ */
         function initLeafletMap(mapId, inputId, defaultLatLng = [33.5731, -7.5898]) {
             const value = document.getElementById(inputId).value;
             let coords = defaultLatLng;
@@ -370,14 +410,12 @@
                 }
             }
 
-            // Reset Leaflet container if already initialized
             const mapContainer = document.getElementById(mapId);
             if (mapContainer._leaflet_id) {
                 mapContainer._leaflet_id = null;
             }
 
             const map = L.map(mapId).setView(coords, 16);
-
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; OpenStreetMap'
             }).addTo(map);
@@ -386,10 +424,7 @@
             marker.bindPopup("Déplacez le marqueur ou cliquez sur la carte pour le positionner.").openPopup();
             document.getElementById(inputId).value = coords.join(',');
 
-            // Géocoder
-            L.Control.geocoder({
-                defaultMarkGeocode: false
-            })
+            L.Control.geocoder({ defaultMarkGeocode: false })
                 .on('markgeocode', function(e) {
                     const latlng = e.geocode.center;
                     marker.setLatLng(latlng);
@@ -403,20 +438,11 @@
                 document.getElementById(inputId).value = `${pos.lat},${pos.lng}`;
             });
 
-            // Fix: do not update marker when user is just dragging the map
             let mapDragged = false;
-
-            map.on('movestart', function () {
-                mapDragged = true;
-            });
-
-            map.on('moveend', function () {
-                setTimeout(() => { mapDragged = false; }, 200); // slight delay for drag detection
-            });
-
+            map.on('movestart', function () { mapDragged = true; });
+            map.on('moveend',   function () { setTimeout(() => { mapDragged = false; }, 200); });
             map.on('click', function (e) {
-                if (mapDragged) return; // ignore clicks during drag
-
+                if (mapDragged) return;
                 marker.setLatLng(e.latlng);
                 document.getElementById(inputId).value = `${e.latlng.lat},${e.latlng.lng}`;
                 marker.bindPopup("Position mise à jour.").openPopup();
@@ -425,8 +451,54 @@
             return map;
         }
 
+        /* ============================
+           Soumission des formulaires
+        ============================ */
+        $('#clientForm').on('submit', function(e){
+            e.preventDefault();
+            const $btn = $('#clientSubmitBtn');
+            const orig = $btn.html();
+            $btn.prop('disabled', true).html('<span class="spinner-border spinner-border-sm me-2"></span>Enregistrement...');
 
+            $.ajax({
+                url: '/app/v1/clients',
+                method: 'POST',
+                data: $('#clientForm').serialize(), // inclut ville & codePostal
+                success: function(resp){
+                    $('#modalClient').modal('hide');
+                    $('#clientForm')[0].reset();
+                    $('#clientsTable').DataTable().ajax.reload(null, false);
+                },
+                error: function(xhr){
+                    alert(xhr.responseText || 'Erreur lors de l’enregistrement');
+                },
+                complete: function(){
+                    $btn.prop('disabled', false).html(orig);
+                }
+            });
+        });
 
+        $('#editClientForm').on('submit', function(e){
+            e.preventDefault();
+            const $btn = $('#clientSubmitEditBtn');
+            const orig = $btn.html();
+            $btn.prop('disabled', true).html('<span class="spinner-border spinner-border-sm me-2"></span>Enregistrement...');
 
+            $.ajax({
+                url: '/app/v1/clients/update/' + $('#editClientId').val(),
+                method: 'POST',
+                data: $('#editClientForm').serialize(), // inclut ville & codePostal
+                success: function(){
+                    $('#editClientModal').modal('hide');
+                    $('#clientsTable').DataTable().ajax.reload(null, false);
+                },
+                error: function(xhr){
+                    alert(xhr.responseText || 'Mise à jour échouée');
+                },
+                complete: function(){
+                    $btn.prop('disabled', false).html(orig);
+                }
+            });
+        });
     </script>
 {% endblock %}

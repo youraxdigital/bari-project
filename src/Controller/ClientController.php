@@ -35,6 +35,7 @@ final class ClientController extends AbstractController
         $ice        = trim((string)$request->request->get('ice', ''));
         $patente    = trim((string)$request->request->get('patente', ''));
         $adresse    = trim((string)$request->request->get('adresse', ''));
+        $ville      = strtoupper(trim((string)$request->request->get('ville', '')));
         $codePostal = trim((string)$request->request->get('codePostal', ''));
 
         // Validations simples
@@ -51,6 +52,13 @@ final class ClientController extends AbstractController
 
         if ($errors) {
             return new JsonResponse(['message' => 'Validation échouée', 'errors' => $errors], 400);
+        }
+
+        if ($ville !== '' && !in_array($ville, ['TEMARA','RABAT','SALE','KENITRA'], true)) {
+            return new JsonResponse(['message' => 'Ville invalide.'], 400);
+        }
+        if ($codePostal !== '' && !preg_match('/^[0-9A-Za-z\- ]{3,10}$/', $codePostal)) {
+            return new JsonResponse(['message' => 'Code postal invalide.'], 400);
         }
 
         // Unicité CODE
@@ -76,6 +84,7 @@ final class ClientController extends AbstractController
         $client->setIce($ice ?: null);
         $client->setPatente($patente ?: null);
         $client->setAdresse($adresse ?: null);
+        $client->setVille($ville ?: null);
         $client->setCodePostal($codePostal ?: null);
 
         // Catégorie si utilisée
@@ -104,6 +113,7 @@ final class ClientController extends AbstractController
         $ice        = trim((string)$request->request->get('ice', ''));
         $patente    = trim((string)$request->request->get('patente', ''));
         $adresse    = trim((string)$request->request->get('adresse', ''));
+        $ville      = strtoupper(trim((string)$request->request->get('ville', '')));
         $codePostal = trim((string)$request->request->get('codePostal', ''));
 
         $errors = [];
@@ -118,6 +128,13 @@ final class ClientController extends AbstractController
         }
         if ($errors) {
             return new JsonResponse(['message' => 'Validation échouée', 'errors' => $errors], 400);
+        }
+
+        if ($ville !== '' && !in_array($ville, ['TEMARA','RABAT','SALE','KENITRA'], true)) {
+            return new JsonResponse(['message' => 'Ville invalide.'], 400);
+        }
+        if ($codePostal !== '' && !preg_match('/^[0-9A-Za-z\- ]{3,10}$/', $codePostal)) {
+            return new JsonResponse(['message' => 'Code postal invalide.'], 400);
         }
 
         // Unicité CODE (exclure ce client)
@@ -144,7 +161,9 @@ final class ClientController extends AbstractController
         $client->setIce($ice ?: null);
         $client->setPatente($patente ?: null);
         $client->setAdresse($adresse ?: null);
+        $client->setVille($ville ?: null);
         $client->setCodePostal($codePostal ?: null);
+
 
         if ($categorieId !== null) {
             $cat = $em->getRepository(CategorieClient::class)->find($categorieId);
@@ -234,6 +253,7 @@ final class ClientController extends AbstractController
                 'ice'          => $c->getIce(),
                 'patente'      => $c->getPatente(),
                 'adresse'      => $c->getAdresse(),
+                'ville'        => $c->getVille(),
                 'codePostal'   => $c->getCodePostal(),
             ];
         }, $rows);
